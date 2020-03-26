@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <%- include('../partials/head') %>
+</head>
+<header>
+    <%- include('../partials/header') %>
+</header>
+
+<body>
+    <main>
+        <form id="searchForm" action= "/update" method= "post">
+            <label>Id van de persoon die je wilt veranderen:</label>
+            <input  id="textinput" name=id>
+            <label>Nieuwe naam:</label>
+            <input id="textinput" name=name>
+            <button type="submit">Wijzig en terug naar resultaten</button>
+        </form>
+    </main>
+</body>
+<footer>
+    <section>
+        <p>Indeling en Styling door Merlijn Bergevoet 2020 &copy;</p>
+    </section>
+</footer>
+
+</html>
