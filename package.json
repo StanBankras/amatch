@@ -1,0 +1,26 @@
+{
+  "name": "amatch",
+  "version": "1.0.0",
+  "description": "Amatch - Dating app project by Sergio Eijben, Merlijn Bergevoet & Stan Bankras ",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StanBankras/amatch.git"
+  },
+  "author": "Merlijn Bergevoet, Sergio Eijben, Stan Bankras",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StanBankras/amatch/issues"
+  },
+  "homepage": "https://github.com/StanBankras/amatch#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
