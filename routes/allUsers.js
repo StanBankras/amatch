@@ -9,14 +9,31 @@ dbCallback(database => {
   db = database
 });
 
-router.get('/', async (req, res, next) => {
+router.get('/allUsers', async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
-    res.render('login');
+    res.render('allUsers');
   } catch(err) {
     console.log(err);
   }
 })
 
 module.exports = router;
+
+// read data from DB
+function users(req, res, next) {
+	db.collection('users').find().toArray(done)
+
+	function done(err, data) {
+		if (err) {
+			next(err)
+		} else {
+		// console.log(data)
+			res.render('allUsers', {data: data})
+		}
+	}
+}
+
+router.get('/allUsers', users)
+
