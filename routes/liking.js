@@ -40,19 +40,19 @@ router.get('/', isAuthenticated, async (req, res, next) => {
   }
 });
 
-// Push id of the liked person to the likedPersons[] of the user
+// Push id of the liked person to the likedProfiles[] of the user
 router.post('/like', async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
 
     // Check if the person is already liked, this means remove the like.
-    if (user.likedPersons.includes(slug(req.body.id))) {
+    if (user.likedProfiles.includes(slug(req.body.id))) {
       try {
         const chats = await db.collection('chats').find().toArray();
         const openChats = chats.filter(chat => {
           return chat.users.includes(user._id.toString()) && chat.users.includes(slug(req.body.id).toString());
         });
-        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedPersons': slug(req.body.id) } });
+        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedProfiles': slug(req.body.id) } });
         if (openChats.length > 0) {
           openChats.forEach(chat => removeChat(chat));
         }
@@ -66,10 +66,10 @@ router.post('/like', async (req, res, next) => {
     } else {
       // See if the other user already liked this user too
       checkMatch(req.session.user, req.body.id, res);
-      // Add the liked user to the likedPersons array
+      // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.user) },
-        { $push: { "likedPersons": slug(req.body.id) } }
+        { $push: { "likedProfiles": slug(req.body.id) } }
       )
       if (!req.body.js) {
         return res.redirect('/');
@@ -176,7 +176,7 @@ function isAuthenticated(req, res, next) {
 async function checkMatch(userId, likedUserId, res) {
   try {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
-    if (likedUser.likedPersons.includes(userId)) {
+    if (likedUser.likedProfiles.includes(userId)) {
       createChat(userId, likedUserId);
     }
   } catch(err) {

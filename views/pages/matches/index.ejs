@@ -29,8 +29,8 @@
                 <form action="/like" method="POST">
                   <input type="hidden" name="id" value="<%= matches[i]._id %>">
                   <button type="submit">
-                    <img class="like <% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>active<% } %>" src="./images/like.png" alt="">
-                    <span class="liked-text"><% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>Liked<% } else { %>Not liked<% } %></span>
+                    <img class="like <% if (user.likedProfiles.includes(matches[i]._id.toHexString())) { %>active<% } %>" src="./assets/img/like.png" alt="">
+                    <span class="liked-text"><% if (user.likedProfiles.includes(matches[i]._id.toHexString())) { %>Liked<% } else { %>Not liked<% } %></span>
                   </button>
                 </form>          
               </div>
@@ -61,9 +61,9 @@
     const matches =<%-JSON.stringify(matches)%>;
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="./javascripts/enhancement.js"></script>
-  <script src="./javascripts/matchSlider.js"></script>
-  <script src="./javascripts/likingUsers.js"></script>
+  <script src="./scripts/enhancement.js"></script>
+  <script src="./scripts/matchSlider.js"></script>
+  <script src="./scripts/likingUsers.js"></script>
 </body>
 
 </html>

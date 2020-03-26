@@ -34,7 +34,8 @@ module.exports = {
       } else {
           callbacks.push(cb);
       }
-  }
+  },
+  server
 }
 
 app.use(express.static('public'));
@@ -47,6 +48,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET
 }));
 
+require('./websockets.js');
 const likeRouter = require('./routes/liking');
 const chatRouter = require('./routes/chatting');
 const loginRouter = require('./routes/login');
