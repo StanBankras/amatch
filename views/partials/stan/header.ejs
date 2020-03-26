@@ -1,0 +1,72 @@
+<header>
+    <nav class="wrapper">
+        <p>Welcome <%= user.firstName %>!</p>
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+
+<style>
+header {
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #f2059f;
+  color: white;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: block;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+header h1 {
+  font-size: 20px;
+}
+
+nav.wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 2rem;
+}
+
+nav form {
+    margin-left: auto;
+}
+
+nav form button {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    border: none;
+    transition: .2s;;
+}
+
+nav form button:hover {
+    cursor: pointer;
+    background-color: #c50381;
+    color: white;
+}
+
+@media (min-width: 550px) {
+    nav.wrapper {
+        margin: 0 20%;
+    }
+}
+</style>

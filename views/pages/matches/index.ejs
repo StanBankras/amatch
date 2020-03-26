@@ -1,0 +1,69 @@
+<html lang="en">
+
+<%- include('../../partials/stan/head') %>
+
+<body>
+
+  <%- include('../../partials/stan/header') %>
+
+  <main id="main">
+    <article>
+      <section class="container" id="matches">
+        <h1>Your matches</h1>
+        <div id="match-items">
+          <ul>
+            <% if (matches != '') { %>
+            <% for(let i=0;i < matches.length;i++) { %>
+            <li data-match="<%= matches[i]._id %>">
+              <figure>
+                <div class="img-wrapper">
+                  <img class="profile-picture"
+                    src="<%= matches[i].picture %>"
+                    width="250px"
+                    height="auto"
+                    alt="<%= matches[i].firstName %> <%= matches[i].lastName %>">
+                </div>
+                <figcaption><%= matches[i].firstName %> <%= matches[i].lastName %>, <%= matches[i].age %></figcaption>
+              </figure>
+              <div class="hearts">
+                <form action="/like" method="POST">
+                  <input type="hidden" name="id" value="<%= matches[i]._id %>">
+                  <button type="submit">
+                    <img class="like <% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>active<% } %>" src="./images/like.png" alt="">
+                    <span class="liked-text"><% if (user.likedPersons.includes(matches[i]._id.toHexString())) { %>Liked<% } else { %>Not liked<% } %></span>
+                  </button>
+                </form>          
+              </div>
+            </li>
+            <% } %>
+            <% } else { %>
+              
+            <% } %>
+          </ul>
+        </div>
+        <nav class="slider-nav">
+          <div class="wrap">
+            <i class="material-icons arrows" id="slide-back">arrow_back_ios</i>
+            <% for(let i=0;i < matches.length;i++) {  %>
+            <i class="material-icons slide-icon" data-slide="<%= i %>">panorama_fish_eye</i>
+            <% } %>
+            <i class="material-icons arrows" id="slide-forward">arrow_forward_ios</i>
+          </div>
+        </nav>
+      </section>
+    </article>
+  </main>
+
+  <%- include('../../partials/stan/footer') %>
+
+  <script type='text/javascript'>
+    const user =<%-JSON.stringify(user)%>;
+    const matches =<%-JSON.stringify(matches)%>;
+  </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./javascripts/enhancement.js"></script>
+  <script src="./javascripts/matchSlider.js"></script>
+  <script src="./javascripts/likingUsers.js"></script>
+</body>
+
+</html>
