@@ -22,7 +22,7 @@ router.get('/filter', function(req,res){
        }
   }
   else {
-      res.render('pages/filter.ejs');
+      res.render('pages/filter/filter.ejs');
   }
 })
 
@@ -39,7 +39,7 @@ router.get('/result', (req, res, next) => {
       if (err) {
         next(err)
       } else {
-         res.render('pages/result.ejs', {data: data})
+         res.render('pages/filter/result.ejs', {data: data})
       }
     }
 })
@@ -59,19 +59,19 @@ function search(req, res, next) {
     if (err) {
       next(err)
     } else {
-      res.render('pages/result.ejs', {data: data})
+      res.render('pages/filter/result.ejs', {data: data})
     }
   }
 }
 
 router.post('/update', update) 
 router.get('/update', (req, res) =>  
-  res.render('pages/update.ejs'))
+  res.render('pages/filter/update.ejs'))
 
 
 router.get('/return',function(req,res){
   if (req.session.hobby1) {
-        // res.render('pages/return.ejs')
+        // res.render('pages/filter/return.ejs')
         req.session.destroy(function(err) {
         if (err) console.log(err)
     })
