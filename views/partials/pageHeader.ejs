@@ -1,28 +1,50 @@
 <header class="container">
   <nav>
-    <ul>
-      <li>
-        <a href="/">
-          <img src="assets/img/logo.png" alt="Amatch logo">
-        </a>
-      </li>
-      <li>
-        <a href="/profile">My profile</a>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a href="/">Dashboard</a>
-      </li>
-      <li>
-        <a href="/finder">Find singles</a>
-      </li>
-      <li>
-        <a href="/your-matches">Your matches</a>
-      </li>
-      <li>
-        <a href="/chats">Chats</a>
-      </li>
-    </ul>
+    <div id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div id="main-nav" class="top-part">
+      <ul>
+        <li>
+          <a href="/">
+            <img src="assets/img/logo.png" alt="Amatch logo">
+          </a>
+        </li>
+        <li>
+          <a href="/profile">My profile</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="/" class="active">Dashboard</a>
+        </li>
+        <li>
+          <a href="/finder">Find singles</a>
+        </li>
+        <li>
+          <a href="/your-matches">Your matches</a>
+        </li>
+        <li>
+          <a href="/chats">Chats</a>
+        </li>
+      </ul>
+    </div>
+    <div class="bottom-part">
+      <div class="title">
+        <nav class="breadcrumbs">
+          <a href="#">Home</a>
+          <span>></span>
+          <a href="#">Dashboard</a>
+        </nav>
+        <h1>Dashboard</h1>
+      </div>
+      <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
   </nav>
 </header>
+
+<script src="scripts/navigation.js"></script>
