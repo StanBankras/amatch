@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const http = require('http');
 const mongo = require('mongodb');
@@ -40,14 +39,13 @@ module.exports = {
 const likeRouter = require('./routes/liking');
 const chatRouter = require('./routes/chatting');
 const loginRouter = require('./routes/login');
-const filterRouter = require('./routes/filter');
+const matchingRouter = require('./routes/matching');
 app.use('/', likeRouter); // Liking routes
 app.use('/', chatRouter); // Chatting routes
 app.use('/', loginRouter); // Chatting routes
-app.use('/', filterRouter); // Matching routes
+app.use('/', matchingRouter); // Matching routes
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ resave: false, saveUninitialized: true, secret: process.env.SESSION_SECRET }))
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');
