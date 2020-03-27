@@ -1,0 +1,26 @@
+body {
+  background-color: #EFEFEF;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-color: #CCCCCC;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-style: solid;
+  background-color: #F9F9F9;
+}
+
+header {
+  background-color: white !important;
+  border-bottom-width: 1px !important;
+}
+
+footer {
+  margin-top: 4rem;
+}
