@@ -9,14 +9,8 @@ dbCallback(database => {
   db = database
 });
 
-router.get('/chatting', async (req, res, next) => {
-  try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
-    res.render('test');
-  } catch(err) {
-    console.log(err);
-  }
+router.get('/chatting', (req, res, next) => {
+    res.render('layout');
 })
 
 module.exports = router;
