@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const slug = require('../middleware/slug');
 const auth = require('../middleware/authentication');
-const chatManager = require('../services/chatService');
+const chatService = require('../services/chatService');
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -42,7 +42,7 @@ router.post('/like', async (req, res, next) => {
         });
         await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedProfiles': slug(req.body.id) } });
         if (openChats.length > 0) {
-          openChats.forEach(chat => chatManager.removeChat(chat));
+          openChats.forEach(chat => chatService.removeChat(chat));
         }
         if (!req.body.js) {
           return res.redirect('/');
@@ -74,7 +74,7 @@ async function checkMatch(userId, likedUserId, res) {
   try {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
     if (likedUser.likedProfiles.includes(userId)) {
-      chatManager.createChat(userId, likedUserId);
+      chatService.createChat(userId, likedUserId);
     }
   } catch(err) {
     return console.error(err);
