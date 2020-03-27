@@ -48,16 +48,15 @@ app.use(session({
   secret: process.env.SESSION_SECRET
 }));
 
-require('./websockets.js');
-const likeRouter = require('./routes/liking');
+require('./websockets.js'); // Import websockets for the chat feature
+const matchRouter = require('./routes/matches');
 const chatRouter = require('./routes/chatting');
 const loginRouter = require('./routes/login');
 const filterRouter = require('./routes/filter');
-app.use('/', likeRouter); // Liking routes
+app.use('/', matchRouter); // Matches routes
 app.use('/', chatRouter); // Chatting routes
-app.use('/', loginRouter); // Chatting routes
+app.use('/', loginRouter); // Login/register routes
 app.use('/', filterRouter); // Matching routes
-
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');
