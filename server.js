@@ -30,9 +30,9 @@ client.connect(() => {
 module.exports = {
   db: function(cb) {
       if(db) {
-          cb(db)
+        cb(db)
       } else {
-          callbacks.push(cb);
+        callbacks.push(cb);
       }
   },
   server

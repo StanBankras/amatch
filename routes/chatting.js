@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const slug = require('slug');
 const dateFormat = require('dateformat');
 const mongo = require('mongodb');
+const slug = require('../middleware/slug');
 const auth = require('../middleware/authentication');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -13,19 +13,6 @@ dbCallback(database => {
 });
 
 dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
-
-// Edit slug so it doesn't replace spaces with '-' -- https://www.npmjs.com/package/slugify
-slug.defaults.mode ='pretty';
-slug.defaults.modes['pretty'] = {
-  replacement: ' ',
-  symbols: true,
-  remove: /[.]/g,
-  lower: false,
-  charmap: slug.charmap,
-  multicharmap: slug.multicharmap
-};
-
-
 
 // Render chats
 router.get('/chats', auth, async (req, res, next) => {
@@ -73,9 +60,9 @@ router.get('/chat/:id', auth, async (req, res, next) => {
 
 router.post('/message', async (req, res, next) => {
   try {
-    const userId = req.body.userId;
-    const chatId = req.body.chatId;
-    const message = req.body.message;
+    const userId = slug(req.body.userId);
+    const chatId = slug(req.body.chatId);
+    const message = slug(req.body.message);
     await db.collection('chats').updateOne({ 'chatNumber': parseInt(chatId) }, {
       $push: { messages: {
         message: message,

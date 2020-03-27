@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const slug = require('slug');
-const mongo = require('mongodb');
+const slug = require('../middleware/slug');
 const auth = require('../middleware/authentication');
 const chatManager = require('../services/chatService');
+const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
@@ -11,17 +11,6 @@ let db;
 dbCallback(database => {
   db = database
 });
-
-// Edit slug so it doesn't replace spaces with '-' -- https://www.npmjs.com/package/slugify
-slug.defaults.mode ='pretty';
-slug.defaults.modes['pretty'] = {
-  replacement: ' ',
-  symbols: true,
-  remove: /[.]/g,
-  lower: false,
-  charmap: slug.charmap,
-  multicharmap: slug.multicharmap
-};
 
 // Render homepage with matches of the logged in user
 router.get('/', auth, async (req, res, next) => {  
@@ -78,29 +67,6 @@ router.post('/like', async (req, res, next) => {
   } catch(err) {
     console.error(err);
   }
-});
-
-// Load users that are able to login
-router.get('/login', async (req, res, next) => {
-  try {
-    const users = await db.collection('users').find().toArray();
-    res.render('pages/matches/login', { users: users });
-  } catch(err) {
-    console.error(err);
-  }
-});
-
-// Post route for login
-router.post('/login-as', (req, res, next) => {
-  // Setting the session user to the selected user on login
-  req.session.user = slug(req.body.user);
-  res.redirect('/');
-});
-
-// Post route for logging out
-router.post('/logout', (req, res, next) => {
-  req.session.destroy();
-  res.redirect('/login');
 });
 
 // Function checks if both users liked each other
