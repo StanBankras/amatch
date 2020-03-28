@@ -16,6 +16,10 @@ body {
   background-color: #F9F9F9;
 }
 
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
 header {
   background-color: white !important;
   border-bottom-width: 1px !important;
