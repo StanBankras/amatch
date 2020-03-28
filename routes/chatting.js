@@ -12,6 +12,7 @@ dbCallback(database => {
   db = database
 });
 
+<<<<<<< HEAD
 dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 
 // Render chats
@@ -75,5 +76,10 @@ router.post('/message', async (req, res, next) => {
     console.error(err);
   }
 });
+=======
+router.get('/chatting', (req, res, next) => {
+    res.render('layout');
+})
+>>>>>>> new-design-layout
 
 module.exports = router;
