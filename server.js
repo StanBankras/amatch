@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const mongo = require('mongodb');
 
-// Load environment variables
-require('dotenv').config();
+// Load environment variables (if statement makes sure only development usage requires .env)
+if (process.env.NODE_ENV != 'production') require('dotenv').config();
 
 // Mongo setup code, obtained from the Full Driver Sample provided by MongoDB
 let db = null;

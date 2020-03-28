@@ -4,7 +4,9 @@
   "description": "Amatch - Dating app project by Sergio Eijben, Merlijn Bergevoet & Stan Bankras ",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "heroku-postbuild": "npm install",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
