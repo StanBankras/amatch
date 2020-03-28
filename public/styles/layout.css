@@ -21,6 +21,10 @@ header {
   border-bottom-width: 1px !important;
 }
 
+main {
+  min-height: 35vh;
+}
+
 header .top-part {
   display: flex;
   flex-direction: column;

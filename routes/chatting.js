@@ -37,7 +37,7 @@ router.get('/chats', auth, async (req, res, next) => {
     } else {
       allChats = [];
     }
-    res.render('pages/chats/chats', { chats: allChats, user });
+    res.render('pages/chats', { chats: allChats, user });
 
   } catch(err) {
     console.error(err);

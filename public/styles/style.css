@@ -257,8 +257,8 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 2px solid var(--main-color);
-  border-bottom: 0px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 0.1rem;
 }
 
 #chat-list .chat-item a .last-message {
@@ -266,8 +266,8 @@ body {
 }
 
 #chat-list .chat-item a img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-right: 1rem;
 }
@@ -275,10 +275,6 @@ body {
 #chat-list .chat-item a i.material-icons {
   margin-left: auto;
   max-width: 24px;
-}
-
-#chat-list .chat-item:last-child a {
-  border-bottom: 2px solid var(--main-color);
 }
 
 /* 

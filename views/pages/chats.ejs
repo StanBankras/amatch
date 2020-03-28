@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chats</title>
+  <%- include('../partials/pageHead') %>
+</head>
+<body>
+  <%- include('../partials/pageHeader') %>
+  <div class="container">
+    <main id="content">
+      <article>
+        <section>
+          <ul id="chat-list">
+            <% if (chats.length < 1) { %>
+              <p>You have no chats yet.</p>
+            <% }%>
+            <% for (let i=0;i < chats.length;i++) { 
+              // Defining the user the currentUser is chatting with
+              const otherUser = user.firstName === chats[i].users[0].firstName ? chats[i].users[1] : chats[i].users[0]; 
+            %>
+            <li class="chat-item">
+              <a href="/chat/<%= chats[i].chatNumber %>">
+                <img
+                  src="<%= otherUser.profilePicture %>"
+                  alt="<%= otherUser.firstName %> <%= otherUser.lastName %>"
+                  width="200px"
+                  height="auto">
+                  
+                <div>
+                  <h3>Chat with <%= otherUser.firstName %>, <%= otherUser.age %></h3>
+                  <% if (chats[i].messages.length != 0) { %>
+                    <p class="last-message"><%= chats[i].messages[chats[i].messages.length-1].message %> - <%= chats[i].messages[chats[i].messages.length-1].date %></p>
+                  <% } else { %>
+                    <p class="last-message">Send a message to <%= otherUser.firstName %>!</p>
+                  <% } %>
+                </div>
+                <i class="material-icons arrows">arrow_forward_ios</i>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </section>
+      </article>
+    </main>
+    <%- include('../partials/pageFooter') %>
+  </div>
+</body>
+</html>
