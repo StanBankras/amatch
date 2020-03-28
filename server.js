@@ -1,10 +1,11 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const http = require('http');
 const mongo = require('mongodb');
 
-// Load environment variables
-require('dotenv').config();
+// Load environment variables (if statement makes sure only development usage requires .env)
+if (process.env.NODE_ENV != 'production') require('dotenv').config();
 
 // Mongo setup code, obtained from the Full Driver Sample provided by MongoDB
 let db = null;
@@ -29,23 +30,33 @@ client.connect(() => {
 module.exports = {
   db: function(cb) {
       if(db) {
-          cb(db)
+        cb(db)
       } else {
-          callbacks.push(cb);
+        callbacks.push(cb);
       }
-  }
+  },
+  server
 }
 
-const likeRouter = require('./routes/liking');
-const chatRouter = require('./routes/chatting');
-const loginRouter = require('./routes/login');
-const matchingRouter = require('./routes/matching');
-app.use('/', likeRouter); // Liking routes
-app.use('/', chatRouter); // Chatting routes
-app.use('/', loginRouter); // Chatting routes
-app.use('/', matchingRouter); // Matching routes
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({ 
+  resave: false,
+  saveUninitialized: true,
+  secure: true,
+  secret: process.env.SESSION_SECRET
+}));
+
+require('./websockets.js'); // Import websockets for the chat feature
+const matchRouter = require('./routes/matches');
+const chatRouter = require('./routes/chatting');
+const loginRouter = require('./routes/login');
+const filterRouter = require('./routes/filter');
+app.use('/', matchRouter); // Matches routes
+app.use('/', chatRouter); // Chatting routes
+app.use('/', loginRouter); // Login/register routes
+app.use('/', filterRouter); // Matching routes
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');
