@@ -32,7 +32,7 @@ module.exports = {
       if(db) {
           cb(db)
       } else {
-          callbacks.push(cb);
+          callbacks.push(cb); 
       }
   }
 }
@@ -48,7 +48,7 @@ app.use('/', filterRouter); // Matching routes
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ resave: false, saveUninitialized: true, secret: process.env.SESSION_SECRET }))
-app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
+app.use((req,res) => { res.status(404).render('pages/404.ejs'); }); // 404 route
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');

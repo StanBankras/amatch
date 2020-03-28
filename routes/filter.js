@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session')
 const router = express.Router();
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
@@ -9,8 +10,11 @@ dbCallback(database => {
   db = database
 });
 
+router.use(session({ resave: false, saveUninitialized: true, secret: process.env.SESSION_SECRET }))
+
 router.get('/filter', function(req,res){
-  if(req.session.hobby1) {
+  let hob = req.session.hobby1 
+  if(hob) {
       db.collection('users')
         .find({"hobby1": hob}).toArray(done)
       function done(err, data) {
@@ -22,7 +26,7 @@ router.get('/filter', function(req,res){
        }
   }
   else {
-      res.render('pages/filter/filter.ejs');
+      res.render('../views/pages/filter/filter.ejs');
   }
 })
 
@@ -39,7 +43,7 @@ router.get('/result', (req, res, next) => {
       if (err) {
         next(err)
       } else {
-         res.render('pages/filter/result.ejs', {data: data})
+         res.render('../views/pages/filter/result.ejs', {data: data})
       }
     }
 })
@@ -59,19 +63,18 @@ function search(req, res, next) {
     if (err) {
       next(err)
     } else {
-      res.render('pages/filter/result.ejs', {data: data})
+      res.render('../views/pages/filter/result.ejs', {data: data})
     }
   }
 }
 
 router.post('/update', update) 
 router.get('/update', (req, res) =>  
-  res.render('pages/filter/update.ejs'))
+  res.render('./views/pages/filter/update.ejs'))
 
 
 router.get('/return',function(req,res){
   if (req.session.hobby1) {
-        // res.render('pages/filter/return.ejs')
         req.session.destroy(function(err) {
         if (err) console.log(err)
     })
