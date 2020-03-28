@@ -13,7 +13,7 @@ dbCallback(database => {
 });
 
 // Render homepage with matches of the logged in user
-router.get('/', auth, async (req, res, next) => {  
+router.get('/matches', auth, async (req, res, next) => {  
   try {
     const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.user) });
     const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
@@ -22,7 +22,7 @@ router.get('/', auth, async (req, res, next) => {
         '$in': userObjects
       }
     }).toArray();
-    res.render('pages/matches/index', { matches: matchList, user });
+    res.render('pages/matches', { matches: matchList, user });
   } catch(err) {
     console.error(err);
   }

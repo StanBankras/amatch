@@ -12,7 +12,7 @@ const filledDot = 'fiber_manual_record';
 const emptyDot = 'panorama_fish_eye';
 
 // Defaults for the slider
-const step = 364;
+const step = 282;
 let listOffset = 0;
 let viewedMatches = [];
 

@@ -33,10 +33,6 @@ ul {
   list-style: none;
 }
 
-article {
-  background-color: white;
-}
-
 /* 
 *
 *   Main layout styling
@@ -45,19 +41,6 @@ article {
 body {
   width: 100vw;
   overflow-x: hidden;
-}
-
-main {
-  min-height: calc(100vh - 60px);
-}
-
-.container {
-  margin: 0 2rem;
-  max-width: 1200px;
-}
-
-.container.fluid {
-  margin: 0;
 }
 
 /* 
@@ -91,11 +74,10 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #CCCCCC;
   max-width: 700px;
-  min-width: 300px;
-  margin: 0 2rem;
+  min-width: 250px;
+  margin: 0 1rem;
 }
 
 #matches ul li:first-child {
@@ -139,7 +121,7 @@ main {
           justify-content: flex-end;
   width: 100%;
   padding: 0.5rem 1rem;
-  background-color: var(--light-skin-tone);
+  background-color: #9646D4;
   position: relative;
   cursor: pointer;
 }
@@ -192,7 +174,6 @@ main {
       -ms-flex-pack: justify;
           justify-content: space-between;
   max-width: 400px;
-  margin: 0 auto;
 }
 
 #matches .slider-nav .wrap i.material-icons {
@@ -210,14 +191,11 @@ main {
 }
 
 #viewed-matches {
-  background-color: var(--secondary-color);
-  padding: 3rem 0;
-  margin-bottom: 60px;
-  color: white;
+  max-width: 1000px;
 }
 
 #viewed-matches h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 #viewed-matches ul {
@@ -229,10 +207,12 @@ main {
 
 #viewed-matches ul li {
   cursor: pointer;
-  padding: 0.7rem;
+  padding: 1rem 5rem;
   background-color: white;
   color: black;
-  border: 1px solid var(--secondary-color);
+  position: relative;
+  padding-right: 1rem;
+  margin-bottom: 2rem;
 }
 
 #viewed-matches ul li * {
@@ -251,8 +231,10 @@ main {
 #viewed-matches ul li figure img {
   margin-right: 1rem;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 65px;
+  height: 65px;
+  position: absolute;
+  left: 0;
 }
 
 /* 
@@ -388,26 +370,12 @@ main {
 *   Media queries
 *
 */
-@media (min-width: 550px) {
-  .container, .fluid.container {
-    margin: 0 15%;
-  }
-}
 
 @media (min-width: 600px) {
   .input-field {
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
-  }
-}
-
-@media (min-width: 768px) {
-  .container, .fluid.container {
-    margin: 0 20%;
-  }
-  #matches h1 {
-    margin-top: 2rem;
   }
 }
 

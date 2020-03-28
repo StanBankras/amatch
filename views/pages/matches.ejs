@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout</title>
+  <%- include('../partials/pageHead') %>
+</head>
+<body>
+  <%- include('../partials/pageHeader') %>
+  <div class="container">
+    <main id="content">
+      <article>
+        <section id="matches">
+          <h1>We found <%= matches.length %> matches based on your preferences!</h1>
+          <div id="match-items">
+            <ul>
+              <% if (matches != '') { %>
+              <% for(let i=0;i < matches.length;i++) { %>
+              <li data-match="<%= matches[i]._id %>">
+                <figure>
+                  <div class="img-wrapper">
+                    <img class="profile-picture"
+                      src="<%= matches[i].profilePicture %>"
+                      width="250px"
+                      height="auto"
+                      alt="<%= matches[i].firstName %> <%= matches[i].lastName %>">
+                  </div>
+                  <figcaption><%= matches[i].firstName %> <%= matches[i].lastName %>, <%= matches[i].age %></figcaption>
+                </figure>
+                <div class="hearts">
+                  <form action="/like" method="POST">
+                    <input type="hidden" name="id" value="<%= matches[i]._id %>">
+                    <button type="submit">
+                      <img class="like <% if (user.likedProfiles.includes(matches[i]._id.toHexString())) { %>active<% } %>" src="./assets/img/like.png" alt="">
+                      <span class="liked-text"><% if (user.likedProfiles.includes(matches[i]._id.toHexString())) { %>Liked<% } else { %>Not liked<% } %></span>
+                    </button>
+                  </form>          
+                </div>
+              </li>
+              <% } %>
+              <% } else { %>
+                You have no matches.
+              <% } %>
+            </ul>
+          </div>
+          <nav class="slider-nav">
+            <div class="wrap">
+              <i class="material-icons arrows" id="slide-back">arrow_back_ios</i>
+              <% for(let i=0;i < matches.length;i++) {  %>
+              <i class="material-icons slide-icon" data-slide="<%= i %>">panorama_fish_eye</i>
+              <% } %>
+              <i class="material-icons arrows" id="slide-forward">arrow_forward_ios</i>
+            </div>
+          </nav>
+        </section>
+      </article>
+    </main>
+    <%- include('../partials/pageFooter') %>
+    </div>  <script type='text/javascript'>
+      const user =<%-JSON.stringify(user)%>;
+      const matches =<%-JSON.stringify(matches)%>;
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./scripts/enhancement.js"></script>
+    <script src="./scripts/matchSlider.js"></script>
+    <script src="./scripts/likingUsers.js"></script>
+</body>
+</html>

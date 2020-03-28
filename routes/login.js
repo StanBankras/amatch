@@ -24,7 +24,7 @@ router.get('/login', async (req, res, next) => {
 router.post('/login-as', (req, res, next) => {
   // Setting the session user to the selected user on login
   req.session.user = slug(req.body.user);
-  res.redirect('/');
+  res.redirect('/matches');
 });
 
 // Post route for logging out
