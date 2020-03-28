@@ -3,7 +3,7 @@ const socket = io.connect("http://localhost:3000");
 const typing = document.querySelector("#typing");
 const message = document.querySelector("#message");
 const chatId = document.querySelector("#chat").value;
-const messages = document.querySelector('#messages .container');
+const messages = document.querySelector('#messages .message-container');
 const sendMessage = document.querySelector("#send-button");
 const username = user.firstName;
 

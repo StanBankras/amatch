@@ -14,7 +14,7 @@ dbCallback(database => {
 router.get('/login', async (req, res, next) => {
   try {
     const users = await db.collection('users').find().toArray();
-    res.render('pages/matches/login', { users: users });
+    res.render('pages/likingLogin', { users: users });
   } catch(err) {
     console.error(err);
   }
