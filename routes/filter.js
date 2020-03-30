@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -12,8 +10,8 @@ dbCallback(database => {
 router.get('/filter', function(req,res){
   if(req.session.hobby1) {
       db.collection('users')
-        .find({"hobby1": hob}).toArray(done)
-      function done(err, data) {
+        .find({'hobby1': hob}).toArray(done)
+      function done(err) {
            if (err) {
               next(err)
            } else {
@@ -31,7 +29,7 @@ router.get('/result', (req, res, next) => {
     let hob = req.session.hobby1
     if (hob) {
        db.collection('users')
-           .find({"hobby1" : hob}).toArray(done)
+           .find({'hobby1' : hob}).toArray(done)
     } else {
        res.redirect('/return')
     }
@@ -50,7 +48,7 @@ function search(req, res, next) {
   }
   let hob = req.session.hobby1 
   if(hob) { 
-    db.collection('users').find({"hobby1" : hob}).toArray(done)
+    db.collection('users').find({'hobby1' : hob}).toArray(done)
   } else {
     res.render('/return')
     
@@ -88,7 +86,7 @@ function update(req, res, next){
   db.collection('users').find().toArray
   (done)
 
-  function done(err, data) {
+  function done(err) {
         if (err) {
           next(err)
         } else {

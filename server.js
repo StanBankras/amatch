@@ -4,18 +4,18 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const mongo = require('mongodb');
 
-// Load environment variables
-require('dotenv').config();
+// Load environment variables (if statement makes sure only development usage requires .env)
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 // Mongo setup code, obtained from the Full Driver Sample provided by MongoDB
 let db = null;
 const callbacks = [];
 const MongoClient = mongo.MongoClient;
-const uri = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST;
+const uri = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@' + process.env.DB_HOST;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 
 // Establish connection to MongoDB database
@@ -30,11 +30,12 @@ client.connect(() => {
 module.exports = {
   db: function(cb) {
       if(db) {
-          cb(db)
+        cb(db)
       } else {
-          callbacks.push(cb);
+        callbacks.push(cb);
       }
-  }
+  },
+  server
 }
 
 app.use(express.static('public'));
@@ -47,14 +48,14 @@ app.use(session({
   secret: process.env.SESSION_SECRET
 }));
 
-const likeRouter = require('./routes/liking');
+const matchRouter = require('./routes/matches');
 const chatRouter = require('./routes/chatting');
 const authRouter = require('./routes/authentication');
 const filterRouter = require('./routes/filter');
 const profileRouter = require('./routes/profile');
-app.use('/', likeRouter); // Liking routes
 app.use('/', chatRouter); // Chatting routes
 app.use('/', authRouter); // Authentication routes
+app.use('/', matchRouter); // Liking routes
 app.use('/', filterRouter); // Matching routes
 app.use('/', profileRouter); // Profile routes
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route

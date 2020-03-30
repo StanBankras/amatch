@@ -4,7 +4,10 @@
   "description": "Amatch - Dating app project by Sergio Eijben, Merlijn Bergevoet & Stan Bankras ",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "heroku-postbuild": "npm install",
+    "start": "node server.js",
+    "lint": "eslint --fix **/*.js",
+    "dev": "nodemon --exec \"npm run lint && node server.js\""
   },
   "repository": {
     "type": "git",
@@ -18,13 +21,18 @@
   "homepage": "https://github.com/StanBankras/amatch#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dateformat": "^3.0.3",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "mongodb": "^3.5.5"
+    "mongodb": "^3.5.5",
+    "slug": "^2.1.1",
+    "dotenv": "^8.2.0",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
     "nodemon": "^2.0.2"
   }
 }
