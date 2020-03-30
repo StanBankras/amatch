@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
+const slug = require('../middleware/slug');
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -9,14 +8,27 @@ dbCallback(database => {
   db = database
 });
 
-router.get('/login', async (req, res, next) => {
+// Load users that are able to login
+router.get('/login', async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
-    res.render('test');
+    const users = await db.collection('users').find().toArray();
+    res.render('pages/likingLogin', { users: users });
   } catch(err) {
-    console.log(err);
+    console.error(err);
   }
-})
+});
+
+// Post route for login
+router.post('/login-as', (req, res) => {
+  // Setting the session user to the selected user on login
+  req.session.user = slug(req.body.user);
+  res.redirect('/matches');
+});
+
+// Post route for logging out
+router.post('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/login');
+});
 
 module.exports = router;

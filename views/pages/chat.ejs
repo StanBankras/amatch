@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout</title>
+  <%- include('../partials/pageHead') %>
+</head>
+<body>
+  <%- include('../partials/pageHeader') %>
+  <div class="container">
+    <main id="content">
+      <article>
+        <section id="messages">
+          <div class="other-user">
+            <img src="<%= otherUser.profilePicture %>" alt="<%= otherUser.firstName %> <%= otherUser.lastName %>">
+            <div class="details">
+              <h3><%= otherUser.firstName %> <%= otherUser.lastName %>, <%= otherUser.age %></h3>
+              <a href="#">View profile</a>
+            </div>
+          </div>
+          <div class="message-container">
+            <% for (let i = 0;i < messages.length;i++) { %>
+              <% if (messages[i].userId == user._id) { %>
+                <div class="outgoing">
+                  <div class="metadata">
+                    <span class="author">You at</span>
+                    <span class="date"><%= messages[i].date %></span>
+                  </div>
+                  <p><%= messages[i].message %></p>
+                </div>            
+              <% } else { %>
+                <div class="incoming">
+                  <div class="metadata">
+                    <span class="author"><%= otherUser.firstName %> at</span>
+                    <span class="date"><%= messages[i].date %></span>
+                  </div>
+                  <p><%= messages[i].message %></p>
+                </div>                
+              <% } %>
+            <% } %>
+          </div>
+          <form action="/message" method="POST" class="input-field">
+            <p id="typing"></p>
+            <fieldset>
+              <input name="chatId" value="<%= id %>" type="hidden" id="chat">
+              <input name="userId" value="<%= user._id %>" type="hidden" id="user">
+              <input name="message" id="message" type="text">
+              <button id="send-button">Send</button>
+            </fieldset>
+          </form>
+        </section>
+      </article>
+    </main>
+    <%- include('../partials/pageFooter') %>
+  </div>
+  <script>
+    const user =<%-JSON.stringify(user)%>;
+    const otherUser =<%-JSON.stringify(otherUser)%>;
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
+  <script src="../scripts/chat.js"></script>   
+</body>
+</html>
