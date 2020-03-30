@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session')
 const router = express.Router();
 const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
