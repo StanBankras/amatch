@@ -37,6 +37,7 @@ module.exports = {
   }
 }
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({ 
@@ -48,21 +49,14 @@ app.use(session({
 
 const likeRouter = require('./routes/liking');
 const chatRouter = require('./routes/chatting');
-const loginRouter = require('./routes/login');
+const authRouter = require('./routes/authentication');
 const filterRouter = require('./routes/filter');
-const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
-const allUsersRouter = require('./routes/allUsers');
-const forgotPwRouter = require('./routes/forgotPw');
 app.use('/', likeRouter); // Liking routes
 app.use('/', chatRouter); // Chatting routes
-app.use('/', loginRouter); // Chatting routes
+app.use('/', authRouter); // Authentication routes
 app.use('/', filterRouter); // Matching routes
-app.use('/', registerRouter); // Register routes
 app.use('/', profileRouter); // Profile routes
-app.use('/', allUsersRouter); // All Users routes
-app.use('/', forgotPwRouter); // Forgot Password routes
-app.use(express.static('public'));
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');
