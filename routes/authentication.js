@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -26,7 +24,7 @@ function login(req, res) {
 
 router.post('/', login)
 
-router.get('/register', async (req, res, next) => {
+router.get('/register', async (req, res) => {
   try {
     res.render('pages/login/register');
   } catch(err) {
@@ -35,7 +33,7 @@ router.get('/register', async (req, res, next) => {
 })
 
 // add data to DB
-function add(req, res, next){ 
+function add(req, res){ 
 	try {
 		db.collection('users').insertOne({
 			firstName: req.body.firstName,
@@ -51,7 +49,7 @@ function add(req, res, next){
 			age: req.body.age,
 		}, done)
 
-		function done(err, data) {
+		function done(err) {
 			if (err) {
 				next(err)
 			} else {
@@ -65,7 +63,7 @@ function add(req, res, next){
 
 router.post('/register', add);
 
-router.get('/forgotPw', async (req, res, next) => {
+router.get('/forgotPw', async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
@@ -75,7 +73,7 @@ router.get('/forgotPw', async (req, res, next) => {
   }
 })
 
-router.get('/allUsers', users, async (req, res, next) => {
+router.get('/allUsers', users, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
@@ -86,7 +84,7 @@ router.get('/allUsers', users, async (req, res, next) => {
 })
 
 // read data from DB
-function users(req, res, next) {
+function users(req, res) {
 	db.collection('users').find().toArray(done)
 
 	function done(err, data) {
