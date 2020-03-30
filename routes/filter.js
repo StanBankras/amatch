@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session')
 const router = express.Router();
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
@@ -7,8 +6,6 @@ let db;
 dbCallback(database => {
   db = database
 });
-
-router.use(session({ resave: false, saveUninitialized: true, secret: process.env.SESSION_SECRET }))
 
 router.get('/filter', function(req,res){
   let hob = req.session.hobby1 
@@ -23,7 +20,7 @@ router.get('/filter', function(req,res){
        }
   }
   else {
-      res.render('../views/pages/filter/filter.ejs');
+      res.render('pages/filter/filter.ejs');
   }
 })
 
@@ -40,7 +37,7 @@ router.get('/result', (req, res, next) => {
       if (err) {
         next(err)
       } else {
-         res.render('../views/pages/filter/result.ejs', {data: data})
+         res.render('pages/filter/result.ejs', {data: data})
       }
     }
 })
@@ -60,14 +57,14 @@ function search(req, res, next) {
     if (err) {
       next(err)
     } else {
-      res.render('../views/pages/filter/result.ejs', {data: data})
+      res.render('pages/filter/result.ejs', {data: data})
     }
   }
 }
 
 router.post('/update', update) 
 router.get('/update', (req, res) =>  
-  res.render('./views/pages/filter/update.ejs'))
+  res.render('pages/filter/update.ejs'))
 
 
 router.get('/return',function(req,res){
