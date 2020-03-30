@@ -12,7 +12,7 @@ dbCallback(database => {
 router.get('/filter', function(req,res){
   if(req.session.hobby1) {
       db.collection('users')
-        .find({"hobby1": hob}).toArray(done)
+        .find({'hobby1': hob}).toArray(done)
       function done(err, data) {
            if (err) {
               next(err)
@@ -31,7 +31,7 @@ router.get('/result', (req, res, next) => {
     let hob = req.session.hobby1
     if (hob) {
        db.collection('users')
-           .find({"hobby1" : hob}).toArray(done)
+           .find({'hobby1' : hob}).toArray(done)
     } else {
        res.redirect('/return')
     }
@@ -50,7 +50,7 @@ function search(req, res, next) {
   }
   let hob = req.session.hobby1 
   if(hob) { 
-    db.collection('users').find({"hobby1" : hob}).toArray(done)
+    db.collection('users').find({'hobby1' : hob}).toArray(done)
   } else {
     res.render('/return')
     
