@@ -9,13 +9,11 @@
 <body>
 
     <h1>ALL USERS</h1>
-
+    
     <% users.forEach(function(users){ %>
     <ul>
         <li>Username: <%= users.username %></li>
         <li>Password: <%= users.password %></li>
-        <!-- <a href="detail?id=<%= user._id %>">See profile</a> -->
-        <a href="detail/<%= users._id %>">See profile</a>
     </ul>
     
     <% }); %>

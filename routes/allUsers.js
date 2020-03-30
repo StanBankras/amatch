@@ -9,7 +9,7 @@ dbCallback(database => {
   db = database
 });
 
-router.get('/allUsers', async (req, res, next) => {
+router.get('/allUsers', users, async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
@@ -29,8 +29,7 @@ function users(req, res, next) {
 		if (err) {
 			next(err)
 		} else {
-		// console.log(data)
-			res.render('allUsers', {data: data})
+			res.render('allUsers', {users: data})
 		}
 	}
 }

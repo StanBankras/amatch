@@ -21,22 +21,20 @@ router.get('/register', async (req, res, next) => {
 
 module.exports = router;
 
-router.post('/', add)
-
 // add data to DB
-function add(req, res, next){
+function add(req, res, next){ try {
 	db.collection('users').insertOne({
-		firstName: req.session.firstName,
-		lastName: req.session.lastName,
-		emailAdress: req.session.emailAdress,
-		phoneNumber: req.session.phoneNumber,
-		username: req.session.username,
-		password: req.session.password,
-		hobbies: req.session.hobbies,
-		education: req.session.education,
-		job: req.session.job,
-		profilePictures: req.session.profilePictures,
-		age: req.session.age,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		emailAdress: req.body.emailAdress,
+		phoneNumber: req.body.phoneNumber,
+		username: req.body.username,
+		password: req.body.password,
+		hobbies: req.body.hobbies,
+		education: req.body.education,
+		job: req.body.job,
+		profilePictures: req.body.profilePictures,
+		age: req.body.age,
 	}, done)
 
 	function done(err, data) {
@@ -46,4 +44,9 @@ function add(req, res, next){
 			res.redirect('/allUsers')
 		}
 	}
+	} catch(err) {
+		console.log(err)
+	}
 }
+
+router.post('/', add)
