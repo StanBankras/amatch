@@ -17,8 +17,11 @@ function login(req, res) {
 		username: req.body.username,
 		password: req.body.password
 	}).then(data => {
-    console.log(data)
-		res.render('profile', {users: data})
+		req.session.id = data._id
+		console.log(data)
+		res.redirect('/profile/' + data._id)
+	}).catch(() => {
+		res.redirect('/')
 	})
 }
 
@@ -67,7 +70,7 @@ router.get('/forgotPw', async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
-    res.render('forgotPw');
+    res.render('pages/login/forgotPw');
   } catch(err) {
     console.log(err);
   }
@@ -77,7 +80,7 @@ router.get('/allUsers', users, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
-    res.render('allUsers');
+    res.render('pages/login/allUsers');
   } catch(err) {
     console.log(err);
   }
@@ -91,7 +94,7 @@ function users(req, res) {
 		if (err) {
 			next(err)
 		} else {
-			res.render('allUsers', {users: data})
+			res.render('pages/login/allUsers', {users: data})
 		}
 	}
 }
