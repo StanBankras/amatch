@@ -12,7 +12,6 @@ dbCallback(database => {
 router.get('/register', async (req, res, next) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
     res.render('register');
   } catch(err) {
     console.log(err);

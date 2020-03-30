@@ -37,6 +37,15 @@ module.exports = {
   }
 }
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({ 
+  resave: false,
+  saveUninitialized: true,
+  secure: true,
+  secret: process.env.SESSION_SECRET
+}));
+
 const likeRouter = require('./routes/liking');
 const chatRouter = require('./routes/chatting');
 const loginRouter = require('./routes/login');
@@ -54,8 +63,6 @@ app.use('/', profileRouter); // Profile routes
 app.use('/', allUsersRouter); // All Users routes
 app.use('/', forgotPwRouter); // Forgot Password routes
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(session({ resave: false, saveUninitialized: true, secret: process.env.SESSION_SECRET }))
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');
