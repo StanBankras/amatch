@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -9,9 +7,10 @@ dbCallback(database => {
   db = database
 });
 
-router.get('/register', async (req, res, next) => {
+router.get('/register', async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
+		const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
+		console.log(user);
     res.render('register');
   } catch(err) {
     console.log(err);
@@ -39,7 +38,7 @@ function add(req, res, next){
 		age: req.body.age,
 	}, done)
 
-	function done(err, data) {
+	function done(err) {
 		if (err) {
 			next(err)
 		} else {
