@@ -1,7 +1,6 @@
 // Grab elements from HTML
 const matchSlider = document.querySelector('#match-items');
 const matchSliderItems = document.querySelector('#match-items ul');
-const matchSliderItemsAll = document.querySelectorAll('#match-items ul li');
 const fwdButton = document.querySelector('#slide-forward');
 const backButton = document.querySelector('#slide-back');
 const slideIcons = document.querySelectorAll('.slider-nav .slide-icon');
@@ -102,7 +101,7 @@ slideIcons.forEach((slide) => {
 
 // Add eventlistener to the list of viewed matches, to catch clicks and set move the slider accordingly
 viewedMatchesList.addEventListener('click', (e) => {
-  if(e.target && e.target.nodeName == "LI") {
+  if(e.target && e.target.nodeName == 'LI') {
     matchNr = e.target.dataset.match;
     // If clicked item == current active match, return
     if(matchNr == Math.abs(listOffset)/step) return;

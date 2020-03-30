@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 let db = null;
 const callbacks = [];
 const MongoClient = mongo.MongoClient;
-const uri = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@" + process.env.DB_HOST;
+const uri = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@' + process.env.DB_HOST;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
@@ -48,15 +48,22 @@ app.use(session({
   secret: process.env.SESSION_SECRET
 }));
 
-require('./websockets.js'); // Import websockets for the chat feature
 const matchRouter = require('./routes/matches');
 const chatRouter = require('./routes/chatting');
 const loginRouter = require('./routes/login');
 const filterRouter = require('./routes/filter');
-app.use('/', matchRouter); // Matches routes
+const registerRouter = require('./routes/register');
+const profileRouter = require('./routes/profile');
+const allUsersRouter = require('./routes/allUsers');
+const forgotPwRouter = require('./routes/forgotPw');
+app.use('/', matchRouter); // Liking routes
 app.use('/', chatRouter); // Chatting routes
 app.use('/', loginRouter); // Login/register routes
 app.use('/', filterRouter); // Matching routes
+app.use('/', registerRouter); // Register routes
+app.use('/', profileRouter); // Profile routes
+app.use('/', allUsersRouter); // All Users routes
+app.use('/', forgotPwRouter); // Forgot Password routes
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');

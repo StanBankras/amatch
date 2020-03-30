@@ -17,11 +17,11 @@ async function createChat(id, otherId) {
     });
     await db.collection('users').updateOne(
       { _id: ObjectID(id) },
-      { $push: { "chats": chatNumber } }
+      { $push: { 'chats': chatNumber } }
     )
     await db.collection('users').updateOne(
       { _id: ObjectID(otherId) },
-      { $push: { "chats": chatNumber } }
+      { $push: { 'chats': chatNumber } }
     )
   } catch(err) {
     console.error(err);

@@ -1,10 +1,10 @@
-const socket = io.connect("/");
+const socket = io.connect('/');
 
-const typing = document.querySelector("#typing");
-const message = document.querySelector("#message");
-const chatId = document.querySelector("#chat").value;
+const typing = document.querySelector('#typing');
+const message = document.querySelector('#message');
+const chatId = document.querySelector('#chat').value;
 const messages = document.querySelector('#messages .message-container');
-const sendMessage = document.querySelector("#send-button");
+const sendMessage = document.querySelector('#send-button');
 const username = user.firstName;
 
 messages.scrollTop = messages.scrollHeight;

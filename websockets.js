@@ -1,8 +1,6 @@
 const server = require('./server.js').server;
 const io = require('socket.io')(server);
 const dateFormat = require('dateformat');
-const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('./server.js').db;
 let db;
@@ -13,7 +11,7 @@ dbCallback(database => {
 dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 
 io.on('connection', (socket) => {
-  socket.username = "Anonymous";
+  socket.username = 'Anonymous';
 
   socket.on('new_message', async (data) => {
     try {

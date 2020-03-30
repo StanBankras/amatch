@@ -15,7 +15,7 @@ dbCallback(database => {
 dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 
 // Render chats
-router.get('/chats', auth, async (req, res, next) => {
+router.get('/chats', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
     const chatList = [];
@@ -45,20 +45,20 @@ router.get('/chats', auth, async (req, res, next) => {
 });
 
 // Render individual chat based on the chat id
-router.get('/chat/:id', auth, async (req, res, next) => {
+router.get('/chat/:id', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
     const id = parseInt(req.params.id);
     const chat = await db.collection('chats').findOne({ chatNumber: id });
     const otherUserId = chat.users[0] == user._id ? chat.users[1] : chat.users[0];
-    const otherUser = await db.collection('users').findOne({  _id: ObjectID(otherUserId) });
+    const otherUser = await db.collection('users').findOne({ _id: ObjectID(otherUserId) });
     res.render('pages/chat', { users: chat.users, messages: chat.messages, user, id, otherUser });
   } catch(err) {
     console.error(err);
   }
 });
 
-router.post('/message', async (req, res, next) => {
+router.post('/message', async (req, res) => {
   try {
     const userId = slug(req.body.userId);
     const chatId = slug(req.body.chatId);

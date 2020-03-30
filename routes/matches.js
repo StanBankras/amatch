@@ -13,7 +13,7 @@ dbCallback(database => {
 });
 
 // Render homepage with matches of the logged in user
-router.get('/matches', auth, async (req, res, next) => {  
+router.get('/matches', auth, async (req, res) => {  
   try {
     const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.user) });
     const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
@@ -29,7 +29,7 @@ router.get('/matches', auth, async (req, res, next) => {
 });
 
 // Push id of the liked person to the likedProfiles[] of the user
-router.post('/like', async (req, res, next) => {
+router.post('/like', async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
 
@@ -57,7 +57,7 @@ router.post('/like', async (req, res, next) => {
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.user) },
-        { $push: { "likedProfiles": slug(req.body.id) } }
+        { $push: { 'likedProfiles': slug(req.body.id) } }
       )
       if (!req.body.js) {
         return res.redirect('/');
@@ -70,7 +70,7 @@ router.post('/like', async (req, res, next) => {
 });
 
 // Function checks if both users liked each other
-async function checkMatch(userId, likedUserId, res) {
+async function checkMatch(userId, likedUserId) {
   try {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
     if (likedUser.likedProfiles.includes(userId)) {

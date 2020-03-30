@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const slug = require('../middleware/slug');
-const mongo = require('mongodb');
-const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -11,7 +9,7 @@ dbCallback(database => {
 });
 
 // Load users that are able to login
-router.get('/login', async (req, res, next) => {
+router.get('/login', async (req, res) => {
   try {
     const users = await db.collection('users').find().toArray();
     res.render('pages/likingLogin', { users: users });
@@ -21,14 +19,14 @@ router.get('/login', async (req, res, next) => {
 });
 
 // Post route for login
-router.post('/login-as', (req, res, next) => {
+router.post('/login-as', (req, res) => {
   // Setting the session user to the selected user on login
   req.session.user = slug(req.body.user);
   res.redirect('/matches');
 });
 
 // Post route for logging out
-router.post('/logout', (req, res, next) => {
+router.post('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/login');
 });
