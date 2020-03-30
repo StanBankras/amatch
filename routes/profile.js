@@ -20,3 +20,12 @@ router.get('/profile', async (req, res, next) => {
 })
 
 module.exports = router;
+
+router.get('/detail/:id/', async (req, res, next) => {
+	try {
+		const profile = await db.collection('users').findOne({ _id: mongo.ObjectID(req.params.id) })	
+		res.render('profile.ejs', {users: profile})
+	} catch(err) {
+		console.log(err)
+	}
+})
