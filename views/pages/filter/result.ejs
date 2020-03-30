@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <%- include('../../partials/pageHead') %>
+</head>
+<header>
+    <%- include('../../partials/pageHeader') %>
+</header>
+
+<body>
+    <main>
+        <div id="filterBar">
+            <a href="/return">Verwijder Filter</a>
+            <p>Filter hobby is geselecteerd</p>
+        </div>
+        <a id="updateknop" href="/update">Verander een naam</a>
+        <div id="matchList">
+            <%- include('../../partials/details') %>
+        </div>
+    </main>
+</body>
+<footer>
+    <%- include('../../partials/pageFooter') %>
+</footer>
+
+</html>

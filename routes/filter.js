@@ -69,7 +69,6 @@ router.get('/update', (req, res) =>
 
 router.get('/return',function(req,res){
   if (req.session.hobby1) {
-        // res.render('pages/return.ejs')
         req.session.destroy(function(err) {
         if (err) console.log(err)
     })

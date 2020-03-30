@@ -32,11 +32,12 @@ module.exports = {
       if(db) {
           cb(db)
       } else {
-          callbacks.push(cb);
+          callbacks.push(cb); 
       }
   }
 }
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({ 
@@ -62,7 +63,6 @@ app.use('/', registerRouter); // Register routes
 app.use('/', profileRouter); // Profile routes
 app.use('/', allUsersRouter); // All Users routes
 app.use('/', forgotPwRouter); // Forgot Password routes
-app.use(express.static('public'));
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');
