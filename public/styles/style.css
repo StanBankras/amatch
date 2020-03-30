@@ -1,0 +1,520 @@
+@font-face {
+    font-family: "CircularMedium";
+    src: url("../fonts/circular-medium.otf");
+}
+
+@font-face {
+    font-family: "CircularBlack";
+    src: url("../fonts/circular-black.otf");
+}
+
+:root {
+    --neutral-color: white;
+    --baby-blue-color: #c9e5ff;
+    --purple-blue-color: #e3e9ff;
+    --pink-color: #ffe6ed;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "CircularMedium", sans-serif;
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    letter-spacing: -0.01rem;
+}
+
+header, main, footer{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+header div {
+    height: 15vh;
+    width: 100vw;
+    margin-top: 1rem;
+}
+
+header div img {
+    max-height: 10rem;
+    max-width: 7rem;
+    display: block;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header nav {
+    height: 30vh;
+    width: 100vw;
+    font-size: 0.5rem;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header nav ul li {
+    margin: 0.5rem 1rem;
+    padding: 0.7rem 0rem 0.7rem 1rem;
+    border: none;
+    width: 90%;
+    background-color: var(--neutral-color);
+    border-radius: 15px;
+}
+
+header nav ul li a{
+    font-weight: 700;
+}
+
+header nav ul li a:hover {
+    cursor: pointer;
+}
+
+header,
+main {
+    background-color: var(--baby-blue-color);
+}
+
+main #searchForm {
+    display: block;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: var(--baby-blue-color);
+}
+
+#searchForm{
+    margin: 1.5rem 0.5rem;
+    background-color: red;
+}
+
+#searchForm > *{
+    display: block;
+}
+
+#searchForm legend {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+#searchForm > label:nth-child(2){
+    margin-bottom: 1rem;
+}
+
+#searchForm select {
+    width: 100%;
+    margin: 0.5rem 0rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    color: gray;
+}
+
+#searchForm button[type=submit] {
+    height: 3rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--neutral-color);
+    color: gray;
+    margin-top: 2rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+#plusButtonOne, #plusButtonTwo{
+    margin: 1rem 0.5rem;
+    padding: 0.3rem 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--neutral-color);
+}
+
+#sexe{
+    margin: 2rem 0rem;
+}
+
+#hobbyList label{
+    display: flex;
+    flex-direction: row;
+}
+
+#hobbyList label input{
+    margin-right: 0.5rem;
+}
+
+#textinput{
+    height: 2rem;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+}
+
+#filterBar{
+    background-color: var(--neutral-color);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+#filterBar > *{
+    margin: 0.5rem 0rem;
+}
+
+#filterBar h1{
+    font-size: 1rem;
+}
+
+#filterBar button{
+    background-color: var(--neutral-color);
+    border: none;
+    text-align: left;
+}
+
+#filterBar form select{
+    width: 100%;
+    padding: 0.5rem 0rem;
+    border-radius: 5px;
+    border: 1.5px solid #e6e6e6;
+}
+
+.disabledDropdown1, .disabledDropdown2, .disabledDropdown3{
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    max-width: 100%;
+    overflow: hidden;
+    transition: 0.3s ;
+}
+
+.disabledDropdown1 label, .disabledDropdown2 label, .disabledDropdown3 label{
+    margin: 0rem 1rem 0rem 0rem;
+    display: block;
+}
+
+.active{
+    max-height: 16rem;
+}
+
+#slider{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    /* background-color: green; */
+    /* max-width: 2rem; */
+}
+  
+#slider > *{
+    margin-right: 1rem;
+}
+  
+#slider output{
+    min-width: 2rem;
+}
+  
+input[type=range]{
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    height: 0.5rem;
+    background: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px -3px rgba(0,0,0,0.75);
+}
+  
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid #ffffff;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+}
+
+#updateKnop{
+    border: none;
+    border-radius: 5px;
+    background-color: var(--neutral-color);
+    color: lightgray;
+    margin-top: 4rem;
+    padding: 1.5rem;
+    
+}
+
+#profileTile{
+    margin: 2rem 1rem;
+}
+
+#profileTile, #profileTile > *{
+    border-radius: 10px;
+}
+
+#profileTile img{
+    width: 90%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#profileTile div{
+    background-color: var(--neutral-color);
+    padding: 2rem 2rem 1rem 2rem;
+}
+
+#profileTile div > *{
+    margin-bottom: 1rem;
+}
+
+#profileTile div h1{
+    font-size: 1.9rem;
+}
+
+#profileTile div ul{
+    list-style: none;
+}
+
+#profileTile div span{
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+#searchForm, #profileTile {
+    -webkit-box-shadow: 0px 1px 24px 1px rgba(0,0,0,0.36);
+    -moz-box-shadow: 0px 1px 24px 1px rgba(0,0,0,0.36);
+    box-shadow: 0px 1px 24px 1px rgba(0,0,0,0.36);
+}
+
+.resultTile{
+    margin: 2rem 0rem;
+}
+
+.actionButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.likeButton{
+    color: var(--neutral-color);
+    background-color: #ff6370;
+    background-image: url(../images/heart.png);
+    background-size: 2.5rem;
+}
+
+.discardButton{
+    color: var(--neutral-color);
+    background-color: #2b92ff;
+    background-image: url(../images/cancel.png);
+    background-size: 2rem;
+}
+
+.likeButton, .discardButton{
+    border: none;
+    border-radius: 40px;
+    padding: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+
+footer {
+    background-color: var(--pink-color);
+}
+
+footer section {
+    width: 100%;
+}
+
+footer section p {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #ffbace;
+    padding: 1.5rem 0rem;
+}
+
+@media screen and (min-width: 350px) {
+
+    header {
+        display: flex;
+        flex-flow: row;
+        padding-bottom: 1rem ;
+    }
+
+    header nav {
+        height: 16vh;
+        width: 100vw;
+        font-size: 0.5rem;
+    }
+
+    header nav ul {
+        flex-direction: row;
+
+        background-color: var(--neutral-color);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    header nav ul li {
+        width: 30%;
+        padding: 0.5rem 0.3rem;
+        margin: 2rem 0rem;
+        border-radius: 0rem;
+        background-color: var(--neutral-color);
+        opacity: 1;
+    }
+
+    header nav ul li a {
+        font-size: 0.8rem;
+    }
+
+    header div {
+        height: 13vh;
+        width: 26vw;
+        margin-top: 1rem;
+    }
+
+    header div img {
+        max-width: 5.5rem;
+    }
+
+    main {
+        padding: 3rem 0rem 5rem 0rem;
+    }
+
+    #hobbyList{
+        max-height: 9rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #searchForm{
+        margin: 0rem 0.5rem;
+    }
+
+    .disabledDropdown1, .disabledDropdown2, .disabledDropdown3{
+        flex-direction: row;
+    }
+    
+    .animatedLink {
+        display: inline-block;
+        color: #000;
+        text-decoration: none;
+    }
+    
+    .animatedLink::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 5px;
+        margin-top: 0.3rem;
+        background: #000;
+        transition: width .4s;
+    }
+    
+    .animatedLink:hover::after {
+        width: 60%;
+    } 
+
+    .active{
+        max-height: 8.5rem;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    nav {
+        margin: 0.5rem 0rem;
+    }
+
+    header div {
+        height: 13vh;
+        width: 26vw;
+        margin-top: 1rem;
+    }
+
+    header div img {
+        max-width: 6.5rem;
+    }
+
+    header nav ul li {
+        width: 31%;
+        padding: 0.7rem 1.5rem;
+        margin: 1.5rem 0rem;
+    }
+
+    header nav ul li a {
+        font-size: 1rem;
+    }
+
+    #searchForm, #profileTile {
+        max-width: 35rem;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #filterBar h1{
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    nav {
+        margin: 1rem 0rem;
+    }
+
+    header div {
+        height: 18vh;
+        width: 20vw;
+        margin-top: 1rem;
+    }
+
+    header div img {
+        max-height: 9rem;
+        max-width: 8rem;
+    }
+
+    header nav ul li a {
+        font-size: 1rem;
+    }
+
+    header nav ul li {
+        padding: 0.7rem 3rem;
+        margin: 1.5rem 1rem;
+    }
+
+    #matchList{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    header nav ul li a {
+        font-size: 1.1rem;
+    }
+
+    header div {
+        height: 15vh;
+    }
+}
