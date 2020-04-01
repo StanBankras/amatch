@@ -1,10 +1,8 @@
-<form id= "searchForm" action= "/result" method= "post">
-    <legend>Zoeken</legend>
-    <div id="hobbyList">
-    <label>Zoek op hobby: </label>
-    <input id="textinput" name=hobby1>
-    </div>
-    <button type="submit">Zoek Matches!</button>
-</form>
-
-
+<div id="searchFormWrapper">
+    <form id="searchForm" action="/result" method="post">
+        <legend>Search for matches</legend>
+        <label>Search for a hobby: </label>
+        <input id="textinput" name=hobby1 placeholder="Hobby">
+        <button id="searchButton" type="submit">Find me matches!</button>
+    </form>
+</div>
