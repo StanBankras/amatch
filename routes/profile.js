@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const mongo = require('mongodb');
+const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -17,13 +19,14 @@ router.get('/profile', async (req, res) => {
   }
 })
 
-module.exports = router;
-
-router.get('/detail/:id/', async (req, res) => {
+router.get('/profile/:id/', async (req, res) => {
 	try {
-		const profile = await db.collection('users').findOne({ _id: mongo.ObjectID(req.params.id) })	
-		res.render('profile.ejs', {users: profile})
+    const profile = await db.collection('users').findOne({ _id: ObjectID(req.params.id) })	
+    // console.log(req.params.id)
+		res.render('pages/login/profile.ejs', {users: profile})
 	} catch(err) {
 		console.log(err)
 	}
 })
+
+module.exports = router;

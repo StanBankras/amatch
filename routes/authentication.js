@@ -7,23 +7,27 @@ dbCallback(database => {
   db = database
 });
 
+// Login using username and password
 router.get('/', (req, res) => {
   res.render('pages/login/login');
 })
 
-// login using username and password (not working/ workin on)
 function login(req, res) {
 	db.collection('users').findOne({
 		username: req.body.username,
 		password: req.body.password
 	}).then(data => {
-    console.log(data)
-		res.render('profile', {users: data})
+		req.session.activeUser = data._id;
+		res.redirect('/profile/' + data._id);
+	}).catch(() => {
+		// res.redirect('/')
+		res.status(400).send('Username or password are invalid!')
 	})
 }
 
 router.post('/', login)
 
+// Register your own user
 router.get('/register', async (req, res) => {
   try {
     res.render('pages/login/register');
@@ -32,7 +36,7 @@ router.get('/register', async (req, res) => {
   }
 })
 
-// add data to DB
+// Add user data to database
 function add(req, res){ 
 	try {
 		db.collection('users').insertOne({
@@ -67,7 +71,7 @@ router.get('/forgotPw', async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
     console.log(user);
-    res.render('forgotPw');
+    res.render('pages/login/forgotPw');
   } catch(err) {
     console.log(err);
   }
@@ -76,14 +80,14 @@ router.get('/forgotPw', async (req, res) => {
 router.get('/allUsers', users, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
-    res.render('allUsers');
+	console.log(user);
+    res.render('pages/login/allUsers');
   } catch(err) {
     console.log(err);
   }
 })
 
-// read data from DB
+// Read all user data from database
 function users(req, res) {
 	db.collection('users').find().toArray(done)
 
@@ -91,7 +95,7 @@ function users(req, res) {
 		if (err) {
 			next(err)
 		} else {
-			res.render('allUsers', {users: data})
+			res.render('pages/login/allUsers', {users: data})
 		}
 	}
 }
