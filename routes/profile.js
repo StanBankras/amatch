@@ -22,7 +22,7 @@ router.get('/profile', async (req, res) => {
 router.get('/profile/:id/', async (req, res) => {
 	try {
     const profile = await db.collection('users').findOne({ _id: ObjectID(req.params.id) })	
-    console.log(req.params.id)
+    // console.log(req.params.id)
 		res.render('pages/login/profile.ejs', {users: profile})
 	} catch(err) {
 		console.log(err)
