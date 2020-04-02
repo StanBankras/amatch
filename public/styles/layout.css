@@ -244,8 +244,9 @@ footer .widgets {
 #searchForm input{
   background-color: #EFEFEF;
   border: none;
-  padding: 0.5rem;
-  width: 40%;
+  font-size: 1.1rem;
+  padding: 1rem;
+  width: 50%;
 }
 
 #searchButton{
