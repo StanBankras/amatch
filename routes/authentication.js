@@ -4,42 +4,41 @@ const router = express.Router();
 const dbCallback = require('../server.js').db;
 let db;
 dbCallback(database => {
-  db = database
+	db = database
 });
 
-// Login using username and password
+// Loggin with using username and password
 router.get('/', (req, res) => {
-  res.render('pages/login/login');
+	res.render('pages/login/login');
 })
 
-function login(req, res) {
-	db.collection('users').findOne({
-		username: req.body.username,
-		password: req.body.password
-	}).then(data => {
+// Loggin post route
+router.post('/', async (req, res) => {
+	try {
+		const data = await db.collection('users').findOne({
+			username: req.body.username,
+			password: req.body.password
+		})
 		req.session.activeUser = data._id;
 		res.redirect('/profile/' + data._id);
-	}).catch(() => {
-		// res.redirect('/')
-		res.status(400).send('Username or password are invalid!')
-	})
-}
-
-router.post('/', login)
+	} catch (err) {
+		console.log(err);
+	}
+})
 
 // Register your own user
 router.get('/register', async (req, res) => {
-  try {
-    res.render('pages/login/register');
-  } catch(err) {
-    console.log(err);
-  }
+	try {
+		res.render('pages/login/register');
+	} catch (err) {
+		console.log(err);
+	}
 })
 
 // Add user data to database
-function add(req, res){ 
+router.post('/register', async (req, res) => {
 	try {
-		db.collection('users').insertOne({
+		await db.collection('users').insertOne({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
 			emailAdress: req.body.emailAdress,
@@ -51,55 +50,45 @@ function add(req, res){
 			job: req.body.job,
 			profilePictures: req.body.profilePictures,
 			age: req.body.age,
-		}, done)
-
-		function done(err) {
-			if (err) {
-				next(err)
-			} else {
-				res.redirect('/allUsers')
-			}
-		}
-	} catch(err) {
+		})
+		res.redirect('/allUsers')
+	} catch (err) {
 		console.log(err)
 	}
-}
-
-router.post('/register', add);
+});
 
 router.get('/forgotPw', async (req, res) => {
-  try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
-    res.render('pages/login/forgotPw');
-  } catch(err) {
-    console.log(err);
-  }
-})
-
-router.get('/allUsers', users, async (req, res) => {
-  try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-	console.log(user);
-    res.render('pages/login/allUsers');
-  } catch(err) {
-    console.log(err);
-  }
+	try {
+		const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
+		console.log(user);
+		res.render('pages/login/forgotPw');
+	} catch (err) {
+		console.log(err);
+	}
 })
 
 // Read all user data from database
-function users(req, res) {
-	db.collection('users').find().toArray(done)
-
-	function done(err, data) {
-		if (err) {
-			next(err)
-		} else {
-			res.render('pages/login/allUsers', {users: data})
-		}
+router.get('/allUsers', async (req, res) => {
+	try {
+		console.log(req.session.activeUser)
+		const data = await db.collection('users').find().toArray();
+		res.render('pages/login/allUsers', { users: data });
+	} catch (err) {
+		console.log(err);
 	}
+})
+
+// Logout user
+function logout(req, res, next) {
+  req.session.destroy(function (err) {
+    if (err) {
+      next(err)
+    } else {
+      res.redirect('/')
+    }
+  })
 }
 
-router.get('/allUsers', users)
+router.get('/log-out', logout)
 
 module.exports = router;
