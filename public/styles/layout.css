@@ -173,6 +173,99 @@ footer .widgets {
   width: 25px;
 }
 
+/* styles result page */
+
+#matchList{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#profileTile{
+  color: white;
+  background-color: white;
+  margin-top: 4rem;
+}
+
+#profileTile img{
+  width: 20rem;
+  height: auto;
+}
+
+#profileTile div{
+ background-color: #9646D4;
+}
+
+#profileTile div h1, p{
+  padding: 1rem;
+}
+
+#profileTile div span{
+  font-weight: 700;
+}
+
+#profileTile div div{
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  
+}
+
+#likeButton{
+  background-color: #9646D4;
+  background-image: url(../assets/img/likeHeart.png);
+  background-size: cover;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+/* styles search from */
+
+#searchFormWrapper{
+  background-color: white;
+  border: 1px solid #CCCCCC;
+  border-radius: 15px;
+  margin: 4rem 4rem;
+  padding: 2rem;
+}
+
+#searchFrom > *{
+  display: block;
+}
+
+#searchForm legend{
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+#searchForm input{
+  background-color: #EFEFEF;
+  border: none;
+  font-size: 1.1rem;
+  padding: 1rem;
+  width: 50%;
+}
+
+#searchButton{
+  color: white;
+  background-color: #9646D4;
+  border: none;
+  border-radius: 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 1rem;
+}
+
+#searchFrom legend, label, input, #searchButton{
+  display: block;
+  margin: 2rem 0rem;
+}
+
+/* styles filter page */
+
 @media (min-width: 850px) {
   footer .widgets {
     flex-direction: row;
