@@ -35,22 +35,14 @@ router.post('/like', async (req, res) => {
 
     // Check if the person is already liked, this means remove the like.
     if (user.likedProfiles.includes(slug(req.body.id))) {
-      try {
-        const chats = await db.collection('chats').find().toArray();
-        const openChats = chats.filter(chat => {
-          return chat.users.includes(user._id.toString()) && chat.users.includes(slug(req.body.id).toString());
-        });
-        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedProfiles': slug(req.body.id) } });
-        if (openChats.length > 0) {
-          openChats.forEach(chat => chatService.removeChat(chat));
-        }
-        if (!req.body.js) {
-          return res.redirect('/');
-        }
-        return res.sendStatus(201);
-      } catch(err) {
-        console.error(err);
+      dislike(user, slug(req.body.id));
+
+      // If this is not an axios post request, it's submitted by a form, thus the page should be refreshed for the user
+      if (!req.body.js) {
+        return res.redirect('/');
       }
+      return res.sendStatus(201);
+
     } else {
       // See if the other user already liked this user too
       checkMatch(req.session.user, req.body.id, res);
@@ -78,6 +70,25 @@ async function checkMatch(userId, likedUserId) {
     }
   } catch(err) {
     return console.error(err);
+  }
+}
+
+// Remove the clicked person from the likes of the current user
+async function dislike(user, otherUser) {
+  try {
+    const chats = await db.collection('chats').find().toArray();
+    const openChats = chats.filter(chat => {
+      return chat.users.includes(user._id.toString()) && chat.users.includes(otherUser.toString());
+    });
+    // Delete any open chats between the two users
+    if (openChats.length > 0) {
+      openChats.forEach(chat => chatService.removeChat(chat));
+    }
+  
+    // Remove the likedPerson from the user
+    await db.collection('users').updateOne({ _id: ObjectID(user._id) }, { $pull: { 'likedProfiles': otherUser } });
+  } catch(err) {
+    console.log(err);
   }
 }
 
