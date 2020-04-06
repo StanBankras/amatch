@@ -43,6 +43,31 @@ async function removeChat(chat) {
   }
 }
 
+async function getUserChats(user) {
+  const chatList = [];
+    user.chats.forEach((chat, err) => {
+      if(err) {
+        console.error(err);
+      }
+      chatList.push(db.collection('chats').findOne({ chatNumber: chat }));
+    });
+    
+    const allChats = await Promise.all(chatList);
+    if (allChats.length > 0) {
+      for (let i=0; i < allChats.length;i++) {
+        const userList = [];
+        allChats[i].users.forEach(user => {
+          userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
+        });
+        allChats[i].users = await Promise.all(userList);
+      }
+      console.log(allChats);
+      return allChats;
+    } else {
+      return [];
+    }
+}
+
 module.exports = {
-  removeChat, createChat
+  removeChat, createChat, getUserChats
 }

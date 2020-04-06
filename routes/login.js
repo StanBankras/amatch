@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const slug = require('../middleware/slug');
+const slug = require('../helpers/slug');
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
