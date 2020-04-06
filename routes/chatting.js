@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const dateFormat = require('dateformat');
 const mongo = require('mongodb');
-const slug = require('../middleware/slug');
+const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
+const chatService = require('../services/chatService');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
@@ -18,25 +19,7 @@ dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 router.get('/chats', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
-    const chatList = [];
-    user.chats.forEach((chat, err) => {
-      if(err) {
-        console.error(err);
-      }
-      chatList.push(db.collection('chats').findOne({ chatNumber: chat }));
-    });
-    allChats = await Promise.all(chatList);
-    if (allChats.length > 0) {
-      for (let i =0; i < allChats.length;i++) {
-        const userList = [];
-        allChats[i].users.forEach(user => {
-          userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
-        });
-        allChats[i].users = await Promise.all(userList);
-      }
-    } else {
-      allChats = [];
-    }
+    const allChats = await chatService.getUserChats(user);
     res.render('pages/chats', { chats: allChats, user });
 
   } catch(err) {
