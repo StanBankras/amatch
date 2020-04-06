@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const slug = require('../middleware/slug');
+const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
 const chatService = require('../services/chatService');
 const mongo = require('mongodb');

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dateFormat = require('dateformat');
 const mongo = require('mongodb');
-const slug = require('../middleware/slug');
+const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
