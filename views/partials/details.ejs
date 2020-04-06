@@ -1,14 +1,13 @@
 <% for (var index = 0; index < data.length; index++) { %>
-<div id="profileTile" class="resultTile">
-  <img src="../../static/images/user.png" alt="man">
+<div id="profileTile">
+  <img src="../../public/assets/img/user.png" alt="user">
   <div>
     <h1><%= data[index].firstName %>, <%= data[index].age %></h1>
     <p><span>Hobby's:</span> <%= data[index].hobby1 %>, <%= data[index].hobby2 %>, <%= data[index].hobby3 %></p>
     <p><span>Opleiding:</span> <%= data[index].education[0] %></p>
-    <ul class="actionButtons">
-      <li><button class="likeButton"></button></li>
-      <li><button class="discardButton"></button></li>
-    </ul>
+    <div>
+      <button id="likeButton" href="chats.ejs"></button>
+    </div>
   </div>
 </div>
 <% } %>
