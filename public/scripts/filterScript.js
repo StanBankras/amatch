@@ -1,17 +1,17 @@
 console.log('gekoppelt');
 let inputField = document.querySelector('#textinput');
-let filter1 = document.querySelector('#filter1');
-let filter2 = document.querySelector('#filter2');
 
-function autoFill(){
-    inputField.value = filter1.textContent;
-    console.log('filled');
-}
+//Alle button namen in een arary
+//Loop er overheen en laad de juiste button
 
-function autoFill2(){
-    inputField.value = filter2.textContent;
-    console.log('filled');
-}
+//bron: https://repl.it/@timmy_i_chen/EnchantingSilverTerabyte
+function queryChanger(autofillText) {
+    inputField.value = autofillText;
+  }
 
-filter1.addEventListener('click', autoFill);
-filter2.addEventListener('click', autoFill2);
+const autofiller = ['lezen', 'muziek', 'outdoor', 'koken', 'dansen', 'sport', 'gamen', 'fotografie', 'huisdieren', 'diy', 'socialemedia', 'films', 'development'];
+
+autofiller.forEach(autofillText => document
+    .getElementById(autofillText)
+    .addEventListener('click', () => queryChanger(autofillText))
+  );
