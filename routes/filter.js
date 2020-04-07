@@ -39,8 +39,7 @@ router.post('/result', async (req, res) => {
   } catch(err){
     console.log(err)
   }
-}
-) 
+}) 
 
 router.get('/result', (req, res, next) => {
     let hob = req.session.hobby1
