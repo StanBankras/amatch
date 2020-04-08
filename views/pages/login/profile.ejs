@@ -13,8 +13,19 @@
     <p><%= users.password %></p>
     <a href="/log-out">Log out</a>
     <a href="/allUsers">All users</a>
-    <button>DELETE</button>
     <button>EDIT</button>
-
+    
+    <form action="/change" method="post">
+        <fieldset>
+          <div class="formpjes">
+            <input type="text" name="username" placeholder="Username" id="changeUsername" value="<%= users.username %>">
+          </div>
+          <!-- <div class="formpjes">
+            <input type="text" name="changePassword" placeholder="Password" id="changePassword" value="<%= users.password %>">
+          </div> -->
+          
+          <button type="submit" id="updateButton">Update!</button>
+        </fieldset>
+      </form>
 </body>
 </html>
