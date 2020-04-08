@@ -228,7 +228,7 @@ footer .widgets {
   background-color: white;
   border: 1px solid #CCCCCC;
   border-radius: 15px;
-  margin: 4rem 4rem;
+  margin: 1rem 1rem;
   padding: 2rem;
 }
 
@@ -239,15 +239,6 @@ footer .widgets {
 #searchForm legend{
   font-weight: 700;
   font-size: 2rem;
-}
-
-#searchForm input{
-  background-color: white;
-  border: none;
-  border-bottom: 2px solid black;
-  font-size: 1.1rem;
-  padding: 1rem;
-  width: 100%;
 }
 
 #searchButton{
@@ -265,6 +256,22 @@ footer .widgets {
   margin: 2rem 0rem;
 }
 
+#searchButton{
+  cursor: pointer;
+}
+
+#textinput{
+  background-color: #fafafa;
+  border: none;
+  border-bottom: 3px solid black;
+  font-size: 1.1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+#textinput:hover{
+  cursor: unset;
+}
 
 
 .filterButtonContainer{
@@ -280,10 +287,11 @@ footer .widgets {
   border: none;
   border-radius: 40px;
   font-size: 1rem;
+  font-weight: 700;
   padding: 1rem;
   margin-left: 0.5rem;
   margin-top: 0.5rem;
-  /* width: 100%; */
+  cursor: pointer;
 }
 
 /* styles filter page */
@@ -328,5 +336,9 @@ footer .widgets {
   }
   #hamburger {
     display: none;
+  }
+
+  #searchFormWrapper{
+    margin: 4rem 4rem;
   }
 }
