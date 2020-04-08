@@ -45,7 +45,7 @@ router.post('/like', async (req, res) => {
 
     } else {
       // See if the other user already liked this user too
-      checkMatch(req.session.user, req.body.id, res);
+      const data = await checkMatch(req.session.user, req.body.id, res);
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.user) },
@@ -54,7 +54,11 @@ router.post('/like', async (req, res) => {
       if (!req.body.js) {
         return res.redirect('/');
       }
-      return res.sendStatus(200);
+      if (!data.match) {
+        return res.json({ match: false });
+      } else {
+        return res.json({ match: true, otherUser: data.otherUser });
+      }
     }
   } catch(err) {
     console.error(err);
@@ -67,7 +71,11 @@ async function checkMatch(userId, likedUserId) {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) });
     if (likedUser.likedProfiles.includes(userId)) {
       chatService.createChat(userId, likedUserId);
-      console.log('There is a match');
+      const data = {
+        match: true,
+        otherUser: likedUser
+      };
+      return data;
     }
   } catch(err) {
     return console.error(err);

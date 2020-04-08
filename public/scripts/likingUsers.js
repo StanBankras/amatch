@@ -10,8 +10,12 @@ likeHearts.forEach((heart) => {
             js: true
         })
         .then((res) => {
+            console.log(res);
             if (res.request.status == 201) {
                 e.target.classList.remove('active');
+            } else if (res.data.match == true) {
+                e.target.classList.add('active');
+                console.log('its a match');
             } else {
                 e.target.classList.add('active');
             }
