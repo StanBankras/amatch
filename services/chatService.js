@@ -61,7 +61,6 @@ async function getUserChats(user) {
         });
         allChats[i].users = await Promise.all(userList);
       }
-      console.log(allChats);
       return allChats;
     } else {
       return [];

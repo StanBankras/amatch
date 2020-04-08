@@ -64,9 +64,10 @@ router.post('/like', async (req, res) => {
 // Function checks if both users liked each other
 async function checkMatch(userId, likedUserId) {
   try {
-    const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
+    const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) });
     if (likedUser.likedProfiles.includes(userId)) {
       chatService.createChat(userId, likedUserId);
+      console.log('There is a match');
     }
   } catch(err) {
     return console.error(err);
