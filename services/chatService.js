@@ -23,6 +23,7 @@ async function createChat(id, otherId) {
       { _id: ObjectID(otherId) },
       { $push: { 'chats': chatNumber } }
     )
+    return chatNumber;
   } catch(err) {
     console.error(err);
   }

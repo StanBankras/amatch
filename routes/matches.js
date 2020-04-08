@@ -57,7 +57,8 @@ router.post('/like', async (req, res) => {
       if (!data.match) {
         return res.json({ match: false });
       } else {
-        return res.json({ match: true, otherUser: data.otherUser });
+        console.log(data.chat);
+        return res.json({ match: true, otherUser: data.otherUser, chat: data.chat });
       }
     }
   } catch(err) {
@@ -70,10 +71,11 @@ async function checkMatch(userId, likedUserId) {
   try {
     const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) });
     if (likedUser.likedProfiles.includes(userId)) {
-      chatService.createChat(userId, likedUserId);
+      const chatId = await chatService.createChat(userId, likedUserId);
       const data = {
         match: true,
-        otherUser: likedUser
+        otherUser: likedUser,
+        chat: chatId
       };
       return data;
     }
