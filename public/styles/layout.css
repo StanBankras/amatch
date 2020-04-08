@@ -242,11 +242,12 @@ footer .widgets {
 }
 
 #searchForm input{
-  background-color: #EFEFEF;
+  background-color: white;
   border: none;
+  border-bottom: 2px solid black;
   font-size: 1.1rem;
   padding: 1rem;
-  width: 50%;
+  width: 100%;
 }
 
 #searchButton{
@@ -262,6 +263,27 @@ footer .widgets {
 #searchFrom legend, label, input, #searchButton{
   display: block;
   margin: 2rem 0rem;
+}
+
+
+
+.filterButtonContainer{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 40%;
+}
+
+.filterButton{
+  color: white;
+  background-color: #00A8FF;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  padding: 1rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  /* width: 100%; */
 }
 
 /* styles filter page */

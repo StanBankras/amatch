@@ -29,4 +29,21 @@ router.get('/profile/:id/', async (req, res) => {
 	}
 })
 
+
+// Writing the function: help from Merlijn Bergevoet 
+// Debugging: help from Stan Bankras
+router.post('/change', async (req, res) => {
+  const newName = req.body.username;
+  const myquery = {_id: ObjectID(req.session.activeUser)}
+  const newvalues = {username: newName}
+  try {
+    console.log(req.session)
+    await db.collection('users').updateOne(myquery, {$set:newvalues})
+    res.redirect('/profile/' + req.session.activeUser)
+  } catch(err) {
+    console.log(err)
+  }
+}) 
+
+
 module.exports = router;

@@ -23,6 +23,7 @@ async function createChat(id, otherId) {
       { _id: ObjectID(otherId) },
       { $push: { 'chats': chatNumber } }
     )
+    return chatNumber;
   } catch(err) {
     console.error(err);
   }
@@ -61,7 +62,6 @@ async function getUserChats(user) {
         });
         allChats[i].users = await Promise.all(userList);
       }
-      console.log(allChats);
       return allChats;
     } else {
       return [];
