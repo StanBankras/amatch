@@ -35,7 +35,15 @@ function renderMatch(otherUser, chat) {
         <p class="age">${ otherUser.age } years old</p>
       </div>
     </div>
-    <a href="/chat/${ chat }">Go to the chat</a>
+    <div class="wrapper">
+      <a class="chat" href="/chat/${ chat }">Go to the chat</a>
+      <a class="close">Close popup</a>
+    </div>
   `
   main.appendChild(matchContainer);
+  matchContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('close')) {
+      main.removeChild(matchContainer);
+    }
+  })
 }
