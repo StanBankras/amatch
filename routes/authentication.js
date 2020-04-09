@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/authentication');
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -68,28 +67,14 @@ router.get('/forgotPw', async (req, res) => {
 	}
 })
 
-// Read all user data from database
-router.get('/allUsers', auth, async (req, res) => {
-	try {
-		console.log(req.session.activeUser)
-		const data = await db.collection('users').find().toArray();
-		res.render('pages/login/allUsers', { users: data });
-	} catch (err) {
-		console.log(err);
-	}
-})
-
-// Logout user
-function logout(req, res, next) {
+router.post('/log-out', (req, res) => {
   req.session.destroy(function (err) {
     if (err) {
-      next(err)
+      console.log(err);
     } else {
-      res.redirect('/')
+      res.redirect('/');
     }
-  })
-}
-
-router.post('/log-out', logout)
+  });
+});
 
 module.exports = router;
