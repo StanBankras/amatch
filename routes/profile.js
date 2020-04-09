@@ -23,12 +23,12 @@ router.get('/profile', auth, async (req, res) => {
 router.post('/edit-profile', async (req, res) => {
   const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
   const editedItems = {};
-  if (user.firstName != req.body.firstName) editedItems.firstName = req.body.firstName;
-  if (user.lastName != req.body.lastName) editedItems.lastName = req.body.lastName;
-  if (user.birthdate != req.body.birthdate) editedItems.birthdate = req.body.birthdate;
-  if (user.education != req.body.education) editedItems.education = req.body.education;
-  if (user.job != req.body.job) editedItems.job = req.body.job;
-  if (user.description != req.body.description) editedItems.description = req.body.description;
+  if (req.body.firstName && user.firstName != req.body.firstName) editedItems.firstName = req.body.firstName;
+  if (req.body.lastName && user.lastName != req.body.lastName) editedItems.lastName = req.body.lastName;
+  if (req.body.birthdate && user.birthdate != req.body.birthdate) editedItems.birthdate = req.body.birthdate;
+  if (req.body.education && user.education != req.body.education) editedItems.education = req.body.education;
+  if (req.body.job && user.job != req.body.job) editedItems.job = req.body.job;
+  if (req.body.description && user.description != req.body.description) editedItems.description = req.body.description;
   console.log(JSON.stringify(editedItems));
   await db.collection('users').updateOne({ _id: ObjectID(req.session.activeUser) }, { $set: editedItems });
   res.redirect('/profile');
