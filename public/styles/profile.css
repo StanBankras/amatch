@@ -1,6 +1,6 @@
 #profile-page {
   display: grid;
-  grid-template-columns: 375px 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 
@@ -61,6 +61,7 @@
 
 #profile-page form .wrap {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -95,4 +96,18 @@
   margin-bottom: 1rem;
   width: 100%;
   resize: vertical;
+}
+
+@media(min-width: 560px) {
+  #profile-page form .wrap {
+    flex-direction: row;
+  }
+}
+
+@media(min-width: 850px) {
+  #profile-page {
+    display: grid;
+    grid-template-columns: 375px 1fr;
+    gap: 2rem;
+  }
 }
