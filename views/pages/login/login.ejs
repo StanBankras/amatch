@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles/loginRegister.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles/loginRegister.css">
 </head>
+
 <body>
 
-    <div class="container">
-        <a href="index.html"><img src="img/logo.png" alt=""></a>
-        <div class="welcome">
-          <h1>Welcome!</h1>
-          <h2>Log in to use the Amore App.</h2>
+  <div class="container">
+    <div class="bgArea">
+      <img src="assets/img/logo-with-text.png" alt="">
+    </div>
+    <div class="loginArea">
+      <h1>Hello, Welcome back</h1>
+      <form action="/" method="post">
+        <div class="formpjes">
+          <label for="">Username</label>
+          <input type="text" name="username" placeholder="jvandijk" id="username">
         </div>
-        <form action="/" method="post">
-          <fieldset>
-            <div class="formpjes">
-              <input type="text" name="username" placeholder="Username" id="username">
-            </div>
-            <div class="formpjes">
-              <input type="password" name="password" placeholder="Password" id="password">
-            </div>
-            
-            <div class="rememberMe">
-              <label class="container">Remember Me
-                <input type="checkbox" checked="checked" class="checkmark">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            
-            <button type="submit" id="submitButton">Login</button>
+        <div class="formpjes">
+          <label for="">Password</label>
+          <input type="password" name="password" placeholder="********" id="password">
+        </div>
 
-            <div class="formpjes">
-              <a href="register"><label>Register now | </label></a>
-              <a href="forgotPw"><label>Forgot password? | </label></a>
-              <a href="allUsers"><label>SEE ALL USERS</label></a>
-            </div>
-          </fieldset>
-        </form>
-      </div>
+        <div>
+          <input type="checkbox" checked="checked">Remember Me
+          <a href="forgotPw"><label>Forgot password?</label></a>
+
+          <button type="submit" id="submitButton">Login</button>
+
+          <div class="formpjes">
+            Don't have an account yet? <a href="register"><label>Click here</label></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
+
 </html>
