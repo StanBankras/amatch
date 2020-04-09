@@ -66,6 +66,9 @@ header .bottom-part {
   display: flex;
   align-items: end;
 }
+header .bottom-part h1 {
+  text-transform: capitalize;
+}
 
 header .bottom-part .title {
   margin-right: 1rem;

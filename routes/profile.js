@@ -12,39 +12,12 @@ dbCallback(database => {
 
 router.get('/profile', auth, async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
-    res.render('profile');
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
+    const route = 'profile'
+    res.render('pages/profile', { user, route });
   } catch(err) {
     console.log(err);
   }
-})
-
-router.get('/profile/:id/', auth, async (req, res) => {
-	try {
-    const profile = await db.collection('users').findOne({ _id: ObjectID(req.params.id) })	
-    // console.log(req.params.id)
-		res.render('pages/login/profile.ejs', {users: profile})
-	} catch(err) {
-		console.log(err)
-	}
-})
-
-
-// Writing the function: help from Merlijn Bergevoet 
-// Debugging: help from Stan Bankras
-router.post('/change', async (req, res) => {
-  const newName = req.body.username;
-  const myquery = {_id: ObjectID(req.session.activeUser)}
-  const newvalues = {username: newName}
-  try {
-    console.log(req.session)
-    await db.collection('users').updateOne(myquery, {$set:newvalues})
-    res.redirect('/profile/' + req.session.activeUser)
-  } catch(err) {
-    console.log(err)
-  }
-}) 
-
+});
 
 module.exports = router;
