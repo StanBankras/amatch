@@ -1,9 +1,28 @@
 <html>
-<%- include('../partials/pageHead') %>
+  <head>
+    <%- include('../partials/pageHead') %>
+    <link rel="stylesheet" href="../styles/profile.css">
+  </head>
 <body>
   <%- include('../partials/pageHeader') %>
   <main class="container">
-    Profile page   
+    <article id="profile-page">
+      <section>
+        <h2>How others see you...</h2>
+        <div class="profile">
+          <div class="wrap">
+            <img src="<%= user.profilePicture %>" alt="">
+            <div>
+              <p class="name"><%= user.firstName %> <%= user.lastName %></p>
+              <p><%= user.age %></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Make edits to your profile</h2>
+      </section>
+    </article> 
     <%- include('../partials/pageFooter') %>
   </main>
 </body>

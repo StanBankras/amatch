@@ -178,7 +178,7 @@ footer .widgets {
 
 /* styles result page */
 
-#matchList{
+#matchList {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -200,7 +200,7 @@ footer .widgets {
  background-color: #9646D4;
 }
 
-#profileTile div h1, p{
+#profileTile div h1, #profileTile div p {
   padding: 1rem;
 }
 
