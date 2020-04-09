@@ -22,7 +22,8 @@ router.get('/matches', auth, async (req, res) => {
         '$in': userObjects
       }
     }).toArray();
-    res.render('pages/matches', { matches: matchList, user });
+    const route = 'matches';
+    res.render('pages/matches', { matches: matchList, user, route });
   } catch(err) {
     console.error(err);
   }

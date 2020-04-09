@@ -53,14 +53,12 @@ const authRouter = require('./routes/authentication');
 const filterRouter = require('./routes/filter');
 const profileRouter = require('./routes/profile');
 const generalRouter = require('./routes/general.js');
-const loginRouter = require('./routes/login'); // Remove when Sergio's login works!
 app.use('/', chatRouter); // Chatting routes
 app.use('/', authRouter); // Authentication routes
 app.use('/', matchRouter); // Liking routes
 app.use('/', filterRouter); // Matching routes
 app.use('/', profileRouter); // Profile routes
 app.use('/', generalRouter); // General routes
-app.use('/', loginRouter); // Login routes
 app.use((req,res) => { res.status(404).render('404.ejs'); }); // 404 route
 
 app.set('views', 'views');

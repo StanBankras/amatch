@@ -20,8 +20,8 @@ router.get('/chats', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const allChats = await chatService.getUserChats(user);
-    res.render('pages/chats', { chats: allChats, user });
-
+    const route = 'chats';
+    res.render('pages/chats', { chats: allChats, user, route });
   } catch(err) {
     console.error(err);
   }
@@ -35,7 +35,8 @@ router.get('/chat/:id', auth, async (req, res) => {
     const chat = await db.collection('chats').findOne({ chatNumber: id });
     const otherUserId = chat.users[0] == user._id ? chat.users[1] : chat.users[0];
     const otherUser = await db.collection('users').findOne({ _id: ObjectID(otherUserId) });
-    res.render('pages/chat', { users: chat.users, messages: chat.messages, user, id, otherUser });
+    const route = 'chats';
+    res.render('pages/chat', { users: chat.users, messages: chat.messages, user, id, otherUser, route });
   } catch(err) {
     console.error(err);
   }

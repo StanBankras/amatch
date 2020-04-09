@@ -7,7 +7,7 @@ dbCallback(database => {
   db = database
 });
 
-router.get('/filter', function(req,res){
+router.get('/finder', function(req,res){
   let hob = req.session.hobby1 
   if(hob) {
       db.collection('users').find({'hobby1': hob}).toArray(done)
@@ -20,7 +20,8 @@ router.get('/filter', function(req,res){
        }
   }
   else {
-      res.render('pages/filter/filter.ejs');
+    const route = 'finder';
+    res.render('pages/filter/filter.ejs', { route });
   }
 })
 
