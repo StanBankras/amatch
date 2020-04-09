@@ -228,7 +228,6 @@ footer .widgets {
   background-color: white;
   border: 1px solid #CCCCCC;
   border-radius: 15px;
-  margin: 4rem 4rem;
   padding: 2rem;
 }
 
@@ -250,17 +249,23 @@ footer .widgets {
   width: 100%;
 }
 
-#searchButton{
+#searchButton {
   color: white;
   background-color: #9646D4;
   border: none;
-  border-radius: 40px;
-  font-size: 1.3rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
   font-weight: 700;
-  padding: 1rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: .2s;
 }
 
-#searchFrom legend, label, input, #searchButton{
+#searchButton:hover {
+  background-color: rgb(95, 37, 139);
+}
+
+#searchFrom legend, label, input, #searchButton {
   display: block;
   margin: 2rem 0rem;
 }
@@ -274,16 +279,20 @@ footer .widgets {
   width: 40%;
 }
 
-.filterButton{
+.filterButton {
   color: white;
   background-color: #00A8FF;
   border: none;
-  border-radius: 40px;
+  border-radius: 30px;
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   margin-left: 0.5rem;
   margin-top: 0.5rem;
-  /* width: 100%; */
+  cursor: pointer; transition: .2s;
+}
+
+.filterButton:hover {
+  background-color: rgb(0, 110, 165);
 }
 
 /* styles filter page */
