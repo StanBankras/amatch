@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 			password: req.body.password
 		})
 		req.session.activeUser = data._id;
-		res.redirect('/profile/' + data._id);
+		res.redirect('/dashboard');
 	} catch (err) {
 		console.log(err);
 	}
@@ -90,6 +90,6 @@ function logout(req, res, next) {
   })
 }
 
-router.get('/log-out', logout)
+router.post('/log-out', logout)
 
 module.exports = router;

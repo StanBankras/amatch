@@ -15,7 +15,7 @@ dbCallback(database => {
 // Render homepage with matches of the logged in user
 router.get('/matches', auth, async (req, res) => {  
   try {
-    const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.user) });
+    const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.activeUser) });
     const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
     const matchList = await db.collection('users').find({
       '_id': {
@@ -31,7 +31,7 @@ router.get('/matches', auth, async (req, res) => {
 // Push id of the liked person to the likedProfiles[] of the user
 router.post('/like', async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
 
     // Check if the person is already liked, this means remove the like.
     if (user.likedProfiles.includes(slug(req.body.id))) {
@@ -45,10 +45,10 @@ router.post('/like', async (req, res) => {
 
     } else {
       // See if the other user already liked this user too
-      const data = await checkMatch(req.session.user, req.body.id, res);
+      const data = await checkMatch(req.session.activeUser, req.body.id, res);
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
-        { _id: ObjectID(req.session.user) },
+        { _id: ObjectID(req.session.activeUser) },
         { $push: { 'likedProfiles': slug(req.body.id) } }
       )
       if (!req.body.js) {
