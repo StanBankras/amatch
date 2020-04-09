@@ -264,7 +264,7 @@ footer .widgets {
   transition: .2s;
 }
 
-#searchFrom legend, label, input, #searchButton {
+#searchFrom legend, #searchFrom label, #searchFrom input, #searchButton {
   display: block;
   margin: 2rem 0rem;
 }
