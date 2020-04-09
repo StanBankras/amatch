@@ -1,6 +1,6 @@
 #profile-page {
   display: grid;
-  grid-template-columns: 450px 1fr;
+  grid-template-columns: 375px 1fr;
   gap: 2rem;
 }
 
@@ -31,4 +31,25 @@
 #profile-page .profile .name {
   font-weight: bold;
   font-size: 18px;
+}
+
+#profile-page .description {
+  margin: 1rem 0;
+  margin-bottom: 0;
+}
+
+#profile-page .profile h3 {
+  border-bottom: 2px solid #00A8FF;
+  padding: 0.4rem 0;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+#profile-page .profile .hobbies span {
+  display: inline-block; padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  background-color: #CCCCCC;
+  color: #161616;
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
 }
