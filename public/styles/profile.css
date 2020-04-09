@@ -5,7 +5,7 @@
 }
 
 #profile-page h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 #profile-page .profile {
@@ -52,4 +52,47 @@
   color: #161616;
   margin-right: 0.4rem;
   margin-bottom: 0.4rem;
+}
+
+#profile-page form {
+  max-width: 700px;
+}
+
+
+#profile-page form .wrap {
+  display: flex;
+  width: 100%;
+}
+
+#profile-page form .wrap > div:first-child {
+  margin-right: 2rem;
+}
+
+#profile-page form .wrap > div {
+  width: 100%;
+  max-width: 250px;
+}
+
+#profile-page form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 13px;
+}
+
+#profile-page form input {
+  padding:0.75rem;
+  border-radius: 5px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 250px;
+}
+
+#profile-page form textarea {
+  padding:0.75rem;
+  border-radius: 5px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 1rem;
+  width: 100%;
+  resize: vertical;
 }

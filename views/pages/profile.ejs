@@ -32,6 +32,34 @@
       </section>
       <section>
         <h2>Make edits to your profile</h2>
+        <form action="/edit-profile" method="POST">
+          <div class="wrap">
+            <div>
+              <label for="firstName">First name</label>
+              <input type="text" name="firstName">
+            </div>
+            <div>
+              <label for="lastName">Last name</label>
+              <input type="text" name="lastName">
+            </div>
+          </div>
+          <label for="lastName">Birth date</label>
+          <input type="date" name="birthDate">
+          <div class="wrap">
+            <div>
+              <label for="education">Education</label>
+              <input type="text" name="education">
+            </div>
+            <div>
+              <label for="job">Job</label>
+              <input type="text" name="job">
+            </div>
+          </div>
+          <label for="hobbies">Hobbies</label>
+          <input type="text">
+          <label for="description">Anything else you want to add?</label>
+          <textarea name="description" cols="30" rows="4"></textarea>
+        </form>
       </section>
     </article> 
     <%- include('../partials/pageFooter') %>
