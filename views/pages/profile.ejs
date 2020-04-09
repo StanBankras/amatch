@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <%- include('../partials/pageHead') %>
+    <link rel="stylesheet" href="../styles/profile.css">
+  </head>
+<body>
+  <%- include('../partials/pageHeader') %>
+  <main class="container">
+    <article id="profile-page">
+      <section>
+        <h2>How others see you...</h2>
+        <div class="profile">
+          <div class="wrap">
+            <img src="<%= user.profilePicture %>" alt="">
+            <div>
+              <p class="name"><%= user.firstName %> <%= user.lastName %></p>
+              <p><%= user.age %></p>
+            </div>
+          </div>
+          <p class="description">
+            <%= user.description %>
+          </p>
+          <h3>Job</h3>
+          <p><%= user.job %></p>
+          <h3>Education</h3>
+          <p><%= user.education %></p>
+          <h3>Hobbies</h3>
+          <p class="hobbies"><span>Outdoor</span><span>Sport</span></p>
+        </div>
+      </section>
+      <section>
+        <h2>Make edits to your profile</h2>
+        <form action="/edit-profile" method="POST">
+          <div class="wrap">
+            <div>
+              <label for="firstName">First name</label>
+              <input type="text" value="<%= user.firstName %>" name="firstName">
+            </div>
+            <div>
+              <label for="lastName">Last name</label>
+              <input type="text" value="<%= user.lastName %>" name="lastName">
+            </div>
+          </div>
+          <label for="lastName">Birth date</label>
+          <input type="date" value="2020-06-01" name="birthdate">
+          <div class="wrap">
+            <div>
+              <label for="education">Education</label>
+              <input type="text" value="<%= user.education %>" name="education">
+            </div>
+            <div>
+              <label for="job">Job</label>
+              <input type="text" value="<%= user.job %>" name="job">
+            </div>
+          </div>
+          <label for="hobbies">Hobbies</label>
+          <input type="text">
+          <label for="description">Anything else you want to add?</label>
+          <textarea name="description" value="<%= user.description %>" cols="30" rows="4"><%= user.description %></textarea>
+          <button type="submit">Save profile</button>
+        </form>
+      </section>
+    </article> 
+    <%- include('../partials/pageFooter') %>
+  </main>
+</body>
+</html>
