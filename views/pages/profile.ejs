@@ -36,29 +36,30 @@
           <div class="wrap">
             <div>
               <label for="firstName">First name</label>
-              <input type="text" name="firstName">
+              <input type="text" value="<%= user.firstName %>" name="firstName">
             </div>
             <div>
               <label for="lastName">Last name</label>
-              <input type="text" name="lastName">
+              <input type="text" value="<%= user.lastName %>" name="lastName">
             </div>
           </div>
           <label for="lastName">Birth date</label>
-          <input type="date" name="birthDate">
+          <input type="date" value="2020-06-01" name="birthdate">
           <div class="wrap">
             <div>
               <label for="education">Education</label>
-              <input type="text" name="education">
+              <input type="text" value="<%= user.education %>" name="education">
             </div>
             <div>
               <label for="job">Job</label>
-              <input type="text" name="job">
+              <input type="text" value="<%= user.job %>" name="job">
             </div>
           </div>
           <label for="hobbies">Hobbies</label>
           <input type="text">
           <label for="description">Anything else you want to add?</label>
-          <textarea name="description" cols="30" rows="4"></textarea>
+          <textarea name="description" value="<%= user.description %>" cols="30" rows="4"></textarea>
+          <button type="submit">Save profile</button>
         </form>
       </section>
     </article> 
