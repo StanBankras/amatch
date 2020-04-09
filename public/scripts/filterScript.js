@@ -9,9 +9,9 @@ function queryChanger(autofillText) {
     inputField.value = autofillText;
   }
 
-const autofiller = ['lezen', 'muziek', 'outdoor', 'koken', 'dansen', 'sport', 'gamen', 'fotografie', 'huisdieren', 'diy', 'socialemedia', 'films', 'development'];
+const autofiller = ['Lezen', 'Muziek', 'Outdoor', 'Koken', 'Dansen', 'Sport', 'Gamen', 'Fotografie', 'Huisdieren', 'DIY', 'Instagram', 'Films', 'Development', 'Festivals'];
 
 autofiller.forEach(autofillText => document
     .getElementById(autofillText)
     .addEventListener('click', () => queryChanger(autofillText))
-  );
+);

@@ -185,18 +185,18 @@ footer .widgets {
   justify-content: space-around;
 }
 
-#profileTile{
+#profileTile {
   color: white;
   background-color: white;
   margin-top: 4rem;
 }
 
-#profileTile img{
+#profileTile img {
   width: 20rem;
   height: auto;
 }
 
-#profileTile div{
+#profileTile div {
  background-color: #9646D4;
 }
 
@@ -204,11 +204,11 @@ footer .widgets {
   padding: 1rem;
 }
 
-#profileTile div span{
+#profileTile div span {
   font-weight: 700;
 }
 
-#profileTile div div{
+#profileTile div div {
   display: flex;
   flex-direction: row-reverse;
   padding-right: 1.5rem;
@@ -216,7 +216,7 @@ footer .widgets {
   
 }
 
-#likeButton{
+#likeButton {
   background-color: #9646D4;
   background-image: url(../assets/img/likeHeart.png);
   background-size: cover;
@@ -227,18 +227,18 @@ footer .widgets {
 
 /* styles search from */
 
-#searchFormWrapper{
+#searchFormWrapper {
   background-color: white;
   border: 1px solid #CCCCCC;
   border-radius: 15px;
   padding: 2rem;
 }
 
-#searchFrom > *{
+#searchFrom > * {
   display: block;
 }
 
-#searchForm legend{
+#searchForm legend {
   font-weight: 700;
   font-size: 2rem;
 }
@@ -264,18 +264,30 @@ footer .widgets {
   transition: .2s;
 }
 
-#searchButton:hover {
-  background-color: rgb(95, 37, 139);
-}
-
-#searchFrom legend, #searchFrom label, #searchFrom input, #searchButton {
+#searchFrom legend, label, input, #searchButton {
   display: block;
   margin: 2rem 0rem;
 }
 
+#searchButton {
+  cursor: pointer;
+}
+
+#textinput {
+  background-color: #fafafa;
+  border: none;
+  border-bottom: 3px solid black;
+  font-size: 1.1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+#textinput:hover {
+  cursor: unset;
+}
 
 
-.filterButtonContainer{
+.filterButtonContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -340,5 +352,9 @@ footer .widgets {
   }
   #hamburger {
     display: none;
+  }
+
+  #searchFormWrapper{
+    margin: 4rem 4rem;
   }
 }
