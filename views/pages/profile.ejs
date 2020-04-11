@@ -25,7 +25,13 @@
           <h3>Education</h3>
           <p><%= user.education %></p>
           <h3>Hobbies</h3>
-          <p class="hobbies"><span>Outdoor</span><span>Sport</span></p>
+          <p class="hobbies">
+            <% user.hobbies.forEach(hobby => { 
+              const hobbyName = hobbies.find(x => x._id.toString() == hobby);
+            %>
+            <span><%= hobbyName.name %></span>
+            <% }) %>
+          </p>
         </div>
       </section>
       <section>

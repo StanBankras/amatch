@@ -30,7 +30,7 @@ router.post('/edit-profile', async (req, res) => {
   if (req.body.education && user.education != req.body.education) editedItems.education = req.body.education;
   if (req.body.job && user.job != req.body.job) editedItems.job = req.body.job;
   if (req.body.description && user.description != req.body.description) editedItems.description = req.body.description;
-  if (req.body.hobbies && user.hobbies != req.body.hobbies) editedItems.hobbies = req.body.hobbies;
+  if (req.body.hobbies && user.hobbies != req.body.hobbies) editedItems.hobbies = typeof req.body.hobbies === 'string' ? [req.body.hobbies] : req.body.hobbies;
   if(Object.keys(editedItems).length === 0) return res.redirect('/profile');
   await db.collection('users').updateOne({ _id: ObjectID(req.session.activeUser) }, { $set: editedItems });
   res.redirect('/profile');
