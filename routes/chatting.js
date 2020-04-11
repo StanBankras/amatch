@@ -32,6 +32,7 @@ router.get('/chat/:id', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.sendStatus(400);
     const chat = await db.collection('chats').findOne({ chatNumber: id });
     const otherUserId = chat.users[0] == user._id ? chat.users[1] : chat.users[0];
     const otherUser = await db.collection('users').findOne({ _id: ObjectID(otherUserId) });
