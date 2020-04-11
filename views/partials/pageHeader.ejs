@@ -8,39 +8,39 @@
     <div id="main-nav" class="top-part">
       <ul>
         <li>
-          <a href="/">
+          <a href="/dashboard">
             <img src="../assets/img/logo.png" alt="Amatch logo">
           </a>
         </li>
         <li>
-          <a href="/profile">My profile</a>
+          <a href="/profile" class="<% if (route == 'profile') { %>active <% } %>">My profile</a>
         </li>
       </ul>
       <ul>
         <li>
-          <a href="/" class="active">Dashboard</a>
+          <a href="/dashboard" class="<% if (route == 'dashboard') { %>active <% } %>">Dashboard</a>
         </li>
         <li>
-          <a href="/finder">Find singles</a>
+          <a href="/finder" class="<% if (route == 'finder') { %>active <% } %>">Find singles</a>
         </li>
         <li>
-          <a href="/matches">Your matches</a>
+          <a href="/matches" class="<% if (route == 'matches') { %>active <% } %>">Your matches</a>
         </li>
         <li>
-          <a href="/chats">Chats</a>
+          <a href="/chats" class="<% if (route == 'chats') { %>active <% } %>">Chats</a>
         </li>
       </ul>
     </div>
     <div class="bottom-part">
       <div class="title">
-        <nav class="breadcrumbs">
+        <!-- <nav class="breadcrumbs">
           <a href="#">Home</a>
           <span>></span>
           <a href="#">Dashboard</a>
-        </nav>
-        <h1>Dashboard</h1>
+        </nav> -->
+        <h1><%= route %></h1>
       </div>
-      <form action="/logout" method="post">
+      <form action="/log-out" method="post">
         <button type="submit">Logout</button>
       </form>
     </div>
