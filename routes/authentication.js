@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
 // Register your own user
 router.get('/register', async (req, res) => {
 	try {
-		res.render('pages/login/register');
+		const hobbies = await db.collection('hobbies').find().toArray();
+		res.render('pages/login/register', {hobbies});
 	} catch (err) {
 		console.log(err);
 	}
@@ -60,7 +61,7 @@ router.post('/register', async (req, res) => {
 			gender: req.body.gender,
 			birthDate: req.body.birthDate,
 			age: req.body.age,
-			likedUsers: [],
+			likedProfiles: [],
 			chats: []
 		})
 		res.redirect('/allUsers')

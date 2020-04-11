@@ -32,12 +32,23 @@
               <input type="number" name="phoneNumber" id="phoneNumber">
             </div>
             <div class="formpjes">
-              <label for="hobbies">Hobbies:</label>
-              <input type="text" name="hobbies" id="hobbies">
+              <label for="hobbies">Hobbies</label>
+              <select name="hobbies" multiple>
+                <div>
+                <% hobbies.forEach(hobby => { %>
+                  <option value="<%= hobby._id %>"><%= hobby.name %></option>
+                <% }) %>
+                </div>
+              </select>
             </div>
             <div class="formpjes">
               <label for="education">Education:</label>
               <input type="text" name="education" id="education">
+            </div>
+            <div class="formpjes">
+              <label for="gender">Gender:</label>
+              <label for="male">Male:</label><input type="radio" name="gender" value="m">
+              <label for="woman">Woman:</label><input type="radio" name="gender" value="w">
             </div>
             <div class="formpjes">
               <label for="job">Job:</label>
