@@ -29,7 +29,7 @@ router.post('/edit-profile', async (req, res) => {
   if (req.body.education && user.education != req.body.education) editedItems.education = req.body.education;
   if (req.body.job && user.job != req.body.job) editedItems.job = req.body.job;
   if (req.body.description && user.description != req.body.description) editedItems.description = req.body.description;
-  console.log(JSON.stringify(editedItems));
+  if(Object.keys(editedItems).length === 0) return res.redirect('/profile');
   await db.collection('users').updateOne({ _id: ObjectID(req.session.activeUser) }, { $set: editedItems });
   res.redirect('/profile');
 });
