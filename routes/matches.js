@@ -15,13 +15,15 @@ dbCallback(database => {
 // Render homepage with matches of the logged in user
 router.get('/matches', auth, async (req, res) => {  
   try {
-    const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.activeUser) });
-    const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
-    const matchList = await db.collection('users').find({
-      '_id': {
-        '$in': userObjects
-      }
-    }).toArray();
+    const users = await db.collection('users').find().toArray();
+    const user = users.find(x => x._id == req.session.activeUser);
+    const matchList = users.filter(matchedUser => {
+      let match = false;
+      user.hobbies.forEach(hobby => {
+        if (matchedUser.hobbies.includes(hobby) && matchedUser._id != user._id && match.gender != user.gender) { match = true; }
+      });
+      return match;
+    });
     const route = 'matches';
     res.render('pages/matches', { matches: matchList, user, route });
   } catch(err) {
