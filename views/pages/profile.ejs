@@ -11,7 +11,7 @@
         <h2>How others see you...</h2>
         <div class="profile">
           <div class="wrap">
-            <img src="<%= user.profilePicture %>" alt="">
+            <img src="<%= 'uploads/profile-pictures/' + user._id %>" alt="">
             <div>
               <p class="name"><%= user.firstName %> <%= user.lastName %></p>
               <p><%= user.age %></p>
@@ -36,7 +36,9 @@
       </section>
       <section>
         <h2>Make edits to your profile</h2>
-        <form action="/edit-profile" method="POST">
+        <form action="/edit-profile" enctype="multipart/form-data" method="POST">
+          <label for="profilePicture">Profile picture</label>
+          <input name="profilepic" type="file">
           <div class="wrap">
             <div>
               <label for="firstName">First name</label>
@@ -48,7 +50,7 @@
             </div>
           </div>
           <label for="lastName">Birth date</label>
-          <input type="date" value="2020-06-01" name="birthdate">
+          <input type="date" value="<%= user.birthdate %>" name="birthdate">
           <div class="wrap">
             <div>
               <label for="education">Education</label>

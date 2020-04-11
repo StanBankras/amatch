@@ -42,7 +42,7 @@ function createViewedMatch(match) {
   li.innerHTML = `
   <figure>
     <img
-      src="${ matches[match].profilePicture }"
+      src="uploads/profile-pictures/${ matches[match]._id }"
       alt="Dating person"
       >
     <figcaption>${ matches[match].firstName } ${ matches[match].lastName }, ${ matches[match].age }</figcaption>
