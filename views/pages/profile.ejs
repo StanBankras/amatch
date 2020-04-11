@@ -54,7 +54,17 @@
             </div>
           </div>
           <label for="hobbies">Hobbies</label>
-          <input type="text">
+          <select name="hobbies" multiple>
+            <div>
+            <% hobbies.forEach(hobby => { %>
+              <% if (user.hobbies.includes(hobby._id.toString())) { %>
+                <option selected="" value="<%= hobby._id %>"><%= hobby.name %></option>                
+              <% } else { %>
+                <option value="<%= hobby._id %>"><%= hobby.name %></option>
+              <% } %>
+            <% }) %>
+            </div>
+          </select>
           <label for="description">Anything else you want to add?</label>
           <textarea name="description" value="<%= user.description %>" cols="30" rows="4"><%= user.description %></textarea>
           <button type="submit">Save profile</button>
