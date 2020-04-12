@@ -2,6 +2,10 @@ body {
     background-image: none;
 }
 
+div.welcome {
+    text-align: center;
+}
+
 div.loginArea {
     grid-area: loginArea;
     margin: 2rem 2rem 0 2rem;
@@ -26,6 +30,34 @@ div.loginArea input {
     padding: 1.3rem;
     width: 100%;
     border-radius: 0.5rem;
+}
+
+div.gender {
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    padding: .5rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+div.loginArea select {
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    padding: .5rem 1.3rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    max-height: 3.87rem;
+}
+
+div.gender input {
+    margin: auto;
+}
+
+div.loginArea input:focus {
+    border: 1px solid #9646D4;
+    outline: none;
 }
 
 div.loginArea label {
@@ -99,6 +131,7 @@ a {
         border: 1px solid #CCCCCC;
         width: auto;
         border-radius: 0.5rem;
+        font-size: 1rem;
     }
 
     div.formpjes {
@@ -117,22 +150,42 @@ a {
     }
 
     div.loginArea button {
-        width: 100%;
+        width: 27.6rem;
         background-color: #9646D4;
         border: none;
         color: #FFFFFF;
+        font-size: 1.3rem;
         padding: 1.3rem;
         border-radius: 0.5rem;
+        border: 1px solid #9646D4;
     }
 
+    div.loginArea button:hover {
+        /* background-color: #AD8EC5; */
+        background-color: white;
+        border: 1px solid #9646D4;
+        color: #9646D4;
+    }
+
+    div.loginArea button:active {
+        background-color: #9646D4;
+        color: white;
+    }
+/* 
     div.nextForm {
         display: none;
-    }
+    } */
 
     div.rememberMe {
         margin: 1rem 0 1rem 0;
         display: flex;
         justify-content: space-between;
+        width: 100%;
+    }
+
+    div.rememberMe a {
+        font-weight: 700;
+        color: #9646D4;
     }
 
     label.container>span.text {

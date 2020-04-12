@@ -41,7 +41,7 @@
           <label for="confirmPassword" id="cPasswordLabel">Confirm Password:</label>
           <input type="text" name="confirmPassword" id="confirmPassword">
         </div>
-        <div class="nextForm">
+        <!-- <div class="nextForm"> -->
           <div class="formpjes">
             <label for="hobbies">Hobbies</label>
             <select name="hobbies" multiple>
@@ -57,18 +57,20 @@
             <input type="text" name="education" id="education">
           </div>
           <div class="formpjes">
-            <label for="gender">Gender:</label>
-            <label for="male">Male:</label><input type="radio" name="gender" value="m">
-            <label for="woman">Woman:</label><input type="radio" name="gender" value="w">
+              <label for="gender">Gender:</label>
+            <div class="gender">
+              <label for="male">Male:</label><input type="radio" name="gender" value="m">
+              <label for="woman">Woman:</label><input type="radio" name="gender" value="w">
+            </div>
           </div>
           <div class="formpjes">
             <label for="job">Job:</label>
             <input type="text" name="job" id="job">
           </div>
-          <div class="formpjes">
+          <!-- <div class="formpjes">
             <label for="profilePictures">Profile Picture:</label>
             <input type="file" name="profilePictures" id="profilePictures">
-          </div>
+          </div> -->
           <div class="formpjes">
             <label for="age">Age:</label>
             <input type="number" name="age" id="age">
@@ -77,12 +79,14 @@
             <label for="username">Username: </label>
             <input type="text" name="username" id="username">
           </div>
-        </div>
+        <!-- </div> -->
 
+        <div class="rememberMe">
         <p>Already have an account? <a href="/">Return to login</a></p>
 
         <button type="submit" id="submitButton">Register to Amatch</button>
-      </form>
+     </div> 
+    </form>
     </div>
   </div>
 </body>

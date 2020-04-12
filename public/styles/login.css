@@ -33,6 +33,11 @@ div.loginArea input {
     border-radius: 0.5rem;
 }
 
+div.loginArea input:focus {
+    border: 1px solid #9646D4;
+    outline: none;
+}
+
 div.loginArea label {
     padding: 0.6rem 0;
 }
@@ -47,6 +52,7 @@ div.bgArea button, div.loginArea button {
     background-color: #9646D4;
     border: none;
     color: #FFFFFF;
+    font-size: 1.3rem;
     padding: 1.3rem;
     border-radius: 0.5rem;
 }
@@ -55,10 +61,16 @@ span.rememberMe {
     margin-left: 2rem;
 }
 
-a.forgotPw label, 
 div.formpjes a label {
     cursor: pointer;
     color: #00A8FF;
+    font-weight: 700;
+}
+
+a.forgotPw label {
+    cursor: pointer;
+    color: darkgray;
+    text-decoration: underline;
 }
 
 a {
@@ -114,6 +126,7 @@ a {
         padding: 1.3rem;
         width: 100%;
         border-radius: 0.5rem;
+        font-size: 1rem;
     }
 
     div.loginArea label {
@@ -125,13 +138,26 @@ a {
         display: block;
     }
 
-    div.bgArea button, div.loginArea button {
+    div.loginArea button {
         width: 100%;
         background-color: #9646D4;
         border: none;
         color: #FFFFFF;
         padding: 1.3rem;
         border-radius: 0.5rem;
+        border: 1px solid #9646D4;
+    }
+
+    div.loginArea button:hover {
+        /* background-color: #AD8EC5; */
+        background-color: white;
+        border: 1px solid #9646D4;
+        color: #9646D4;
+    }
+
+    div.loginArea button:active {
+        background-color: #9646D4;
+        color: white;
     }
     
     /* Customize the label (the container) */
@@ -184,7 +210,7 @@ label.container input.checkmark {
 
 /* On mouse-over, add a grey background color */
 label.container:hover input.checkmark~.checkmark {
-    background-color: #AD8EC5;
+    background-color: #9646D4;
 }
 
 /* When the checkbox is checked, add a blue background */
