@@ -3,14 +3,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout</title>
-  <link rel="stylesheet" href="styles/liking.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/profile.css">
   <%- include('../partials/pageHead') %>
 </head>
 <body>
   <%- include('../partials/pageHeader') %>
   <div class="container">
     <main id="content">
-      Dashboard, welcome <%= user.firstName %>
+      <div id="dashboard">
+        <div>
+          <div class="matches">
+            <% for (const match of matches.slice(0, Math.min(3, matches.length))) { %>
+              <%= match.firstName %>
+            <% } %>
+          </div>
+        </div>
+        <div id="profile-page" class="single-column">
+          <h2>How people see you...</h2>
+          <div class="profile">
+            <div class="wrap">
+              <img src="<%= '/uploads/profile-pictures/' + user._id %>" alt="">
+              <div>
+                <p class="name"><%= user.firstName %> <%= user.lastName %></p>
+                <p><%= user.age %></p>
+              </div>
+            </div>
+            <p class="description">
+              <%= user.description %>
+            </p>
+            <h3>Job</h3>
+            <p><%= user.job %></p>
+            <h3>Education</h3>
+            <p><%= user.education %></p>
+            <h3>Hobbies</h3>
+            <p class="hobbies">
+              <% user.hobbies.forEach(hobby => { 
+                const hobbyName = hobbies.find(x => x._id.toString() == hobby);
+              %>
+              <span><%= hobbyName.name %></span>
+              <% }) %>
+            </p>
+          </div>          
+        </div>
+      </div>
     </main>
     <%- include('../partials/pageFooter') %>
     </div>
