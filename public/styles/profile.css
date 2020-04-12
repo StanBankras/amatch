@@ -4,6 +4,11 @@
   gap: 2rem;
 }
 
+#profile-page.preview {
+  display: block;
+  max-width: 800px;
+}
+
 #profile-page h2 {
   margin-bottom: 2rem;
 }
