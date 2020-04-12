@@ -11,8 +11,10 @@ dbCallback(database => {
 async function getMatches(user, users) {
   return users.filter(matchedUser => {
     let match = false;
+    if (matchedUser._id.toString() === user._id.toString()) return false;
+    if (match.gender === user.gender) return false;
     user.hobbies.forEach(hobby => {
-      if (matchedUser.hobbies.includes(hobby) && matchedUser._id != user._id && match.gender != user.gender) { match = true; }
+      if (matchedUser.hobbies.includes(hobby)) { match = true; }
     });
     return match;
   });

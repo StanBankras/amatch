@@ -16,9 +16,10 @@ router.get('/dashboard', auth, async (req, res) => {
   const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
   const chats = await chatService.getUserChats(user);
   const users = await db.collection('users').find().toArray();
-  const matches = await matchService.getMatches(user, users)
+  const matches = await matchService.getMatches(user, users);
+  const hobbies = await db.collection('hobbies').find().toArray();
   const route = 'dashboard';
-  res.render('pages/dashboard', { user, route, chats, matches });
+  res.render('pages/dashboard', { user, route, chats, matches, hobbies });
 });
 
 module.exports = router;
