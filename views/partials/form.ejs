@@ -1,5 +1,4 @@
 <div id="searchFormWrapper">
-<<<<<<< HEAD
     <form id="searchForm" action="/result" method="post">
         <legend>Search for matches</legend>
         <label>Name a hobby you want your matches to have: </label>
@@ -8,22 +7,9 @@
     </form>
     <div class="filterButtonContainer" id="filterButtonContainer">
         <% for (let index = 0; index < hobbies.length; index++) { %>
-        <button class="filterButton"><%= hobbies[index].name %></button>
+        <button class="filterButton" data-id="<%= hobbies[index]._id %>"><%= hobbies[index].name %></button>
         <% } %>
     </div>
-=======
-  <form id="searchForm" action="/result" method="post">
-    <legend>Search for matches</legend>
-    <label>Name a hobby you want your matches to have: </label>
-    <input id="textinput" name=hobby1 placeholder="Choose a hobby from below" readonly>
-    <button id="searchButton" type="submit">Find me matches!</button>
-  </form>
-  <div class="filterButtonContainer" id="filterButtonContainer">
-    <% for (let index = 0; index < hobbies.length; index++) { %>
-    <button class="filterButton"><%= hobbies[index].name %></button>
-    <% } %>
-  </div>
->>>>>>> 64d453ccb31084edafe290742c51d6b91643340d
 </div>
 
 <!-- 

@@ -3,6 +3,7 @@ const router = express.Router();
 const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
 const chatService = require('../services/chatService');
+const matchService = require('../services/matchService');
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -17,15 +18,9 @@ router.get('/matches', auth, async (req, res) => {
   try {
     const users = await db.collection('users').find().toArray();
     const user = users.find(x => x._id == req.session.activeUser);
-    const matchList = users.filter(matchedUser => {
-      let match = false;
-      user.hobbies.forEach(hobby => {
-        if (matchedUser.hobbies.includes(hobby) && matchedUser._id != user._id && match.gender != user.gender) { match = true; }
-      });
-      return match;
-    });
+    const matches = await matchService.getMatches(user, users);
     const route = 'matches';
-    res.render('pages/matches', { matches: matchList, user, route });
+    res.render('pages/matches', { matches, user, route });
   } catch(err) {
     console.error(err);
   }
