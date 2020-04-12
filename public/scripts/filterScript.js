@@ -1,4 +1,3 @@
-console.log('gekoppelt');
 let inputField = document.querySelector('#textinput');
 const filterButtons = document.querySelector('#filterButtonContainer');
 

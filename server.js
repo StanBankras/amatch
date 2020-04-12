@@ -47,6 +47,8 @@ app.use(session({
   secret: process.env.SESSION_SECRET
 }));
 
+require('./websockets');
+
 const matchRouter = require('./routes/matches');
 const chatRouter = require('./routes/chatting');
 const authRouter = require('./routes/authentication');

@@ -6,6 +6,8 @@ let db;
 dbCallback(database => {
 	db = database
 });
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // Loggin with using username and password
 router.get('/', (req, res) => {
@@ -16,11 +18,17 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const data = await db.collection('users').findOne({
-			username: req.body.username,
-			password: req.body.password
+			username: req.body.username
 		})
-		req.session.activeUser = data._id;
-		res.redirect('/dashboard');
+
+		const match = await bcrypt.compare(req.body.password, data.password);
+
+		if(match) {
+			req.session.activeUser = data._id;
+			res.redirect('/dashboard');
+		} else {
+			res.redirect('/')
+		}
 	} catch (err) {
 		console.log(err);
 	}
@@ -29,7 +37,8 @@ router.post('/', async (req, res) => {
 // Register your own user
 router.get('/register', async (req, res) => {
 	try {
-		res.render('pages/login/register');
+		const hobbies = await db.collection('hobbies').find().toArray();
+		res.render('pages/login/register', {hobbies});
 	} catch (err) {
 		console.log(err);
 	}
@@ -37,6 +46,7 @@ router.get('/register', async (req, res) => {
 
 // Add user data to database
 router.post('/register', async (req, res) => {
+	const passwordHash = await bcrypt.hashSync(req.body.password, saltRounds);
 	try {
 		await db.collection('users').insertOne({
 			firstName: req.body.firstName,
@@ -44,12 +54,15 @@ router.post('/register', async (req, res) => {
 			emailAdress: req.body.emailAdress,
 			phoneNumber: req.body.phoneNumber,
 			username: req.body.username,
-			password: req.body.password,
+			password: passwordHash,
 			hobbies: req.body.hobbies,
 			education: req.body.education,
 			job: req.body.job,
-			profilePictures: req.body.profilePictures,
+			gender: req.body.gender,
+			birthDate: req.body.birthDate,
 			age: req.body.age,
+			likedProfiles: [],
+			chats: []
 		})
 		res.redirect('/allUsers')
 	} catch (err) {
@@ -59,8 +72,6 @@ router.post('/register', async (req, res) => {
 
 router.get('/forgotPw', async (req, res) => {
 	try {
-		const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-		console.log(user);
 		res.render('pages/login/forgotPw');
 	} catch (err) {
 		console.log(err);

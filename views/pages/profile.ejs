@@ -11,7 +11,7 @@
         <h2>How others see you...</h2>
         <div class="profile">
           <div class="wrap">
-            <img src="<%= user.profilePicture %>" alt="">
+            <img src="<%= 'uploads/profile-pictures/' + user._id %>" alt="">
             <div>
               <p class="name"><%= user.firstName %> <%= user.lastName %></p>
               <p><%= user.age %></p>
@@ -25,12 +25,20 @@
           <h3>Education</h3>
           <p><%= user.education %></p>
           <h3>Hobbies</h3>
-          <p class="hobbies"><span>Outdoor</span><span>Sport</span></p>
+          <p class="hobbies">
+            <% user.hobbies.forEach(hobby => { 
+              const hobbyName = hobbies.find(x => x._id.toString() == hobby);
+            %>
+            <span><%= hobbyName.name %></span>
+            <% }) %>
+          </p>
         </div>
       </section>
       <section>
         <h2>Make edits to your profile</h2>
-        <form action="/edit-profile" method="POST">
+        <form action="/edit-profile" enctype="multipart/form-data" method="POST">
+          <label for="profilePicture">Profile picture</label>
+          <input name="profilepic" type="file">
           <div class="wrap">
             <div>
               <label for="firstName">First name</label>
@@ -42,7 +50,7 @@
             </div>
           </div>
           <label for="lastName">Birth date</label>
-          <input type="date" value="2020-06-01" name="birthdate">
+          <input type="date" value="<%= user.birthdate %>" name="birthdate">
           <div class="wrap">
             <div>
               <label for="education">Education</label>
@@ -54,7 +62,17 @@
             </div>
           </div>
           <label for="hobbies">Hobbies</label>
-          <input type="text">
+          <select name="hobbies" multiple>
+            <div>
+            <% hobbies.forEach(hobby => { %>
+              <% if (user.hobbies.includes(hobby._id.toString())) { %>
+                <option selected="" value="<%= hobby._id %>"><%= hobby.name %></option>                
+              <% } else { %>
+                <option value="<%= hobby._id %>"><%= hobby.name %></option>
+              <% } %>
+            <% }) %>
+            </div>
+          </select>
           <label for="description">Anything else you want to add?</label>
           <textarea name="description" value="<%= user.description %>" cols="30" rows="4"><%= user.description %></textarea>
           <button type="submit">Save profile</button>
