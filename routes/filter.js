@@ -24,11 +24,13 @@ router.post('/result', async (req, res) => {
     const hobbyName = await db.collection('hobbies').find({'name': filter}).toArray();
     hobbyName.forEach((hobbyName) => {
       hobbyId = hobbyName._id;
-      console.log(hobbyId);
+      hobbyId.toString();
     });
     console.log(hobbyId);
-    const data = await db.collection('users').find({ hobbies: { $elemMatch: { index: hobbyId } } }).toArray();
-    console.log('data' + data);
+    // const data = await db.collection('users').find({ hobbies: {$all: [hobbyId]}}).toArray();
+    const data = await db.collection('users').find({ hobbies: {$all: [hobbyId, hobbyId]}}).toArray();
+    console.log(data);
+    console.log(hobbyId);
     const route = 'result';
     res.render('pages/filter/result.ejs', { data: data, hobbyName, route });
   } catch (err) {
