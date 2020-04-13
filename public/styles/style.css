@@ -297,7 +297,7 @@ footer section p {
 
 #dashboard {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 
@@ -310,7 +310,7 @@ footer section p {
   border-radius: 10px;
   border: 1px solid #CCCCCC;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   gap: 2rem;
   background-color: white;
 }
@@ -327,6 +327,24 @@ footer section p {
 #dashboard .matches .match {
   text-align: center;
   font-weight: bold;
+}
+
+@media(min-width: 540px) {
+  #dashboard .matches .wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(min-width: 840px) {
+  #dashboard .matches .wrap {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media(min-width: 1190px) {
+  #dashboard {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 @media screen and (min-width: 350px) {
