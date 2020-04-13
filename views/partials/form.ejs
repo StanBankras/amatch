@@ -7,7 +7,7 @@
     </form>
     <div class="filterButtonContainer" id="filterButtonContainer">
         <% for (let index = 0; index < hobbies.length; index++) { %>
-        <button class="filterButton"><%= hobbies[index].name %></button>
+        <button class="filterButton" data-id="<%= hobbies[index]._id %>"><%= hobbies[index].name %></button>
         <% } %>
     </div>
 </div>

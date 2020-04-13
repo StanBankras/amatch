@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const ObjectID = require('mongodb').ObjectID;
+const mongo = require('mongodb');
+const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -21,15 +22,13 @@ router.get('/finder', async (req, res) => {
 
 router.post('/result', async (req, res) => {
   try {
-    let filter = req.body.filter;
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
+    const filter = req.body.filter;
     const hobbyName = await db.collection('hobbies').findOne({'name': filter});
-    let hobbyId = hobbyName._id;
-    console.log(hobbyId);
-    const data = await db.collection('users').find({ hobbies: hobbyId.toHexString() }).toArray();
-    const route = 'result';
-    console.log(data);
-    console.log(hobbyId);
-    res.render('pages/filter/result.ejs', { data: data, hobbyName, hobbyId, route });
+    const hobbyId = hobbyName._id;
+    const matches = await db.collection('users').find({ hobbies: hobbyId.toHexString() }).toArray();
+    const route = 'finder';
+    res.render('pages/filter-result', { matches, route, user });
   } catch (err) {
     console.log(err);
   }
@@ -53,15 +52,6 @@ router.get('/result', async (req, res) => {
     console.log(err);
     res.redirect('/return')
   }
-})
-
-router.get('/return', function (req, res) {
-  if (req.session.filter) {
-    req.session.destroy(function (err) {
-      if (err) console.log(err)
-    })
-  }
-  res.redirect('/filter')
-})
+});
 
 module.exports = router;
