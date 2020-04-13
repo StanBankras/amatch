@@ -26,6 +26,7 @@ router.post('/result', auth, async (req, res) => {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const filter = req.body.filter;
     const hobbyName = await db.collection('hobbies').findOne({'name': filter});
+    const hobbies = await db.collection('hobbies').find().toArray();
     const hobbyId = hobbyName._id;
     const matches = await db.collection('users').find({ hobbies: hobbyId.toHexString() }).toArray();
     const filteredMatches = matches.filter(matchedUser => {
@@ -38,7 +39,7 @@ router.post('/result', auth, async (req, res) => {
       return match;
     });
     const route = 'finder';
-    res.render('pages/filter-result', { matches: filteredMatches, route, user });
+    res.render('pages/filter-result', { matches: filteredMatches, route, user, hobbies });
   } catch (err) {
     console.log(err);
   }

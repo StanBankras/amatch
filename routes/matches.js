@@ -16,10 +16,11 @@ dbCallback(database => {
 router.get('/matches', auth, async (req, res) => {  
   try {
     const users = await db.collection('users').find().toArray();
+    const hobbies = await db.collection('hobbies').find().toArray();
     const user = users.find(x => x._id == req.session.activeUser);
     const matches = await matchService.getMatches(user, users);
     const route = 'matches';
-    res.render('pages/matches', { matches, user, route });
+    res.render('pages/matches', { matches, user, route, hobbies });
   } catch(err) {
     console.error(err);
   }
