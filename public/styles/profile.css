@@ -68,22 +68,23 @@
 
 #profile-page .profile #artistContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
+  align-items: center;
 }
 
 #profile-page .profile #artistContainer img {
   height: 8rem;
-  width: auto;
-}
-
-#profile-page .profile #artistContainer div {
-  margin: 1.5rem 0 0 0;
+  width: 8rem;
 }
 
 #profile-page .profile #artistContainer div #artistName {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+#profile-page .profile #artistContainer div p {
+  font-size: 0.9rem;
 }
 
 #profile-page .profile #artistContainer div a {
@@ -178,6 +179,10 @@
 
 @media(min-width: 560px) {
   #profile-page form .wrap {
+    flex-direction: row;
+  }
+
+  #profile-page .profile #artistContainer {
     flex-direction: row;
   }
 }

@@ -17,7 +17,11 @@ router.get('/profile', auth, async (req, res) => {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const hobbies = await db.collection('hobbies').find().toArray();
     const route = 'profile'
-    res.render('pages/profile', { user, route, hobbies });
+    artistId = user.deezerArtistId;
+    const apiUrl = 'https://api.deezer.com/artist/' + artistId;
+    const fetchResponse = await fetch(apiUrl);
+    const json = await fetchResponse.json();
+    res.render('pages/profile', { user, route, hobbies, json });
   } catch(err) {
     console.log(err);
   }

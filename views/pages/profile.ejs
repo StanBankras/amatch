@@ -31,6 +31,15 @@
             %>
             <span><%= hobbyName.name %></span>
             <% }) %>
+            <h3>Favorite artist</h3>
+          <div id="artistContainer">
+            <img id="artistPicture" src="<%= json.picture_medium %>" alt="artistpicture"  title="<%= json.name %>">
+            <div>
+              <p id="artistName"><%= json.name %></p>
+              <p><%= json.nb_fan %> fans</p>
+              <a href="<%= json.link %>"> Listen to <%= json.name %> on Deezer </a>
+            </div>
+          </div>
           </p>
         </div>
       </section>
