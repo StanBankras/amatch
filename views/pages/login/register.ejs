@@ -11,7 +11,7 @@
 <body>
   <div class="container">
     <div class="loginArea">
-      <a href="index.html"><img src="assets/img/logo-with-text.png" alt=""></a>
+      <a href="/"><img src="assets/img/logo-with-text.png" alt=""></a>
       <div class="welcome">
         <h1 class="register">Register to Amatch</h1>
         <h2 class="register">Find someone who likes what you like</h2>
@@ -19,27 +19,27 @@
       <form action="/register" method="post">
         <div class="formpjes">
           <label for="firstName">First name</label>
-          <input type="text" name="firstName" id="firstName">
+          <input type="text" placeholder="Jan" name="firstName" id="firstName">
         </div>
         <div class="formpjes">
           <label for="lastName">Last name</label>
-          <input type="text" name="lastName" id="lastName">
+          <input type="text" placeholder="van Dijk" name="lastName" id="lastName">
         </div>
         <div class="formpjes">
           <label for="emailAdress">E-mail</label>
-          <input type="email" name="emailAdress" id="emailAdress">
+          <input type="email" placeholder="piet@example.com" name="emailAdress" id="emailAdress">
         </div>
         <div class="formpjes">
           <label for="phoneNumber">Phone number</label>
-          <input type="number" name="phoneNumber" id="phoneNumber">
+          <input type="number" placeholder="0612345678" name="phoneNumber" id="phoneNumber">
         </div>
         <div class="formpjes">
           <label for="password">Password: </label>
-          <input type="password" name="password" id="password">
+          <input type="password" placeholder="******" name="password" id="password">
         </div>
         <div class="formpjes">
           <label for="confirmPassword" id="cPasswordLabel">Confirm Password:</label>
-          <input type="text" name="confirmPassword" id="confirmPassword">
+          <input type="text" placeholder="******" name="confirmPassword" id="confirmPassword">
         </div>
         <!-- <div class="nextForm"> -->
           <div class="formpjes">
@@ -54,7 +54,7 @@
           </div>
           <div class="formpjes">
             <label for="education">Education:</label>
-            <input type="text" name="education" id="education">
+            <input type="text" placeholder="University" name="education" id="education">
           </div>
           <div class="formpjes">
               <label for="gender">Gender:</label>
@@ -65,31 +65,33 @@
           </div>
           <div class="formpjes">
             <label for="job">Job:</label>
-            <input type="text" name="job" id="job">
+            <input type="text" placeholder="Front-End Developer" name="job" id="job">
           </div>
           <!-- <div class="formpjes">
             <label for="profilePictures">Profile Picture:</label>
             <input type="file" name="profilePictures" id="profilePictures">
           </div> -->
           <div class="formpjes">
-            <label for="age">Age:</label>
-            <input type="number" name="age" id="age">
+            <label for="age">Date of birth:</label>
+            <input type="date" placeholder="21" name="dob" id="dob">
           </div>
           <div class="formpjes">
             <label for="username">Username: </label>
-            <input type="text" name="username" id="username">
+            <input type="text" placeholder="jvandijk" name="username" id="username">
           </div>
-        <!-- </div> -->
-
-        <div class="rememberMe">
-        <p>Already have an account? <a href="/">Return to login</a></p>
-
-        <button type="submit" id="submitButton">Register to Amatch</button>
-     </div> 
+          <div class="formpjes">
+            <p>Already have an account? <a href="/">Return to login</a></p>
+          </div>
+          <div class="formpjes">
+            <button id="nextButton">Next</button>
+          </div>
+          <div class="formpjes">
+            <button type="submit" id="submitButton" formaction="/register">Register to Amatch</button>
+          </div>
+        <!-- </div> --> 
     </form>
     </div>
   </div>
 </body>
-<script src="static/js/script.js"></script>
-
+<script src="../scripts/form.js"></script>   
 </html>

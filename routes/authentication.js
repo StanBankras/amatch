@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
 			likedProfiles: [],
 			chats: []
 		})
-		res.redirect('/allUsers')
+		res.redirect('/')
 	} catch (err) {
 		console.log(err)
 	}
