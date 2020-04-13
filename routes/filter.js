@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+// const ObjectID = require('mongodb').ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
@@ -20,20 +21,23 @@ router.get('/finder', async (req, res) => {
 
 router.post('/result', async (req, res) => {
   try {
-    const hobbyNames = await db.collection('hobbies').find({'name': filter});
-    const data = await db.collection('users').find({ hobbies: hobbyNames.forEach((name, hobbyId) => {
-      hobbyId = name._id;
-      console.log(hobbyId);
-      return hobbyId;
-    })
-    }).toArray();
-    console.log(data);
+    let filter = req.body.filter;
+    const hobbyName = await db.collection('hobbies').findOne({'name': filter});
+    let hobbyId = hobbyName._id;
+    console.log(hobbyId);
+    const data = await db.collection('users').find({ hobbies: hobbyId.toHexString() }).toArray();
     const route = 'result';
-    res.render('pages/filter/result.ejs', { data: data, hobbies: hobbyId, route });
+    console.log(data);
+    console.log(hobbyId);
+    res.render('pages/filter/result.ejs', { data: data, hobbyName, hobbyId, route });
   } catch (err) {
     console.log(err);
   }
-});
+})
+
+//haal alle items uit het array 'hobbies' op
+//vergelijk welke id's van het array 'hobbies' in 'hobbies' collection zitten
+//die arrayen en mee sturen 
 
 router.get('/result', async (req, res) => {
   try {
