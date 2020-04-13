@@ -16,7 +16,7 @@
           <h2>Your matches are waiting...</h2>
           <div class="matches">
             <div class="wrap">
-              <% for (const match of matches.slice(0, Math.min(3, matches.length))) { %>
+              <% for (const match of matches.slice(0, Math.min(7, matches.length))) { %>
                 <div class="match">
                   <a href="<%= '/profile/' + match._id %>">
                     <img src="<%= 'uploads/profile-pictures/' + match._id %>" alt="<%= match.firstName + ' ' + match.lastName %>">
