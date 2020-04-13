@@ -2,6 +2,7 @@
   <head>
     <%- include('../partials/pageHead') %>
     <link rel="stylesheet" href="../styles/profile.css">
+    <link rel="stylesheet" href="../styles/liking.css">
   </head>
 <body>
   <%- include('../partials/pageHeader') %>
@@ -13,8 +14,8 @@
           <div class="wrap">
             <img src="<%= '/uploads/profile-pictures/' + user._id %>" alt="">
             <div>
-              <p class="name"><%= user.firstName %> <%= user.lastName %></p>
-              <p><%= user.age %></p>
+              <p class="name"><%= user.firstName %> <%= user.lastName %>, <%= user.age %></p>
+              <p><%= user.description %></p>
             </div>
           </div>
           <p class="description">
@@ -34,8 +35,14 @@
           </p>
         </div>
       </section>
+      <form action="/like">
+        <input type="hidden" name="id" value="<%= user._id %>">
+        <button id="like-button"><% if (activeUser.likedProfiles.includes(user._id.toString())) { %>Dislike<% } else { %>Like<% } %> this user</button>
+      </form>
     </article> 
     <%- include('../partials/pageFooter') %>
   </main>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="../scripts/profilePreviewLiking.js"></script>
 </body>
 </html>

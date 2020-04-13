@@ -43,7 +43,7 @@ router.post('/like', async (req, res) => {
 
     } else {
       // See if the other user already liked this user too
-      const data = await matchService.checkMatch(req.session.activeUser, req.body.id, res);
+      const data = await matchService.checkMatch(req.session.activeUser, req.body.id);
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.activeUser) },
@@ -55,7 +55,6 @@ router.post('/like', async (req, res) => {
       if (!data.match) {
         return res.json({ match: false });
       } else {
-        console.log(data.chat);
         return res.json({ match: true, otherUser: data.otherUser, chat: data.chat });
       }
     }

@@ -11,6 +11,11 @@
   display: block;
 }
 
+
+#profile-page.preview > section {
+  margin-bottom: 2rem;
+}
+
 #profile-page h2 {
   margin-bottom: 2rem;
 }
