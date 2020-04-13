@@ -25,9 +25,10 @@ router.get('/profile', auth, async (req, res) => {
 router.get('/profile/:id', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.params.id) });
+    const activeUser = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const hobbies = await db.collection('hobbies').find().toArray();
     const route = 'profile'
-    res.render('pages/profile-preview', { user, route, hobbies });
+    res.render('pages/profile-preview', { user, route, hobbies, activeUser });
   } catch(err) {
     console.log(err);
   }

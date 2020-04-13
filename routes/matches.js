@@ -16,10 +16,11 @@ dbCallback(database => {
 router.get('/matches', auth, async (req, res) => {  
   try {
     const users = await db.collection('users').find().toArray();
+    const hobbies = await db.collection('hobbies').find().toArray();
     const user = users.find(x => x._id == req.session.activeUser);
     const matches = await matchService.getMatches(user, users);
     const route = 'matches';
-    res.render('pages/matches', { matches, user, route });
+    res.render('pages/matches', { matches, user, route, hobbies });
   } catch(err) {
     console.error(err);
   }
@@ -42,7 +43,7 @@ router.post('/like', async (req, res) => {
 
     } else {
       // See if the other user already liked this user too
-      const data = await matchService.checkMatch(req.session.activeUser, req.body.id, res);
+      const data = await matchService.checkMatch(req.session.activeUser, req.body.id);
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.activeUser) },
@@ -54,7 +55,6 @@ router.post('/like', async (req, res) => {
       if (!data.match) {
         return res.json({ match: false });
       } else {
-        console.log(data.chat);
         return res.json({ match: true, otherUser: data.otherUser, chat: data.chat });
       }
     }
