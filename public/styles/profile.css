@@ -66,10 +66,39 @@
   margin-bottom: 0.4rem;
 }
 
+#profile-page .profile #artistContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#profile-page .profile #artistContainer img {
+  height: 8rem;
+  width: auto;
+}
+
+#profile-page .profile #artistContainer div {
+  margin: 1.5rem 0 0 0;
+}
+
+#profile-page .profile #artistContainer div #artistName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#profile-page .profile #artistContainer div a {
+  border-bottom:2px solid white;
+  transition: 0.5s;
+}
+
+#profile-page .profile #artistContainer div a:hover {
+  border-bottom: 2px solid black;
+  transition: 0.5s;
+}
+
 #profile-page form {
   max-width: 700px;
 }
-
 
 #profile-page form .wrap {
   display: flex;
