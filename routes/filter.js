@@ -55,8 +55,6 @@ router.get('/result', async (req, res) => {
   }
 })
 
-// const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
-
 router.get('/return', function (req, res) {
   if (req.session.filter) {
     req.session.destroy(function (err) {
