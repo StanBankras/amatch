@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const mongo = require('mongodb');
+const auth = require('../middleware/authentication');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
 dbCallback(database => {
-  db = database;
+  db = database; 
 });
 
 router.get('/finder', async (req, res) => {
@@ -20,37 +21,26 @@ router.get('/finder', async (req, res) => {
 //zoek in het array met hobbys van de gebruiker
 //array de gebruikers die dat hebben
 
-router.post('/result', async (req, res) => {
+router.post('/result', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const filter = req.body.filter;
     const hobbyName = await db.collection('hobbies').findOne({'name': filter});
     const hobbyId = hobbyName._id;
     const matches = await db.collection('users').find({ hobbies: hobbyId.toHexString() }).toArray();
+    const filteredMatches = matches.filter(matchedUser => {
+      let match = false;
+      if (matchedUser._id.toString() === user._id.toString()) return false;
+      if (match.gender === user.gender) return false;
+      user.hobbies.forEach(hobby => {
+        if (matchedUser.hobbies.includes(hobby)) { match = true; }
+      });
+      return match;
+    });
     const route = 'finder';
-    res.render('pages/filter-result', { matches, route, user });
+    res.render('pages/filter-result', { matches: filteredMatches, route, user });
   } catch (err) {
     console.log(err);
-  }
-})
-
-//haal alle items uit het array 'hobbies' op
-//vergelijk welke id's van het array 'hobbies' in 'hobbies' collection zitten
-//die arrayen en mee sturen 
-
-router.get('/result', async (req, res) => {
-  try {
-    const hobbyList = await db.collection('users').hobbies.find({ 
-      hobbies
-    });
-    const data = await db.collection('hobbies').find( { 
-      _id: hobbyList 
-    });
-    let nameOfHobby = data.name;
-    res.render('pages/filter/result.ejs', { data: data, nameOfHobby});
-  } catch (err) {
-    console.log(err);
-    res.redirect('/return')
   }
 });
 

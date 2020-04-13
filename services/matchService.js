@@ -32,6 +32,9 @@ async function checkMatch(userId, likedUserId) {
         chat: chatId
       };
       return data;
+    } else {
+      const data = { match: false };
+      return data;
     }
   } catch(err) {
     return console.error(err);

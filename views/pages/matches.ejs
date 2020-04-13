@@ -20,11 +20,13 @@
               <li data-match="<%= matches[i]._id %>">
                 <figure>
                   <div class="img-wrapper">
-                    <img class="profile-picture"
-                      src="<%= 'uploads/profile-pictures/' + matches[i]._id %>"
-                      width="250px"
-                      height="auto"
-                      alt="<%= matches[i].firstName %> <%= matches[i].lastName %>">
+                    <a href="<%= '/profile/' + matches[i]._id %>">
+                      <img class="profile-picture"
+                        src="<%= 'uploads/profile-pictures/' + matches[i]._id %>"
+                        width="250px"
+                        height="auto"
+                        alt="<%= matches[i].firstName %> <%= matches[i].lastName %>">
+                    </a>
                   </div>
                   <figcaption><%= matches[i].firstName %> <%= matches[i].lastName %>, <%= matches[i].age %></figcaption>
                 </figure>
