@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
-const chatService = require('../services/chatService');
+const matchService = require('../services/matchService');
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -17,15 +17,9 @@ router.get('/matches', auth, async (req, res) => {
   try {
     const users = await db.collection('users').find().toArray();
     const user = users.find(x => x._id == req.session.activeUser);
-    const matchList = users.filter(matchedUser => {
-      let match = false;
-      user.hobbies.forEach(hobby => {
-        if (matchedUser.hobbies.includes(hobby) && matchedUser._id != user._id && match.gender != user.gender) { match = true; }
-      });
-      return match;
-    });
+    const matches = await matchService.getMatches(user, users);
     const route = 'matches';
-    res.render('pages/matches', { matches: matchList, user, route });
+    res.render('pages/matches', { matches, user, route });
   } catch(err) {
     console.error(err);
   }
@@ -38,7 +32,7 @@ router.post('/like', async (req, res) => {
 
     // Check if the person is already liked, this means remove the like.
     if (user.likedProfiles.includes(slug(req.body.id))) {
-      dislike(user, slug(req.body.id));
+      matchService.dislikeUser(user, slug(req.body.id));
 
       // If this is not an axios post request, it's submitted by a form, thus the page should be refreshed for the user
       if (!req.body.js) {
@@ -48,7 +42,7 @@ router.post('/like', async (req, res) => {
 
     } else {
       // See if the other user already liked this user too
-      const data = await checkMatch(req.session.activeUser, req.body.id, res);
+      const data = await matchService.checkMatch(req.session.activeUser, req.body.id, res);
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
         { _id: ObjectID(req.session.activeUser) },
@@ -68,42 +62,5 @@ router.post('/like', async (req, res) => {
     console.error(err);
   }
 });
-
-// Function checks if both users liked each other
-async function checkMatch(userId, likedUserId) {
-  try {
-    const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) });
-    if (likedUser.likedProfiles.includes(userId)) {
-      const chatId = await chatService.createChat(userId, likedUserId);
-      const data = {
-        match: true,
-        otherUser: likedUser,
-        chat: chatId
-      };
-      return data;
-    }
-  } catch(err) {
-    return console.error(err);
-  }
-}
-
-// Remove the clicked person from the likes of the current user
-async function dislike(user, otherUser) {
-  try {
-    const chats = await db.collection('chats').find().toArray();
-    const openChats = chats.filter(chat => {
-      return chat.users.includes(user._id.toString()) && chat.users.includes(otherUser.toString());
-    });
-    // Delete any open chats between the two users
-    if (openChats.length > 0) {
-      openChats.forEach(chat => chatService.removeChat(chat));
-    }
-  
-    // Remove the likedPerson from the user
-    await db.collection('users').updateOne({ _id: ObjectID(user._id) }, { $pull: { 'likedProfiles': otherUser } });
-  } catch(err) {
-    console.log(err);
-  }
-}
 
 module.exports = router;

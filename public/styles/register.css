@@ -1,26 +1,27 @@
 body {
-    padding: 0;
-    margin: 0;
+    background-image: none;
 }
 
-h1 {
-    color: #9646D4;
-    font-size: 2rem;
-}
-
-div.bgArea img {
-    display: none;
-}
-
-div.loginArea img {
-    width: 10rem;
-    margin: 0 auto;
+div.welcome {
+    text-align: center;
 }
 
 div.loginArea {
     grid-area: loginArea;
-    margin: 2rem;
+    margin: 2rem 2rem 0 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+}
+
+div.loginArea h1 {
+    color: #9646D4;
+    font-size: 2rem;
+}
+
+div.loginArea img {
+    width: 10rem;
+    margin: auto;
+    display: block;
 }
 
 div.loginArea input {
@@ -29,6 +30,34 @@ div.loginArea input {
     padding: 1.3rem;
     width: 100%;
     border-radius: 0.5rem;
+}
+
+div.gender {
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    padding: .5rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+div.loginArea select {
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+    padding: .5rem 1.3rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    max-height: 3.87rem;
+}
+
+div.gender input {
+    margin: auto;
+}
+
+div.loginArea input:focus {
+    border: 1px solid #9646D4;
+    outline: none;
 }
 
 div.loginArea label {
@@ -40,7 +69,7 @@ div.loginArea label {
     display: block;
 }
 
-button {
+div.loginArea button {
     width: 100%;
     background-color: #9646D4;
     border: none;
@@ -49,83 +78,131 @@ button {
     border-radius: 0.5rem;
 }
 
+span.rememberMe {
+    margin-left: 2rem;
+}
+
+a.forgotPw label, 
+div.formpjes a label {
+    cursor: pointer;
+    color: #00A8FF;
+}
+
+a {
+    text-decoration: none;
+}
+
 @media only screen and (min-width: 1450px) {
-    div.container {
-        display: grid;
-        height: 100%;
-        grid-template-columns: [bgArea] 70% [loginArea] 30%;
-        /* grid-template-columns: [bgArea] 70vw [loginArea] 30vw; */
-    }
-    h1 {
-        color: #9646D4;
-        font-size: 2.6rem;
-    }
-    /* Background Area */
-    div.bgArea {
-        grid-area: bgArea;
+    body {
+        padding: 0;
+        margin: 0;
         background-image: url('../assets/img/login-background.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        text-align: center;
-        height: 100vh;
     }
-    div.bgArea img {
-        margin-top: 5rem;
-        width: 15rem;
+    
+    div.container {
+        height: 100%;
+        width: 100%;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    div.loginArea h1 {
+        color: #9646D4;
+        font-size: 2.6rem;
     }
     /* --------------- */
+
     /* Login Area */
     div.loginArea {
-        grid-area: loginArea;
-        margin: 5rem;
+        width: 50vw;
+        margin: 0 auto;
+        padding: 4rem;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     div.loginArea input {
-        box-sizing: border-box;
         border: 1px solid #CCCCCC;
-        padding: 1.3rem;
-        width: 100%;
+        width: auto;
         border-radius: 0.5rem;
+        font-size: 1rem;
     }
+
+    div.formpjes {
+        width: 23vw;
+        padding: 1rem 0 1rem 0;
+    }
+
     div.loginArea label {
         padding: 0.6rem 0;
     }
+
     div.loginArea input,
     div.loginArea label {
         display: block;
-    }
-    button {
         width: 100%;
+    }
+
+    div.loginArea button {
+        width: 27.6rem;
         background-color: #9646D4;
         border: none;
         color: #FFFFFF;
+        font-size: 1.3rem;
         padding: 1.3rem;
         border-radius: 0.5rem;
+        border: 1px solid #9646D4;
     }
-    /* Customize the label (the container) */
-    label.container {
-        display: block;
-        justify-content: start;
-        position: relative;
-        cursor: pointer;
-        width: 63%;
+
+    div.loginArea button:hover {
+        /* background-color: #AD8EC5; */
+        background-color: white;
+        border: 1px solid #9646D4;
+        color: #9646D4;
     }
+
+    div.loginArea button:active {
+        background-color: #9646D4;
+        color: white;
+    }
+/* 
+    div.nextForm {
+        display: none;
+    } */
+
     div.rememberMe {
         margin: 1rem 0 1rem 0;
         display: flex;
+        justify-content: space-between;
+        width: 100%;
     }
-    a.forgotPw {
-        justify-content: end;
+
+    div.rememberMe a {
+        font-weight: 700;
+        color: #9646D4;
     }
+
     label.container>span.text {
         margin-left: 3rem;
     }
+
+    div.loginArea span.checkmark {
+        border-radius: 0.5rem;
+        position: absolute;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #CCCCCC;
+    }
 }
 
-
 /* Hide the browser's default checkbox */
-
 label.container input.checkmark {
     position: absolute;
     opacity: 0;
@@ -134,51 +211,39 @@ label.container input.checkmark {
     width: 0;
 }
 
-
 /* Create a custom checkbox */
-
 .checkmark {
     border-radius: 0.5rem;
     position: absolute;
-    left: 0;
+    left: 2rem;
     height: 25px;
     width: 25px;
     background-color: #CCCCCC;
 }
 
-
 /* On mouse-over, add a grey background color */
-
 label.container:hover input.checkmark~.checkmark {
     background-color: #AD8EC5;
 }
 
-
 /* When the checkbox is checked, add a blue background */
-
 label.container input.checkmark:checked~.checkmark {
     background-color: #9646D4;
 }
 
-
 /* Create the checkmark/indicator (hidden when not checked) */
-
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-
 /* Show the checkmark when checked */
-
 label.container input.checkmark:checked~.checkmark:after {
     display: block;
 }
 
-
 /* Style the checkmark/indicator */
-
 label.container .checkmark:after {
     left: 9px;
     top: 5px;
@@ -191,13 +256,10 @@ label.container .checkmark:after {
     transform: rotate(45deg);
 }
 
-
 /* Custom checkbox code by Inju Michorius */
-
 div.formpjes:last-child {
     margin-top: 1rem;
 }
-
-div.formpjes>a:last-child {
+div.formpjes > a:last-child {
     display: inline-block;
 }

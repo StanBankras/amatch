@@ -16,7 +16,7 @@
             <img src="<%= '/uploads/profile-pictures/' + otherUser._id.toString() %>" alt="<%= otherUser.firstName %> <%= otherUser.lastName %>">
             <div class="details">
               <h3><%= otherUser.firstName %> <%= otherUser.lastName %>, <%= otherUser.age %></h3>
-              <a href="#">View profile</a>
+              <a href="<%= '/../profile/' + otherUser._id %>">View profile</a>
             </div>
           </div>
           <div class="message-container">

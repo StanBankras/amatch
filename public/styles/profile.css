@@ -3,6 +3,13 @@
   grid-template-columns: 1fr;
   gap: 2rem;
 }
+#profile-page.preview {
+  display: block;
+  max-width: 800px;
+}
+#profile-page.single-column {
+  display: block;
+}
 
 #profile-page h2 {
   margin-bottom: 2rem;

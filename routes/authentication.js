@@ -72,8 +72,6 @@ router.post('/register', async (req, res) => {
 
 router.get('/forgotPw', async (req, res) => {
 	try {
-		const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-		console.log(user);
 		res.render('pages/login/forgotPw');
 	} catch (err) {
 		console.log(err);

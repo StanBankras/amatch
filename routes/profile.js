@@ -22,6 +22,17 @@ router.get('/profile', auth, async (req, res) => {
   }
 });
 
+router.get('/profile/:id', auth, async (req, res) => {
+  try {
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.params.id) });
+    const hobbies = await db.collection('hobbies').find().toArray();
+    const route = 'profile'
+    res.render('pages/profile-preview', { user, route, hobbies });
+  } catch(err) {
+    console.log(err);
+  }
+});
+
 router.post('/edit-profile', async (req, res) => {
   const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
   req.userId = user._id.toString();
