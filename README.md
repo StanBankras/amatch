@@ -46,7 +46,7 @@ You'll need the following tools to start the installation of Amatch:
 * Make the following collections: **users, chats & hobbies**
 * In the hobbies collection, [insert this data](https://pastebin.com/Vbh1BAep).
 * Create a .env files in the root of the setup
-** Use the following setup
+**Use the following setup**
 ```
 DB_USER=
 DB_PASSWORD=
