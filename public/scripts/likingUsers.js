@@ -29,7 +29,7 @@ function renderMatch(otherUser, chat) {
   matchContainer.innerHTML = `
     <h1>It's a match!</h1>
     <div class="wrapper">
-      <img src="${ otherUser.profilePicture }">
+      <img src="uploads/profile-pictures/${ otherUser._id }">
       <div>
         <p class="name">${ otherUser.firstName } ${ otherUser.lastName }</p>
         <p class="age">${ otherUser.age } years old</p>
