@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongo = require('mongodb');
 const auth = require('../middleware/authentication');
+const fetch = require('node-fetch');
 const profilePictureUpload = require('../helpers/multer').profilePicture;
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -16,7 +17,11 @@ router.get('/profile', auth, async (req, res) => {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const hobbies = await db.collection('hobbies').find().toArray();
     const route = 'profile'
-    res.render('pages/profile', { user, route, hobbies });
+    artistId = user.deezerArtistId;
+    const apiUrl = 'https://api.deezer.com/artist/' + artistId;
+    const fetchResponse = await fetch(apiUrl);
+    const json = await fetchResponse.json();
+    res.render('pages/profile', { user, route, hobbies, json });
   } catch(err) {
     console.log(err);
   }
@@ -28,7 +33,11 @@ router.get('/profile/:id', auth, async (req, res) => {
     const activeUser = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const hobbies = await db.collection('hobbies').find().toArray();
     const route = 'profile'
-    res.render('pages/profile-preview', { user, route, hobbies, activeUser });
+    artistId = user.deezerArtistId;
+    const apiUrl = 'https://api.deezer.com/artist/' + artistId;
+    const fetchResponse = await fetch(apiUrl);
+    const json = await fetchResponse.json();
+    res.render('pages/profile-preview', { user, route, hobbies, activeUser, json });
   } catch(err) {
     console.log(err);
   }

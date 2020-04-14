@@ -16,10 +16,10 @@ router.get('/finder', async (req, res) => {
   res.render('pages/filter/filter.ejs', { route, hobbies });
 })
 
-//pak de inhoud van het inputfield
-//zoek de hobby op en zet het om naar het id van die hobby
-//zoek in het array met hobbys van de gebruiker
-//array de gebruikers die dat hebben
+//takes the value of the input inputfield
+//queries the hobby and converts it to the id of that hobby
+//searches through the array 'hobbies' of the user
+//arrays the users which have those hobbies
 
 router.post('/result', auth, async (req, res) => {
   try {

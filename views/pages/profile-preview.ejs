@@ -1,9 +1,11 @@
 <html>
-  <head>
-    <%- include('../partials/pageHead') %>
-    <link rel="stylesheet" href="../styles/profile.css">
-    <link rel="stylesheet" href="../styles/liking.css">
-  </head>
+
+<head>
+  <%- include('../partials/pageHead') %>
+  <link rel="stylesheet" href="../styles/profile.css">
+  <link rel="stylesheet" href="../styles/liking.css">
+</head>
+
 <body>
   <%- include('../partials/pageHeader') %>
   <main class="container">
@@ -33,16 +35,28 @@
             <span><%= hobbyName.name %></span>
             <% }) %>
           </p>
+          <h3>Favorite artist</h3>
+          <div id="artistContainer">
+            <img id="artistPicture" src="<%= json.picture_medium %>" alt="artistpicture"  title="<%= json.name %>">
+            <div>
+              <p id="artistName"><%= json.name %></p>
+              <p><%= json.nb_fan %> fans</p>
+              <a href="<%= json.link %>"> Listen to <%= json.name %> on Deezer </a>
+            </div>
+          </div>
         </div>
       </section>
       <form action="/like">
         <input type="hidden" name="id" value="<%= user._id %>">
-        <button id="like-button"><% if (activeUser.likedProfiles.includes(user._id.toString())) { %>Dislike<% } else { %>Like<% } %> this user</button>
+        <button
+          id="like-button"><% if (activeUser.likedProfiles.includes(user._id.toString())) { %>Dislike<% } else { %>Like<% } %>
+          this user</button>
       </form>
-    </article> 
+    </article>
     <%- include('../partials/pageFooter') %>
   </main>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../scripts/profilePreviewLiking.js"></script>
 </body>
+
 </html>

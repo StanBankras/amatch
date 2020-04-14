@@ -62,7 +62,8 @@ router.post('/register', async (req, res) => {
 			birthDate: req.body.birthDate,
 			age: req.body.age,
 			likedProfiles: [],
-			chats: []
+			chats: [],
+			deezerArtistId: req.body.deezerArtistId
 		})
 		res.redirect('/allUsers')
 	} catch (err) {
