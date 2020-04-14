@@ -14,6 +14,8 @@
 * [Sources](#sources)
 * [License](#license)
 
+---
+
 ## About the project
 Amatch is a dating app for anyone who wants to find a date that is interested in the same things they are interested in. You're matched with other Amatch users based on the hobbies you have and you can start chatting with someone if you both like each other.
 
@@ -62,6 +64,8 @@ If the installation process was followed, you can run the Amatch project by the 
 
 The project will be hosted on **port 3000** if you didn't change this.
 
+---
+
 ## Contributing
 You are allowed to fork this repository and contribute any changes using a pull request. We will then review your contribution and allow the changes to be merged into the real project if we think they're a valuable addition.
 
@@ -69,4 +73,4 @@ You are allowed to fork this repository and contribute any changes using a pull 
 
 
 ## License
-MIT
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
