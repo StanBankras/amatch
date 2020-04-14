@@ -12,7 +12,7 @@
     <main id="content">
       <article>
         <section id="matches">
-          <h1>We found <%= matches.length %> matches based on your preferences!</h1>
+          <h1>We found <%= matches.length %> matches based on the hobby you searched!</h1>
           <div id="match-items">
             <ul>
               <% if (matches != '') { %>
@@ -49,7 +49,7 @@
               </li>
               <% } %>
               <% } else { %>
-                You have no matches.
+                No matches with this hobby were found.
               <% } %>
             </ul>
           </div>

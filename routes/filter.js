@@ -1,98 +1,48 @@
 const express = require('express');
 const router = express.Router();
+const mongo = require('mongodb');
+const auth = require('../middleware/authentication');
+const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
 let db;
 dbCallback(database => {
-  db = database
+  db = database; 
 });
 
-router.get('/filter', function(req,res){
-  let hob = req.session.hobby1 
-  if(hob) {
-      db.collection('users').find({'hobby1': hob}).toArray(done)
-      function done(err) {
-           if (err) {
-              next(err)
-           } else {
-              res.redirect('/result')
-           }
-       }
-  }
-  else {
-      res.render('pages/filter/filter.ejs');
-  }
+router.get('/finder', async (req, res) => {
+  const hobbies = await db.collection('hobbies').find().toArray();
+  const route = 'finder';
+  res.render('pages/filter/filter.ejs', { route, hobbies });
 })
 
-router.post('/result', search) 
-router.get('/result', (req, res, next) => {
-    let hob = req.session.hobby1
-    if (hob) {
-       db.collection('users')
-           .find({'hobby1': hob}).toArray(done)
-    } else {
-       res.redirect('/return')
-    }
-    function done(err, data) {
-      if (err) {
-        next(err)
-      } else {
-         res.render('pages/filter/result.ejs', {data: data})
-      }
-    }
-})
+//takes the value of the input inputfield
+//queries the hobby and converts it to the id of that hobby
+//searches through the array 'hobbies' of the user
+//arrays the users which have those hobbies
 
-function search(req, res, next) {
-  if (req.body.hobby1) {
-    req.session.hobby1 = req.body.hobby1
+router.post('/result', auth, async (req, res) => {
+  try {
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
+    const filter = req.body.filter;
+    const hobbyName = await db.collection('hobbies').findOne({'name': filter});
+    const hobbies = await db.collection('hobbies').find().toArray();
+    const hobbyId = hobbyName._id;
+    const matches = await db.collection('users').find({ hobbies: hobbyId.toHexString() }).toArray();
+    const filteredMatches = matches.filter(matchedUser => {
+      let match = false;
+      if (matchedUser._id.toString() === user._id.toString()) return false;
+      if (matchedUser.gender === user.gender) return false;
+      user.hobbies.forEach(hobby => {
+        if (matchedUser.hobbies.includes(hobby)) { match = true; }
+      });
+      return match;
+    });
+    const route = 'finder';
+    res.render('pages/filter-result', { matches: filteredMatches, route, user, hobbies });
+  } catch (err) {
+    console.log(err);
   }
-  let hob = req.session.hobby1 
-  if(hob) { 
-    db.collection('users').find({'hobby1': hob}).toArray(done)
-  } else {
-    res.render('/return')
-    
-  }
-  function done(err, data) {
-    if (err) {
-      next(err)
-    } else {
-      res.render('pages/filter/result.ejs', {data: data})
-    }
-  }
-}
-
-router.post('/update', update) 
-router.get('/update', (req, res) =>  
-  res.render('pages/filter/update.ejs'))
-
-
-router.get('/return',function(req,res){
-  if (req.session.hobby1) {
-        req.session.destroy(function(err) {
-        if (err) console.log(err)
-    })
-   }
-   res.redirect('/filter')
-})
-
-function update(req, res, next){
-  let id = req.body.id
-  let name = req.body.name
-  let filter = {_id: mongo.ObjectId(id)};
-  let update = {$set: {name: name}}
-  db.collection('users').updateOne(filter, update)
-  db.collection('users').find().toArray
-  (done)
-
-  function done(err) {
-        if (err) {
-          next(err)
-        } else {
-          res.redirect('/result')
-          console.log('redirected')
-        }
-      }
-}
+});
 
 module.exports = router;

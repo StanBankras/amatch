@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const dateFormat = require('dateformat');
 const mongo = require('mongodb');
-const slug = require('../middleware/slug');
+const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
+const chatService = require('../services/chatService');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
 const dbCallback = require('../server.js').db;
@@ -17,28 +18,11 @@ dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 // Render chats
 router.get('/chats', auth, async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
-    const chatList = [];
-    user.chats.forEach((chat, err) => {
-      if(err) {
-        console.error(err);
-      }
-      chatList.push(db.collection('chats').findOne({ chatNumber: chat }));
-    });
-    allChats = await Promise.all(chatList);
-    if (allChats.length > 0) {
-      for (let i =0; i < allChats.length;i++) {
-        const userList = [];
-        allChats[i].users.forEach(user => {
-          userList.push(db.collection('users').findOne({ _id: new ObjectID(user) }))
-        });
-        allChats[i].users = await Promise.all(userList);
-      }
-    } else {
-      allChats = [];
-    }
-    res.render('pages/chats', { chats: allChats, user });
-
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
+    console.log(user);
+    const allChats = await chatService.getUserChats(user);
+    const route = 'chats';
+    res.render('pages/chats', { chats: allChats, user, route });
   } catch(err) {
     console.error(err);
   }
@@ -47,12 +31,14 @@ router.get('/chats', auth, async (req, res) => {
 // Render individual chat based on the chat id
 router.get('/chat/:id', auth, async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
     const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.sendStatus(400);
     const chat = await db.collection('chats').findOne({ chatNumber: id });
     const otherUserId = chat.users[0] == user._id ? chat.users[1] : chat.users[0];
     const otherUser = await db.collection('users').findOne({ _id: ObjectID(otherUserId) });
-    res.render('pages/chat', { users: chat.users, messages: chat.messages, user, id, otherUser });
+    const route = 'chats';
+    res.render('pages/chat', { users: chat.users, messages: chat.messages, user, id, otherUser, route });
   } catch(err) {
     console.error(err);
   }

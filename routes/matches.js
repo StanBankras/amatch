@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const slug = require('../middleware/slug');
+const slug = require('../helpers/slug');
 const auth = require('../middleware/authentication');
-const chatService = require('../services/chatService');
+const matchService = require('../services/matchService');
 const mongo = require('mongodb');
 const ObjectID = mongo.ObjectID;
 // Use database connection from server.js
@@ -15,14 +15,12 @@ dbCallback(database => {
 // Render homepage with matches of the logged in user
 router.get('/matches', auth, async (req, res) => {  
   try {
-    const user = await db.collection('users').findOne({ _id: new ObjectID(req.session.user) });
-    const userObjects = user.matches.filter(item => item).map(item => { return new ObjectID(item) });
-    const matchList = await db.collection('users').find({
-      '_id': {
-        '$in': userObjects
-      }
-    }).toArray();
-    res.render('pages/matches', { matches: matchList, user });
+    const users = await db.collection('users').find().toArray();
+    const hobbies = await db.collection('hobbies').find().toArray();
+    const user = users.find(x => x._id == req.session.activeUser);
+    const matches = await matchService.getMatches(user, users);
+    const route = 'matches';
+    res.render('pages/matches', { matches, user, route, hobbies });
   } catch(err) {
     console.error(err);
   }
@@ -31,54 +29,38 @@ router.get('/matches', auth, async (req, res) => {
 // Push id of the liked person to the likedProfiles[] of the user
 router.post('/like', async (req, res) => {
   try {
-    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.user) });
+    const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
 
     // Check if the person is already liked, this means remove the like.
     if (user.likedProfiles.includes(slug(req.body.id))) {
-      try {
-        const chats = await db.collection('chats').find().toArray();
-        const openChats = chats.filter(chat => {
-          return chat.users.includes(user._id.toString()) && chat.users.includes(slug(req.body.id).toString());
-        });
-        await db.collection('users').updateOne({ _id: ObjectID(req.session.user) }, { $pull: { 'likedProfiles': slug(req.body.id) } });
-        if (openChats.length > 0) {
-          openChats.forEach(chat => chatService.removeChat(chat));
-        }
-        if (!req.body.js) {
-          return res.redirect('/');
-        }
-        return res.sendStatus(201);
-      } catch(err) {
-        console.error(err);
+      matchService.dislikeUser(user, slug(req.body.id));
+
+      // If this is not an axios post request, it's submitted by a form, thus the page should be refreshed for the user
+      if (!req.body.js) {
+        return res.redirect('/');
       }
+      return res.sendStatus(201);
+
     } else {
       // See if the other user already liked this user too
-      checkMatch(req.session.user, req.body.id, res);
+      const data = await matchService.checkMatch(req.session.activeUser, req.body.id);
       // Add the liked user to the likedProfiles array
       await db.collection('users').updateOne(
-        { _id: ObjectID(req.session.user) },
+        { _id: ObjectID(req.session.activeUser) },
         { $push: { 'likedProfiles': slug(req.body.id) } }
       )
       if (!req.body.js) {
         return res.redirect('/');
       }
-      return res.sendStatus(200);
+      if (!data.match) {
+        return res.json({ match: false });
+      } else {
+        return res.json({ match: true, otherUser: data.otherUser, chat: data.chat });
+      }
     }
   } catch(err) {
     console.error(err);
   }
 });
-
-// Function checks if both users liked each other
-async function checkMatch(userId, likedUserId) {
-  try {
-    const likedUser = await db.collection('users').findOne({ _id: ObjectID(likedUserId) })
-    if (likedUser.likedProfiles.includes(userId)) {
-      chatService.createChat(userId, likedUserId);
-    }
-  } catch(err) {
-    return console.error(err);
-  }
-}
 
 module.exports = router;

@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/profile.css">
+  <%- include('../partials/pageHead') %>
+</head>
+<body>
+  <%- include('../partials/pageHeader') %>
+  <div class="container">
+    <main id="content">
+      <div id="dashboard">
+        <div>
+          <h2>Your matches are waiting...</h2>
+          <div class="matches">
+            <div class="wrap">
+              <% for (const match of matches.slice(0, Math.min(7, matches.length))) { %>
+                <div class="match">
+                  <a href="<%= '/profile/' + match._id %>">
+                    <img src="<%= 'uploads/profile-pictures/' + match._id %>" alt="<%= match.firstName + ' ' + match.lastName %>">
+                    <p><%= match.firstName %></p>
+                  </a>
+                </div>
+              <% } %>      
+              <div class="all-matches">
+                <a href="/matches">
+                  <img src="assets/img/find-matches.png" alt="">
+                </a>
+              </div>        
+            </div>
+          </div>
+        </div>
+        <div id="profile-page" class="single-column">
+          <h2>How people see you...</h2>
+          <div class="profile">
+            <div class="wrap">
+              <img src="<%= '/uploads/profile-pictures/' + user._id %>" alt="">
+              <div>
+                <p class="name"><%= user.firstName %> <%= user.lastName %></p>
+                <p><%= user.age %></p>
+              </div>
+            </div>
+            <p class="description">
+              <%= user.description %>
+            </p>
+            <h3>Job</h3>
+            <p><%= user.job %></p>
+            <h3>Education</h3>
+            <p><%= user.education %></p>
+            <h3>Hobbies</h3>
+            <p class="hobbies">
+              <% user.hobbies.forEach(hobby => { 
+                const hobbyName = hobbies.find(x => x._id.toString() == hobby);
+              %>
+              <span><%= hobbyName.name %></span>
+              <% }) %>
+            </p>
+          </div>          
+        </div>
+      </div>
+    </main>
+    <%- include('../partials/pageFooter') %>
+    </div>
+</body>
+</html>

@@ -4,102 +4,90 @@ const router = express.Router();
 const dbCallback = require('../server.js').db;
 let db;
 dbCallback(database => {
-  db = database
+	db = database
 });
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-// Login using username and password
+// Loggin with using username and password
 router.get('/', (req, res) => {
-  res.render('pages/login/login');
+	res.render('pages/login/login');
 })
 
-function login(req, res) {
-	db.collection('users').findOne({
-		username: req.body.username,
-		password: req.body.password
-	}).then(data => {
-		req.session.activeUser = data._id;
-		res.redirect('/profile/' + data._id);
-	}).catch(() => {
-		// res.redirect('/')
-		res.status(400).send('Username or password are invalid!')
-	})
-}
+// Loggin post route
+router.post('/', async (req, res) => {
+	try {
+		const data = await db.collection('users').findOne({
+			username: req.body.username
+		})
 
-router.post('/', login)
+		const match = await bcrypt.compare(req.body.password, data.password);
+		
+		if(match) {
+			req.session.activeUser = data._id;
+			res.redirect('/dashboard');
+		} else {
+			res.redirect('/')
+		}
+	} catch (err) {
+		console.log(err);
+	}
+})
 
 // Register your own user
 router.get('/register', async (req, res) => {
-  try {
-    res.render('pages/login/register');
-  } catch(err) {
-    console.log(err);
-  }
+	try {
+		const hobbies = await db.collection('hobbies').find().toArray();
+		res.render('pages/login/register', {hobbies});
+	} catch (err) {
+		console.log(err);
+	}
 })
 
 // Add user data to database
-function add(req, res){ 
+router.post('/register', async (req, res) => {
+	const passwordHash = await bcrypt.hashSync(req.body.password, saltRounds);
 	try {
-		db.collection('users').insertOne({
+		const hobbies = typeof req.body.hobbies == 'string' ? [req.body.hobbies] : req.body.hobbies;
+		await db.collection('users').insertOne({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
 			emailAdress: req.body.emailAdress,
 			phoneNumber: req.body.phoneNumber,
 			username: req.body.username,
-			password: req.body.password,
-			hobbies: req.body.hobbies,
+			password: passwordHash,
+			hobbies: hobbies,
 			education: req.body.education,
 			job: req.body.job,
-			profilePictures: req.body.profilePictures,
+			gender: req.body.gender,
+			birthDate: req.body.birthDate,
 			age: req.body.age,
-		}, done)
-
-		function done(err) {
-			if (err) {
-				next(err)
-			} else {
-				res.redirect('/allUsers')
-			}
-		}
-	} catch(err) {
+			likedProfiles: [],
+			chats: [],
+			deezerArtistId: req.body.deezerArtistId
+		})
+		res.redirect('/')
+	} catch (err) {
 		console.log(err)
 	}
-}
-
-router.post('/register', add);
+});
 
 router.get('/forgotPw', async (req, res) => {
-  try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-    console.log(user);
-    res.render('pages/login/forgotPw');
-  } catch(err) {
-    console.log(err);
-  }
-})
-
-router.get('/allUsers', users, async (req, res) => {
-  try {
-    const user = await db.collection('users').findOne({ 'firstName': 'Jan' });
-	console.log(user);
-    res.render('pages/login/allUsers');
-  } catch(err) {
-    console.log(err);
-  }
-})
-
-// Read all user data from database
-function users(req, res) {
-	db.collection('users').find().toArray(done)
-
-	function done(err, data) {
-		if (err) {
-			next(err)
-		} else {
-			res.render('pages/login/allUsers', {users: data})
-		}
+	try {
+		res.render('pages/login/forgotPw');
+	} catch (err) {
+		console.log(err);
 	}
-}
+})
 
-router.get('/allUsers', users)
+router.post('/log-out', (req, res) => {
+  req.session.destroy(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
 
 module.exports = router;

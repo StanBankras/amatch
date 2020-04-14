@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <%- include('../partials/pageHead') %>
+  <link rel="stylesheet" href="../styles/profile.css">
+  <link rel="stylesheet" href="../styles/liking.css">
+</head>
+
+<body>
+  <%- include('../partials/pageHeader') %>
+  <main class="container">
+    <article id="profile-page" class="preview">
+      <section>
+        <h2>You have visited the profile page of <%= user.firstName %> <%= user.lastName %></h2>
+        <div class="profile">
+          <div class="wrap">
+            <img src="<%= '/uploads/profile-pictures/' + user._id %>" alt="">
+            <div>
+              <p class="name"><%= user.firstName %> <%= user.lastName %>, <%= user.age %></p>
+              <p><%= user.description %></p>
+            </div>
+          </div>
+          <p class="description">
+            <%= user.description %>
+          </p>
+          <h3>Job</h3>
+          <p><%= user.job %></p>
+          <h3>Education</h3>
+          <p><%= user.education %></p>
+          <h3>Hobbies</h3>
+          <p class="hobbies">
+            <% user.hobbies.forEach(hobby => { 
+              const hobbyName = hobbies.find(x => x._id.toString() == hobby);
+            %>
+            <span><%= hobbyName.name %></span>
+            <% }) %>
+          </p>
+          <h3>Favorite artist</h3>
+          <div id="artistContainer">
+            <img id="artistPicture" src="<%= json.picture_medium %>" alt="artistpicture"  title="<%= json.name %>">
+            <div>
+              <p id="artistName"><%= json.name %></p>
+              <p><%= json.nb_fan %> fans</p>
+              <a href="<%= json.link %>"> Listen to <%= json.name %> on Deezer </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <form action="/like">
+        <input type="hidden" name="id" value="<%= user._id %>">
+        <button
+          id="like-button"><% if (activeUser.likedProfiles.includes(user._id.toString())) { %>Dislike<% } else { %>Like<% } %>
+          this user</button>
+      </form>
+    </article>
+    <%- include('../partials/pageFooter') %>
+  </main>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="../scripts/profilePreviewLiking.js"></script>
+</body>
+
+</html>

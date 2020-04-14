@@ -10,11 +10,22 @@
 
     <h1>Profile</h1>
     <p><%= users.username %></p>
-    <p><%= users.email %></p>
-    <p><%= users.phonenumber %></p>
     <p><%= users.password %></p>
-    <button>DELETE</button>
+    <a href="/log-out">Log out</a>
+    <a href="/allUsers">All users</a>
     <button>EDIT</button>
-
+    
+    <form action="/change" method="post">
+        <fieldset>
+          <div class="formpjes">
+            <input type="text" name="username" placeholder="Username" id="changeUsername" value="<%= users.username %>">
+          </div>
+          <!-- <div class="formpjes">
+            <input type="text" name="changePassword" placeholder="Password" id="changePassword" value="<%= users.password %>">
+          </div> -->
+          
+          <button type="submit" id="updateButton">Update!</button>
+        </fieldset>
+      </form>
 </body>
 </html>

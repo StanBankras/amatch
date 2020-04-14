@@ -17,6 +17,77 @@ body {
 *   Your matches page
 *
 */
+
+/* Popup when there is a match */
+main {
+  position: relative;
+}
+
+#match {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 800px;
+  padding: 3rem;
+  background-color: white;
+  z-index: 10000;
+  animation: scaleIn .3s ease-in;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+#match img {
+  max-width: 100%;
+  margin-right: 2rem;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+#match .wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+#match .chat {
+  display: block;
+  margin-right: 1rem;
+  padding: 1rem;
+  background-color: #9646D4;
+  color: white;
+  font-weight: bold;
+  transition: .2s;
+  cursor: pointer;
+}
+
+#match .chat:hover {
+  display: block;
+  margin-right: 1rem;
+  padding: 1rem;
+  background-color: rgb(109, 44, 158);
+  color: white;
+  font-weight: bold;
+}
+
+#match .close {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#match .wrapper p.name {
+  font-weight: bold;
+  margin-bottom: 0;
+  font-size: 20px;
+  padding: 0;
+}
+
+#match .wrapper p.age {
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding: 0;
+}
+
 #matches {
   padding: 1rem 0;
 }
@@ -43,6 +114,8 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  flex-direction: column;
+  align-items: center;
   border: 1px solid #CCCCCC;
   max-width: 700px;
   min-width: 250px;
@@ -70,6 +143,23 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+#matches li .hobbies {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  padding-top: 0.5rem;
+  max-width: 300px;
+  width: 100%;
+}
+#matches li .hobbies span {
+  display: block;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 25px;
+  background-color: rgb(226, 226, 226);
+  font-size: 12px;
 }
 
 #matches ul li figure .img-wrapper img.profile-picture {
@@ -410,5 +500,17 @@ body {
   100% {
     -webkit-transform: scale(1);
             transform: scale(1);
+  }
+}
+@keyframes scaleIn {
+  0% {
+    -webkit-transform: scale(0) translate(-50%, -50%);
+            transform: scale(0) translate(-50%, -50%);
+            transform-origin: 0% 0%;
+  }
+  100% {
+    -webkit-transform: scale(1) translate(-50%, -50%);
+            transform: scale(1) translate(-50%, -50%);
+            transform-origin: 0% 0%;
   }
 }
