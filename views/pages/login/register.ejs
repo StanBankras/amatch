@@ -33,14 +33,6 @@
           <label for="phoneNumber">Phone number</label>
           <input type="number" placeholder="0612345678" name="phoneNumber" id="phoneNumber">
         </div>
-        <div class="formpjes">
-          <label for="password">Password: </label>
-          <input type="password" placeholder="******" name="password" id="password">
-        </div>
-        <div class="formpjes">
-          <label for="confirmPassword" id="cPasswordLabel">Confirm Password:</label>
-          <input type="text" placeholder="******" name="confirmPassword" id="confirmPassword">
-        </div>
         <!-- <div class="nextForm"> -->
           <div class="formpjes">
             <label for="hobbies">Hobbies</label>
@@ -77,17 +69,37 @@
           </div>
           <div class="formpjes">
             <label for="username">Deezer Artist ID: </label>
-            <input type="text" name="deezerArtistId" id="deezerArtistId">
+            <select name="deezerArtistId" multiple>
+              <div>
+                <option value="8706544">Dua Lipa</option>
+                <option value="1147">Justin Timberlake</option>
+                <option value="6160">Rick Astley</option>
+                <option value="384236">Ed Sheeran</option>
+                <option value="246791">Drake</option>
+                <option value="106">Keane</option>
+                <option value="1362735">Charlie Puth</option>
+                <option value="7543848">Post Malone</option>
+                <option value="987373">Ronnie Flex</option>
+                <option value="7990708">Snelle</option>
+              </div>
+            </select>
           </div>
           <div class="formpjes">
             <label for="username">Username: </label>
             <input type="text" placeholder="jvandijk" name="username" id="username">
           </div>
           <div class="formpjes">
-            <p>Already have an account? <a href="/">Return to login</a></p>
           </div>
           <div class="formpjes">
-            <button id="nextButton">Next</button>
+            <label for="password">Password: </label>
+            <input type="password" placeholder="******" name="password" id="password">
+          </div>
+          <div class="formpjes">
+            <label for="confirmPassword" id="cPasswordLabel">Confirm Password:</label>
+            <input type="password" placeholder="******" name="confirmPassword" id="confirmPassword">
+          </div>
+          <div class="formpjes">
+            <p>Already have an account? <a href="/">Return to login</a></p>
           </div>
           <div class="formpjes">
             <button type="submit" id="submitButton" formaction="/register">Register to Amatch</button>

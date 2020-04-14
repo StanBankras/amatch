@@ -201,10 +201,6 @@ a {
     div.formpjes:nth-child(14) {
         display: inline-block;
     }
-
-    div.formpjes:nth-child(15) {
-        display: none;
-    }
 }
 
 /* Hide the browser's default checkbox */
