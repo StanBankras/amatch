@@ -12,7 +12,7 @@ async function getMatches(user, users) {
   return users.filter(matchedUser => {
     let match = false;
     if (matchedUser._id.toString() === user._id.toString()) return false;
-    if (match.gender === user.gender) return false;
+    if (matchedUser.gender === user.gender) return false;
     user.hobbies.forEach(hobby => {
       if (matchedUser.hobbies.includes(hobby)) { match = true; }
     });
