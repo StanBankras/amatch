@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 		})
 
 		const match = await bcrypt.compare(req.body.password, data.password);
-
+		
 		if(match) {
 			req.session.activeUser = data._id;
 			res.redirect('/dashboard');
