@@ -19,6 +19,7 @@ dateFormat.masks.chatFormat = 'HH:MM - dd/mm';
 router.get('/chats', auth, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ _id: ObjectID(req.session.activeUser) });
+    console.log(user);
     const allChats = await chatService.getUserChats(user);
     const route = 'chats';
     res.render('pages/chats', { chats: allChats, user, route });
