@@ -48,6 +48,7 @@ router.get('/register', async (req, res) => {
 router.post('/register', async (req, res) => {
 	const passwordHash = await bcrypt.hashSync(req.body.password, saltRounds);
 	try {
+		const hobbies = typeof req.body.hobbies == 'string' ? [req.body.hobbies] : req.body.hobbies;
 		await db.collection('users').insertOne({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
@@ -55,7 +56,7 @@ router.post('/register', async (req, res) => {
 			phoneNumber: req.body.phoneNumber,
 			username: req.body.username,
 			password: passwordHash,
-			hobbies: req.body.hobbies,
+			hobbies: hobbies,
 			education: req.body.education,
 			job: req.body.job,
 			gender: req.body.gender,
