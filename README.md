@@ -75,10 +75,10 @@ You are allowed to fork this repository and contribute any changes using a pull 
 * Heroku. (n.d.). GitHub Integration (Heroku GitHub Deploys) | Heroku Dev Center. Retrieved April 14, 2020, from https://devcenter.heroku.com/articles/github-integration#enabling-github-integration
 * Heroku. (n.d.-a). Configuration and Config Vars | Heroku Dev Center. Retrieved April 14, 2020, from https://devcenter.heroku.com/articles/config-vars
 * K. (n.d.). kelektiv/node.bcrypt.js. Retrieved April 12, 2020, from https://github.com/kelektiv/node.bcrypt.js#usage
-* Mozilla Client Side Web APIs. (2019, December 31). Retrieved 31 April 2020, from https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction
+* Mozilla Client Side Web APIs. (2019, December 31). Retrieved 31 March 2020, from https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction
 * MongoDB. (n.d.). The most popular database for modern apps. Retrieved April 12, 2020, from https://www.mongodb.com/
-* Scott, T. (2016, December 16). TechnoligyAdvice. Retrieved 30 April 2020, from https://technologyadvice.com/blog/information-technology/how-to-use-an-api/
-* The Coding Train. (2019, May 17). 1.1: fetch() - Working With Data & APIs in JavaScript. Retrieved 6 May 2020, from https://www.youtube.com/watch?v=tc8DU14qX6I&list=PLRqwX-V7Uu6YxDKpFzf_2D84p0cyk4T7X&index=3
+* Scott, T. (2016, December 16). TechnoligyAdvice. Retrieved 30 March 2020, from https://technologyadvice.com/blog/information-technology/how-to-use-an-api/
+* The Coding Train. (2019, May 17). 1.1: fetch() - Working With Data & APIs in JavaScript. Retrieved 6 March 2020, from https://www.youtube.com/watch?v=tc8DU14qX6I&list=PLRqwX-V7Uu6YxDKpFzf_2D84p0cyk4T7X&index=3
 * What is the use of password encryption? (2011, November 16). Retrieved April 4, 2020, from https://security.stackexchange.com/questions/8945/what-is-the-use-of-password-encryption/8948
 * Wikipedia contributors. (2020a, February 28). Salt (cryptography). Retrieved April 12, 2020, from https://en.wikipedia.org/wiki/Salt_(cryptography)
 * Wikipedia contributors. (2020b, April 8). Bcrypt. Retrieved April 12, 2020, from https://en.wikipedia.org/wiki/Bcrypt
