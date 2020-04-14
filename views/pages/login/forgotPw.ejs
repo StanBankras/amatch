@@ -4,27 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forgot Password</title>
-  <link rel="stylesheet" href="styles/loginRegister.css">
+  <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
-  <div class="containerRegister">
-    <a href="index.html"><img src="img/logo.png" alt=""></a>
-    <div class="welcome">
-      <h1 class="forgotpassword">Forgot Password?</h1>
-      <p>If you have forgotten your password you can reset it here.</p>
+  <div class="container">
+    <div class="bgArea">
+        <img src="assets/img/logo-with-text.png" alt="">
     </div>
-    <form method="post">
-      <fieldset>
-        <div class="formpjes">
-        <label for="name">Email address:</label>
-          <input type="text" name="name">
-        </div>
-        
-        <div class="formpjes">
-          <input id="submitButton" type="submit" value="Send my Password">
-        </div>
-      </fieldset>
-    </form>
-  </div>
+    <div class="loginArea">
+        <img src="assets/img/logo-with-text.png" alt="">
+        <h1>Recover your password</h1>
+        <form action="/" method="post">
+            <div class="formpjes">
+                <label for="">Your email</label>
+                <input type="text" name="emailAdress" placeholder="user@example.com" id="emailAdress">
+            </div>
+
+            <button type="submit" id="submitButton">Send my recovery</button>
+
+            <div class="formpjes">
+                Remembered it? <a href="/"><label>Return to login</label></a>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

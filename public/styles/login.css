@@ -52,6 +52,7 @@ div.bgArea button, div.loginArea button {
     background-color: #9646D4;
     border: none;
     color: #FFFFFF;
+    margin-top: 1rem;
     font-size: 1.3rem;
     padding: 1.3rem;
     border-radius: 0.5rem;
@@ -146,6 +147,10 @@ a {
         padding: 1.3rem;
         border-radius: 0.5rem;
         border: 1px solid #9646D4;
+        -webkit-transition: background-color 0.1s ease-out;
+        -moz-transition: background-color 0.1s ease-out;
+        -o-transition: background-color 0.1s ease-out;
+        transition: background-color 0.1s ease-out;
     }
 
     div.loginArea button:hover {
@@ -206,6 +211,10 @@ label.container input.checkmark {
     height: 25px;
     width: 25px;
     background-color: #CCCCCC;
+    -webkit-transition: background-color 0.1s ease-out;
+    -moz-transition: background-color 0.1s ease-out;
+    -o-transition: background-color 0.1s ease-out;
+    transition: background-color 0.1s ease-out;
 }
 
 /* On mouse-over, add a grey background color */
