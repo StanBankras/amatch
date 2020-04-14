@@ -70,7 +70,13 @@ The project will be hosted on **port 3000** if you didn't change this.
 You are allowed to fork this repository and contribute any changes using a pull request. We will then review your contribution and allow the changes to be merged into the real project if we think they're a valuable addition.
 
 ## Sources
-
+* Clark, B. (2018, June 17). Heroku Alternatives — Top 5 Picks - Brenda Clark. Retrieved April 14, 2020, from https://medium.com/@brenda.clark/heroku-alternatives-top-5-picks-9095cef91d91
+* Heroku. (n.d.). GitHub Integration (Heroku GitHub Deploys) | Heroku Dev Center. Retrieved April 14, 2020, from https://devcenter.heroku.com/articles/github-integration#enabling-github-integration
+* Heroku. (n.d.-a). Configuration and Config Vars | Heroku Dev Center. Retrieved April 14, 2020, from https://devcenter.heroku.com/articles/config-vars
+* K. (n.d.). kelektiv/node.bcrypt.js. Retrieved April 12, 2020, from https://github.com/kelektiv/node.bcrypt.js#usage
+* What is the use of password encryption? (2011, November 16). Retrieved April 4, 2020, from https://security.stackexchange.com/questions/8945/what-is-the-use-of-password-encryption/8948
+* Wikipedia contributors. (2020a, February 28). Salt (cryptography). Retrieved April 12, 2020, from https://en.wikipedia.org/wiki/Salt_(cryptography)
+* Wikipedia contributors. (2020b, April 8). Bcrypt. Retrieved April 12, 2020, from https://en.wikipedia.org/wiki/Bcrypt
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
