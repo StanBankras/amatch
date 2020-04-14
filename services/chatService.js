@@ -46,10 +46,7 @@ async function removeChat(chat) {
 
 async function getUserChats(user) {
   const chatList = [];
-    user.chats.forEach((chat, err) => {
-      if(err) {
-        console.error(err);
-      }
+    user.chats.forEach((chat) => {
       chatList.push(db.collection('chats').findOne({ chatNumber: chat }));
     });
     

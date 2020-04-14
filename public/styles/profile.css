@@ -11,6 +11,11 @@
   display: block;
 }
 
+
+#profile-page.preview > section {
+  margin-bottom: 2rem;
+}
+
 #profile-page h2 {
   margin-bottom: 2rem;
 }
@@ -61,10 +66,40 @@
   margin-bottom: 0.4rem;
 }
 
+#profile-page .profile #artistContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+#profile-page .profile #artistContainer img {
+  height: 8rem;
+  width: 8rem;
+}
+
+#profile-page .profile #artistContainer div #artistName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#profile-page .profile #artistContainer div p {
+  font-size: 0.9rem;
+}
+
+#profile-page .profile #artistContainer div a {
+  border-bottom:2px solid white;
+  transition: 0.5s;
+}
+
+#profile-page .profile #artistContainer div a:hover {
+  border-bottom: 2px solid black;
+  transition: 0.5s;
+}
+
 #profile-page form {
   max-width: 700px;
 }
-
 
 #profile-page form .wrap {
   display: flex;
@@ -144,6 +179,10 @@
 
 @media(min-width: 560px) {
   #profile-page form .wrap {
+    flex-direction: row;
+  }
+
+  #profile-page .profile #artistContainer {
     flex-direction: row;
   }
 }

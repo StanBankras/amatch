@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 		})
 
 		const match = await bcrypt.compare(req.body.password, data.password);
-
+		
 		if(match) {
 			req.session.activeUser = data._id;
 			res.redirect('/dashboard');
@@ -62,9 +62,10 @@ router.post('/register', async (req, res) => {
 			birthDate: req.body.birthDate,
 			age: req.body.age,
 			likedProfiles: [],
-			chats: []
+			chats: [],
+			deezerArtistId: req.body.deezerArtistId
 		})
-		res.redirect('/allUsers')
+		res.redirect('/')
 	} catch (err) {
 		console.log(err)
 	}

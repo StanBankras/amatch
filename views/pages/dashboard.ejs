@@ -13,10 +13,23 @@
     <main id="content">
       <div id="dashboard">
         <div>
+          <h2>Your matches are waiting...</h2>
           <div class="matches">
-            <% for (const match of matches.slice(0, Math.min(3, matches.length))) { %>
-              <%= match.firstName %>
-            <% } %>
+            <div class="wrap">
+              <% for (const match of matches.slice(0, Math.min(7, matches.length))) { %>
+                <div class="match">
+                  <a href="<%= '/profile/' + match._id %>">
+                    <img src="<%= 'uploads/profile-pictures/' + match._id %>" alt="<%= match.firstName + ' ' + match.lastName %>">
+                    <p><%= match.firstName %></p>
+                  </a>
+                </div>
+              <% } %>      
+              <div class="all-matches">
+                <a href="/matches">
+                  <img src="assets/img/find-matches.png" alt="">
+                </a>
+              </div>        
+            </div>
           </div>
         </div>
         <div id="profile-page" class="single-column">
