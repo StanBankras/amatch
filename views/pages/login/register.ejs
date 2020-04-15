@@ -33,10 +33,29 @@
           <label for="phoneNumber">Phone number</label>
           <input type="number" placeholder="0612345678" name="phoneNumber" id="phoneNumber" required>
         </div>
+        <div class="formpjes">
+            <label for="gender">Gender</label>
+          <div class="gender">
+            <label for="male">Male</label><input type="radio" name="gender" id="m" value="m" required onClick="validateGender();">
+            <label for="woman">Woman</label><input type="radio" name="gender" id="w" value="w" onClick="validateGender();">
+          </div>
+        </div>
+        <div class="formpjes">
+          <label for="age">Age</label>
+          <input type="number" placeholder="21" name="age" id="age" min="18" max="120" required>
+        </div>
         <!-- <div class="nextForm"> -->
+        <div class="formpjes">
+          <label for="education">Education</label>
+          <input type="text" placeholder="University" name="education" id="education" required>
+        </div>
+        <div class="formpjes">
+          <label for="job">Job</label>
+          <input type="text" placeholder="Front-End Developer" name="job" id="job" required>
+        </div>
           <div class="formpjes">
             <label for="hobbies">Hobbies</label>
-            <select name="hobbies" multiple required>
+            <select name="hobbies" multiple required id="selectHobbies">
               <div>
                 <% hobbies.forEach(hobby => { %>
                 <option value="<%= hobby._id %>"><%= hobby.name %></option>
@@ -44,32 +63,9 @@
               </div>
             </select>
           </div>
-          <div class="formpjes">
-            <label for="education">Education</label>
-            <input type="text" placeholder="University" name="education" id="education" required>
-          </div>
-          <div class="formpjes">
-              <label for="gender">Gender</label>
-            <div class="gender">
-              <label for="male">Male</label><input type="radio" name="gender" value="m" required>
-              <label for="woman">Woman</label><input type="radio" name="gender" value="w">
-            </div>
-          </div>
-          <div class="formpjes">
-            <label for="job">Job</label>
-            <input type="text" placeholder="Front-End Developer" name="job" id="job" required>
-          </div>
-          <!-- <div class="formpjes">
-            <label for="profilePictures">Profile Picture:</label>
-            <input type="file" name="profilePictures" id="profilePictures">
-          </div> -->
-          <div class="formpjes">
-            <label for="age">Age</label>
-            <input type="number" placeholder="21" name="age" id="age" min="18" max="120" required>
-          </div>
-          <div class="formpjes">
+          <div class="formpjes" id='deezerArtistId'>
             <label for="username">Deezer Artist ID</label>
-            <select name="deezerArtistId" required>
+            <select name="deezerArtistId" id="deezerArtistId" required>
               <div>
                 <option value="8706544">Dua Lipa</option>
                 <option value="1147">Justin Timberlake</option>
@@ -89,8 +85,6 @@
             <input type="text" placeholder="jvandijk" name="username" id="username" required>
           </div>
           <div class="formpjes">
-          </div>
-          <div class="formpjes">
             <label for="password">Password</label>
             <input type="password" placeholder="******" name="password" id="password" required>
           </div>
@@ -99,10 +93,12 @@
             <input type="password" placeholder="******" name="confirmPassword" id="confirmPassword" required>
           </div>
           <div class="formpjes">
-            <p>Already have an account? <a href="/">Return to login</a></p>
+            <button type="submit" id="submitButton">Register to Amatch</button>
           </div>
           <div class="formpjes">
-            <button type="submit" id="submitButton" formaction="/register">Register to Amatch</button>
+          </div>
+          <div class="formpjes">
+            <p>Already have an account? <a href="/">Return to login</a></p>
           </div>
         <!-- </div> --> 
     </form>

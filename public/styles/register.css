@@ -49,7 +49,16 @@ div.loginArea select {
     padding: .5rem 1.3rem;
     width: 100%;
     border-radius: 0.5rem;
+    font-size: 1rem;
     max-height: 3.87rem;
+}
+
+div#deezerArtistId {
+    visibility: hidden;
+}
+
+div.loginArea select#deezerArtistId {
+    padding: 1.3rem;
 }
 
 div.gender input {
@@ -138,6 +147,11 @@ a {
     div.formpjes {
         width: 23vw;
         padding: 1rem 0 1rem 0;
+    }
+
+    div.formpjes:nth-child(7), 
+    div.formpjes:nth-child(8) {
+        border-bottom: 2px solid #9646D4;
     }
 
     div.loginArea label {
